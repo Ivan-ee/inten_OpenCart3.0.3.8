@@ -1,0 +1,5 @@
+catalog/view/javascript/**/??.js
+admin/view/javascript/**/??.js
+admin/view/javascript/**/lang/*.js
+system/storage/cache/*
+system/storage/logs/*
