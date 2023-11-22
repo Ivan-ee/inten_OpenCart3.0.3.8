@@ -33,8 +33,8 @@ var LiveSearchJs = function () {
                     }
 
                     var html  = '<li style="text-align: center;height:10px;">';
-                        html += '<img class="loading" src="catalog/view/javascript/live_search/loading.gif" />';
-                        html += '</li>';
+                    html += '<img class="loading" src="catalog/view/javascript/live_search/loading.gif" />';
+                    html += '</li>';
                     $('.live-search ul').html(html);
                     $('.live-search').css('display','block');
 
@@ -54,7 +54,7 @@ var LiveSearchJs = function () {
                                 $('.result-text').html('<a href="'+all_search_href+'" class="view-all-results">'+options.text_view_all_results+' ('+result.total+')</a>');
                                 $.each(products, function(index,product) {
                                     var html = '<li>';
-                                        // show_add_button
+                                    // show_add_button
                                     if(show_add_button){
                                         html += '<div class="product-add-cart">';
                                         html += '<a href="javascript:;" onclick="cart.add('+product.product_id+', '+product.minimum+');" class="btn btn-primary">';
@@ -62,8 +62,8 @@ var LiveSearchJs = function () {
                                         html += '</a>';
                                         html += '</div>';
                                     }
-                                        html += '<div>';
-                                        html += '<a href="' + product.url + '" title="' + product.name + '">';
+                                    html += '<div>';
+                                    html += '<a href="' + product.url + '" title="' + product.name + '">';
                                     // show image
                                     if(product.image && show_image){
                                         html += '<div class="product-image"><img alt="' + product.name + '" src="' + product.image + '"></div>';
@@ -71,7 +71,7 @@ var LiveSearchJs = function () {
                                     // show name & extra_info
                                     html += '<div class="product-name">' + product.name ;
                                     if(show_description){
-                                        html += '<p>' + product.extra_info + '</p>';
+                                        html += '<p class="product-description">' + product.extra_info + '</p>';
                                     }
                                     html += '</div>';
                                     // show price & special price
