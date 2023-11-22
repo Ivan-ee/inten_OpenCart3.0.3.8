@@ -1,0 +1,8 @@
+<table class="table table-total d-flex justify-content-end">
+	{% for total in totals %} 
+		<tr>
+			<td class="text-right fw-bold"><strong>{{ total.title }}:</strong></td>
+			<td class="text-right fw-bold">{{ total.text }}</td>
+		</tr>
+	{% endfor %} 
+</table>

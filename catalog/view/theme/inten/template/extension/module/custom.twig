@@ -1,0 +1,138 @@
+{{ header }}
+
+<main class="main">
+    <div class="custom-width">
+
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-12 pe-0 ps-0">
+                    <nav class="breadcrumbs">
+                        <ul>
+
+                            {% for breadcrumb in breadcrumbs %}
+
+                                {% if loop.last %}
+                                    <li><span>{{ breadcrumb.text }}</span></li>
+
+                                {% else %}
+                                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid ps-0 pe-0">
+            <div id="content">
+
+                <h1 class="section-title mb-4"><span class="fw-bold fs-4">{{ heading_title }}</span></h1>
+
+
+                <div class="row">
+                    <div class="col-7">
+                        {% if cart %}
+                            <div id="custom-cart">
+                                {{ cart }}
+                            </div>
+                        {% endif %}
+
+                        {% if total %}
+                            <div id="custom-total">{{ total }}</div>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="col-5">
+                        <div class="ms-3">
+                            {% if customer and not logged %}
+                                <div id="custom-customer">{{ customer }}</div>
+                            {% endif %}
+
+                            {% if payment %}
+                                <div class="buttons" id="custom-control">
+                                    <div class="pull-right" style="width: 100%;">
+{#                                        {% if text_agree %}#}
+{#                                            <input type="checkbox" name="agree"#}
+{#                                                   value="1" {% if agree %} checked="checked" {% endif %} />#}
+{#                                            &nbsp;#}
+{#                                            <label for="input-agree" class="control-label">{{ text_agree }}</label>#}
+{#                                            <br>#}
+{#                                        {% endif %}#}
+
+                                        <input type="button" style="width: 100%;" value="{{ button_continue }}" id="button-custom-order"
+                                               data-loading-text="{{ text_loading }}" class="btn btn-gray pt-3 pb-3"
+                                               />
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<script>
+    $(document).ready(function () {
+
+        $('#button-custom-order').on('click', function () {
+
+            {% if (not logged) %}
+
+            checkoutCustomer()
+            {% if (login is defined and login != constant('false')) %}
+                .then(checkoutLogin)
+                {% endif %}
+                {% if (shipping is defined and shipping != constant('false')) %}
+                .then(checkoutShipping)
+                {% endif %}
+                .then(checkoutPayment)
+                {% if (comment is defined and comment != constant('false')) %}
+                .then(checkoutComment)
+                {% endif %}
+                .then(checkoutConfirm)
+                .catch(failureCallback);
+
+            {% else %}
+
+            {% if (shipping is defined and shipping != constant('false')) %}
+
+            checkoutShipping()
+                .then(checkoutPayment)
+                {% if (comment is defined and comment != constant('false')) %}
+                .then(checkoutComment)
+                {% endif %}
+                .then(checkoutConfirm)
+                .catch(failureCallback);
+
+            {% else %}
+
+            checkoutPayment()
+            {% if (comment is defined and comment != constant('false')) %}
+                .then(checkoutComment)
+                {% endif %}
+                .then(checkoutConfirm)
+                .catch(ailureCallback);
+
+
+            {% endif %}
+
+            {% endif %}
+
+        });
+
+    });
+
+</script>
+{{ footer }}

@@ -1,0 +1,17 @@
+<section class="mt-4 mb-4 d-none d-md-block">
+    <div id="carouselExampleSlidesOnly{{ module }}" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for banner in banners %}
+                <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                    <img src="{{ banner.image }}" class="d-block w-100" alt="photo-1">
+                </div>
+
+
+            {#<div class="carousel-item">
+                <img src="/assets/img/slider/2.png" class="d-block w-100" alt="photo-2">
+            </div>#}
+
+            {% endfor %}
+        </div>
+    </div>
+</section>

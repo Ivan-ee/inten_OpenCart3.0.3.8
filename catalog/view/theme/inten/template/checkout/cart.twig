@@ -1,0 +1,99 @@
+{{ header }}
+
+
+<main class="main">
+    <div class="custom-width">
+
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-12 pe-0 ps-0">
+                    <nav class="breadcrumbs">
+                        <ul>
+
+                            {% for breadcrumb in breadcrumbs %}
+
+                                {% if loop.last %}
+                                    <li><span>{{ breadcrumb.text }}</span></li>
+
+                                {% else %}
+                                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid ps-0 pe-0">
+
+            <div id="content" class="{{ class }}">{{ content_top }}
+                <h1 class="section-title mb-4"><span class="fw-bold fs-4">{{ heading_title }}</span></h1>
+                <form action="{{ action }}" method="post" enctype="multipart/form-data">
+                    <div class="table-responsive table-checkout">
+                        <table class="table">
+                            <tbody>
+
+                            {% for product in products %}
+                                <tr>
+                                    <td class="text-center align-middle align-middle">{% if product.thumb %} <a
+                                                href="{{ product.href }}"><img
+                                                    src="{{ product.thumb }}" alt="{{ product.name }}"
+                                                    title="{{ product.name }}" class="img-thumbnail"/></a> {% endif %}
+                                    </td>
+                                    <td class="text-left align-middle"><a
+                                                href="{{ product.href }}">{{ product.name }}</a>
+                                    <td class="text-left align-middle">{{ product.model }}</td>
+                                    <td class="text-left align-middle">
+                                        <div class="input-group btn-block" style="max-width: 200px;">
+                                            <input type="text" name="quantity[{{ product.cart_id }}]"
+                                                   value="{{ product.quantity }}" size="1" class="form-control"/>
+                                            <span class="input-group-btn">
+                  <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i
+                              class="fa fa-refresh"></i></button>
+                  <button type="button" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"
+                          onclick="cart.remove('{{ product.cart_id }}');"><i class="fa fa-times-circle"></i></button>
+                  </span></div>
+                                    </td>
+                                    <td class="text-right align-middle">{{ product.total }}</td>
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </form>
+
+                <div class="row mt-4 justify-content-end">
+                    <div class="col-2 ps-0">
+                        <table class="table table-total ">
+                            {% for total in totals %}
+                                <tr>
+                                    <td class="text-right fw-bold"><strong>{{ total.title }}:</strong></td>
+                                    <td class="text-right fw-bold">{{ total.text }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+
+                <div class="buttons clearfix d-flex justify-content-end">
+                    <div class="pull-left"><a href="{{ continue }}" class="btn btn-gray me-3">{{ button_shopping }}</a>
+                    </div>
+                    <div class="pull-right"><a href="{{ checkout }}" class="btn btn-gray">{{ button_checkout }}</a>
+                    </div>
+                </div>
+                {{ content_bottom }}
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+
+{{ footer }}

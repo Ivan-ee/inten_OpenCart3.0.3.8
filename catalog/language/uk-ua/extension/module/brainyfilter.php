@@ -1,0 +1,19 @@
+<?php
+$_['heading_title']				= '';
+$_['button_clear']				= 'Скинути';
+$_['default_value_select']		= '- Вибрати -';
+$_['price_header']				= 'Ціна';
+$_['categories_header']			= 'Категорії';
+$_['min_max']					= 'Мін - Макс:';
+$_['reset']						= 'Скинути все';
+$_['submit']					= 'Застосувати';
+$_['stock_status']				= 'Наявність';
+$_['manufacturers']				= 'Виробники';
+$_['entry_show_more']			= 'Показати все';
+$_['entry_show_less']			= 'Приховати';
+$_['rating']					= 'Рейтинг';
+$_['option']					= 'Опції';
+$_['entry_block_title']			= 'Фільтри';
+$_['entry_search']				= 'Пошук';
+$_['text_bf_page_title']		= 'Фільтр товарів';
+$_['empty_slider_value']		= 'Не вибрано';

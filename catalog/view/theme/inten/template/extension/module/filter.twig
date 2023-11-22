@@ -1,0 +1,42 @@
+<div class="sidebar">
+
+    <div class="collapse collapse-filters" id="collapseFilters">
+        {% for filter_group in filter_groups %}
+            <div class="filter-block pb-4">
+                <p class="section-title"><span>{{ filter_group.name }}</span></p>
+                <div class="form-check" id="filter-group{{ filter_group.filter_group_id }}">
+                    {% for filter in filter_group.filter %}
+
+                            <div>
+                                <input class="form-check-input" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" id="{{ filter.name }}"
+                                        {% if filter.filter_id in filter_category %}checked{% endif %}>
+                                <label class="form-check-label ms-2 mt-1" for="{{ filter.name }}">
+                                    {{ filter.name }}
+                                </label>
+                            </div>
+
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="panel-footer text-right">
+        <button type="button" id="button-filter" class="btn btn-gray btn-block">{{ button_filter }}</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#button-filter').on('click', function () {
+        filter = [];
+
+        $('input[name^=\'filter\']:checked').each(function (element) {
+            filter.push(this.value);
+        });
+
+        location = '{{ action }}&filter=' + filter.join(',');
+    });
+</script>

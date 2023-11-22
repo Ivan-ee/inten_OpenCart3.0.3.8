@@ -1,0 +1,55 @@
+{{ header }}
+
+<main class="main" id="common-success">
+    <div class="custom-width">
+
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-12 pe-0 ps-0">
+                    <nav class="breadcrumbs">
+                        <ul>
+
+                            {% for breadcrumb in breadcrumbs %}
+
+                                {% if loop.last %}
+                                    <li><span>{{ breadcrumb.text }}</span></li>
+
+                                {% else %}
+                                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="{{ class }}">
+
+                <div class="" id="content">
+
+                    <h1 class="section-title h3 fw-bold mb-4">
+                        <span>{{ heading_title }}</span>
+                    </h1>
+
+                    {{ text_error }}
+
+                    <div class="buttons mt-4">
+                        <div class="text-start"><a href="{{ continue }}" class="btn btn-gray">{{ button_continue }}</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+
+{{ footer }}

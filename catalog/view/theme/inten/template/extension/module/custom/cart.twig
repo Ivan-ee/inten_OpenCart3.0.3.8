@@ -1,0 +1,95 @@
+{% if products %}
+    <form action="{{ action }}" method="post" enctype="multipart/form-data">
+        <div class="table-responsive table-checkout">
+            <table class="table mt-3 mb-3">
+
+                <tbody>
+                {% for product in products %}
+                    <tr>
+
+                        {% for column, name in setting.columns %}
+
+                            {% if (column == 'image') %}
+                                <td class="text-left align-middle">{% if (product.thumb) %}<a
+                                        href="{{ product['href'] }}"><img
+                                                src="{{ product.thumb }}" alt="{{ product.name }}"
+                                                title="{{ product.name }}" class="img-thumbnail"/></a>{% endif %}</td>
+                            {% endif %}
+
+                            {% if (column == 'name') %}
+                                <td class="text-left align-middle"><a
+                                    href="{{ product['href'] }}">{{ product.name }}</a>
+                                {#                                    {% if (not product['stock']) %} #}
+                                {#                                        <span class="text-danger">***</span> #}
+                                {#                                    {% endif %} #}
+                                {#                                    {% if (product.option) %} #}
+                                {#                                        {% for option in product.option %} #}
+                                {#                                            <br/> #}
+                                {#                                            <small>{{ option.name }}: {{ option.value }}</small> #}
+                                {#                                        {% endfor %} #}
+                                {#                                    {% endif %} #}
+                                {#                                    {% if (product.reward) %} #}
+                                {#                                        <br/> #}
+                                {#                                        <small>{{ product.reward }}</small> #}
+                                {#                                    {% endif %} #}
+                                {#                                    {% if (product.recurring) %} #}
+                                {#                                        <br/> #}
+                                {#                                        <span class="label label-info">{{ text_recurring_item }}</span> #}
+                                {#                                        <small>{{ product.recurring }}</small> #}
+                                {#                                    {% endif %}</td> #}
+                            {% endif %}
+
+                            {% if (column == 'model') %}
+                                <td class="text-left align-middle">{{ product.model }}</td>
+                            {% endif %}
+
+                            {% if (column == 'sku') %}
+                                <td class="text-left align-middle">{{ product.sku }}</td>
+                            {% endif %}
+
+                            {% if (column == 'quantity') %}
+                                <td class="text-left align-middle">
+                                    <div class="input-group" style="max-width: 200px;">
+                  <span class="input-group-btn align-middle">
+                    <button class="btn btn-minus" type="button"
+                            onclick="custom_cart.update({{ product.cart_id }}, {{ product.quantity - 1 }})" {% if product.quantity == 1 %} disabled {% endif %}><i
+                                class="fa fa-minus"></i></button>
+                  </span>
+                                        <input type="text" oninput="custom_cart.change({{ product.cart_id }}, event)"
+                                               name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}"
+                                               size="1" class="form-control border-0 text-center"/>
+                                        <span class="input-group-btn">
+                    <button class="btn btn-plus" type="button"
+                            onclick="custom_cart.update({{ product.cart_id }}, {{ product.quantity + 1 }})"><i
+                                class="fa fa-plus"></i></button>
+                  </span>
+                                    </div>
+                                </td>
+                            {% endif %}
+
+                            {% if (column == 'price') %}
+                                <td class="text-right align-middle">{{ product.price }}</td>
+                            {% endif %}
+
+                            {% if (column == 'total') %}
+                                <td class="text-right align-middle">{{ product.total }}</td>
+                            {% endif %}
+
+                            {% if (column == 'remove') %}
+                                <td class="text-left align-middle">
+                                    <button type="button" data-toggle="tooltip"
+                                            class="btn btn-gray"
+                                            onclick="custom_cart.remove('{{ product.cart_id }}');"><i
+                                                class="fa-regular fa-circle-xmark"></i></button>
+                                </td>
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+{% endif %} 

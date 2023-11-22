@@ -1,0 +1,65 @@
+{{ header }}
+
+<main class="main" id="common-success">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav class="breadcrumbs">
+                    <ul>
+                        {% for breadcrumb in breadcrumbs %}
+                            {% if loop.last %}
+                                <li><span>{{ breadcrumb.text }}</span></li>
+                            {% else %}
+                                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+
+            {{ column_left }}
+
+            {% if column_left and column_right %}
+                {% set class, card = 'col-lg-6 col-md-8', 'col-lg-4' %}
+            {% elseif column_left or column_right %}
+                {% set class, card = 'col-lg-9 col-md-8', 'col-lg-4' %}
+            {% else %}
+                {% set class, card = 'col-12', 'col-lg-3' %}
+
+            {% endif %}
+
+            <div class="{{ class }}">
+
+                {{ content_top }}
+
+                <div class="bg-white checkout-content p-3 mb-3" id="content">
+
+                    <h1 class="section-title h3">
+                        <span>{{ heading_title }}</span>
+                    </h1>
+
+                    {{ text_message }}
+
+                    <div class="buttons">
+                        <div class="text-end"><a href="{{ continue }}" class="btn btn-warning">{{ button_continue }}</a></div>
+                    </div>
+
+                </div><!-- ./chekout-content -->
+
+                {{ content_bottom }}
+
+            </div><!-- ./class -->
+
+            {{ column_right }}
+
+        </div><!-- ./row -->
+    </div><!-- ./container-fluid -->
+
+</main>
+
+
+{{ footer }}

@@ -1,0 +1,298 @@
+{{ header }}
+
+<main class="main">
+    <div class="custom-width" id="product-product">
+        <div class="container-fluid">
+
+            <div class="row ">
+                <div class="col-12 pe-0 ps-0">
+                    <nav class="breadcrumbs">
+                        <ul>
+
+                            {% for breadcrumb in breadcrumbs %}
+
+                                {% if loop.last %}
+                                    <li><span>{{ breadcrumb.text }}</span></li>
+
+                                {% else %}
+                                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-fluid" id="content">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 mb-3">
+
+                    {% if thumb %}
+
+                        {% set gallery = [{popup: thumb, thumb: thumb}]|merge(images) %}
+
+                    {% else %}
+
+                        {% set gallery = images %}
+
+                    {% endif %}
+
+                    <div id="carouselExample" class="carousel carousel-dark slide">
+                        <div class="carousel-inner carousel-product-item">
+                            {% for image in gallery %}
+                                <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                                    <img src="{{ image.popup }}" class="d-block" alt="{{ heading_title }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if gallery|length> 1 %}
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 mb-3" id="product">
+                    <div class="product-content ms-3">
+                        <h1 class="section-title h2 mb-1">
+                            <span>{{ heading_title }}</span>
+                        </h1>
+
+                        <h6 class="product-brand mb-4"><a href="{{ manufacturers }}">{{ manufacturer }}</a></h6>
+
+                        <div class="product-price mb-4">{{ price }}</div>
+
+                        <div class="product-add2cart d-flex">
+                            <div class="input-group quantity me-2" style="width: 130px;">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-minus">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input type="text" name="quantity"
+                                       class="form-control border-0 text-center" value="{{ minimum }}"
+                                       id="input-quantity">
+                                <input type="hidden" name="product_id" value="{{ product_id }}"/>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-plus">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-gray px-3" id="button-cart"
+                                    data-loading-text="{{ text_loading }}">
+                                {{ button_cart }}
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-3">
+                <div class="col-12 ps-0 pe-0">
+
+                    <div class="accordion accordion-flush" id="accordionFlush">
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    {{ tab_description }}
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlush">
+                                <div class="accordion-body">{{ description }}</div>
+                            </div>
+                        </div>
+
+                        {% if attribute_groups %}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                            aria-controls="flush-collapseTwo">
+                                        {{ tab_attribute }}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionFlush">
+                                    <div class="accordion-body">
+                                        <table class="table table-bordered">
+                                            {% for attribute_group in attribute_groups %}
+                                                <thead class="border-none">
+                                                <tr>
+                                                    <td colspan="2"><strong>{{ attribute_group.name }}</strong></td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for attribute in attribute_group.attribute %}
+                                                    <tr>
+                                                        <td>{{ attribute.name }}</td>
+                                                        <td>{{ attribute.text }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        {% if products %}
+
+            <section class="new-products">
+                <div class="container-fluid ps-0 pe-0">
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <h2 class="section-title">
+                                <span>{{ text_related }}</span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="owl-carousel owl-theme owl-carousel-full">
+
+                        {% for product in products %}
+                            <div class="product-cart">
+                                <div class="product-cart-offer">
+                                    <div class="offer-hit">Хит</div>
+                                </div>
+                                <div class="product-cart-wishlist">
+                                    <button type="button" class="btn-cart"
+                                            onclick="wishlist.add('{{ product.product_id }}');">
+                                        <i class="fa-regular fa-heart fa-xl"></i>
+                                    </button>
+                                </div>
+                                <div class="product-thumb">
+                                    <a href="{{ product.href }}"> <img src="{{ product.thumb }}"
+                                                                       alt="{{ produtc.name }}"></a>
+                                </div>
+                                <div class="products-details">
+                                    <h4>
+                                        <a href="{{ product.href }}">{{ product.name }}</a>
+                                    </h4>
+                                    <p class="product-expect">
+                                        {{ product.description }}
+                                    </p>
+                                    <div class="product-bottom-details d-flex justify-content-between align-items-center">
+                                        <div class="product-price">
+                                            {{ product.price }}
+                                        </div>
+                                        <div class="product-links">
+                                            <button type="button" class="btn btn-gray"
+                                                    onclick="cart.add('{{ product.product_id }}');">В корзину
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </section>
+
+        {% endif %}
+
+    </div>
+
+
+</main>
+
+{{ footer }}
+
+<script type="text/javascript">
+    $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
+        $.ajax({
+            url: 'index.php?route=product/product/getRecurringDescription',
+            type: 'post',
+            data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
+            dataType: 'json',
+            beforeSend: function () {
+                $('#recurring-description').html('');
+            },
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+
+                if (json['success']) {
+                    $('#recurring-description').html(json['success']);
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $('#button-cart').on('click', function () {
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+            dataType: 'json',
+            beforeSend: function () {
+                $('#button-cart').button('loading');
+            },
+            complete: function () {
+                $('#button-cart').button('reset');
+            },
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+                $('.form-group').removeClass('has-error');
+
+                if (json['error']) {
+                    if (json['error']['option']) {
+                        for (i in json['error']['option']) {
+                            var element = $('#input-option' + i.replace('_', '-'));
+
+                            if (element.parent().hasClass('input-group')) {
+                                element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+                            } else {
+                                element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+                            }
+                        }
+                    }
+
+                    if (json['error']['recurring']) {
+                        $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+                    }
+
+                    // Highlight any found errors
+                    $('.text-danger').parent().addClass('has-error');
+                }
+
+                if (json['success']) {
+                    $('span.cart-info').html(json['total']);
+                    $('#modal-cart .modal-body').load('index.php?route=common/cart/info .in-cart');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+</script>
+
+

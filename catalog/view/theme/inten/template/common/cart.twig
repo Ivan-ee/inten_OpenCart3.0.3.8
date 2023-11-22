@@ -1,0 +1,98 @@
+<div class="modal fade" id="modal-cart" tabindex="-1" aria-labelledby="modal-cartLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-3" id="modal-cartLabel">{{ text_title }}</h1>
+                <button type="button" class="btn btn-gray" data-bs-dismiss="modal" aria-label="Закрыть">
+                    <i class="fa-solid fa-xmark fa-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="in-cart">
+                    {% if products %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+
+                                {% for product in products %}
+
+                                    <tr>
+                                        <td class="product-img-td text-center align-middle"><a
+                                                    href="{{ product.href }}"><img src="{{ product.thumb }}"
+                                                                                   alt="{{ product.name }}"></a>
+                                        </td>
+                                        <td class="text-center align-middle fw-bold">
+                                            <a href="{{ product.href }}">{{ product.name }}</a>
+                                        </td>
+
+{#                                        <td class="text-center align-middle">#}
+{#                                            <div class="input-group-btn">#}
+{#                                                <button class="btn btn-minus" onclick="custom_cart.update({{ product.cart_id }}, {{ product.quantity - 1 }})" {% if product.quantity == 1 %} disabled {% endif %}>#}
+{#                                                    <i class="fa fa-minus"></i>#}
+{#                                                </button>#}
+{#                                            </div>#}
+{#                                        </td>#}
+
+{#                                        <td class="text-center align-middle">#}
+{#                                            <input type="text"#}
+{#                                                   name="quantity[{{ product.cart_id }}]"#}
+{#                                                   oninput="custom_cart.change({{ product.cart_id }}, event)"#}
+{#                                                   class="form-control border-0 text-center"#}
+{#                                                   value="{{ product.quantity }}" min="1"#}
+{#                                                   id="input-quantity">#}
+{#                                            <input type="hidden" name="product_id" value="{{ product_id }}"/>#}
+{#                                        </td>#}
+
+{#                                        <td class="text-center align-middle">#}
+{#                                            <div class="input-group-btn">#}
+{#                                                <button class="btn btn-plus" onclick="custom_cart.update({{ product.cart_id }}, {{ product.quantity + 1 }})">#}
+{#                                                    <i class="fa fa-plus"></i>#}
+{#                                                </button>#}
+{#                                            </div>#}
+{#                                        </td>#}
+
+                                        <td class="text-center align-middle">
+                                            <i class="fa-solid fa-xmark fa-2xs"></i>{{ product.quantity }}
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <button class="btn btn-gray" onclick="cart.remove('{{ product.cart_id }}');"
+                                                    >
+                                                <i class="fa-regular fa-circle-xmark"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                                <tfoot>
+
+                                {% for total in totals %}
+                                    <tr>
+                                        <td colspan="4" class="text-end">{{ total.title }}</td>
+                                        <td colspan="4" class="text-end fw-bold">{{ total.text }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tfoot>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-center mt-4">{{ text_empty }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="modal-footer">
+{#                <a href="{{ checkout }}" class="btn btn-gray">{{ text_checkout }}</a>#}
+                <a href="{{ cart }}" class="btn btn-gray">{{ text_cart }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button type="button" class="btn cart position-relative ms-3" data-bs-toggle="modal" data-bs-target="#modal-cart">
+    <i class="fa-solid fa-cart-shopping fa-xl"></i>
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-info">{{ text_items }}</span>
+</button>
+

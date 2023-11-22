@@ -1,0 +1,119 @@
+<!doctype html>
+<html dir="{{ direction }}" lang="{{ lang }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="{{ base }}"/>
+    {% if description %}
+        <meta name="description" content="{{ description }}"/>
+    {% endif %}
+    {% if keywords %}
+        <meta name="keywords" content="{{ keywords }}"/>
+    {% endif %}
+    <title>{{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+
+    {% for style in styles %}
+        <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
+    {% endfor %}
+    {% for script in scripts %}
+        <script src="{{ script }}" type="text/javascript"></script>
+    {% endfor %}
+
+    <link rel="stylesheet" href="catalog/view/theme/inten/assets/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="catalog/view/theme/inten/assets/owlcarousel/owl.theme.default.min.css">
+    <link href="catalog/view/theme/inten/assets/scss/main.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    {% for link in links %}
+        <link href="{{ link.href }}" rel="{{ link.rel }}"/>
+    {% endfor %}
+    {% for analytic in analytics %}
+        {{ analytic }}
+    {% endfor %}
+</head>
+
+<body>
+
+<div class="wrapper">
+    <header class="header">
+
+        <nav class="header-top d-none d-xl-block">
+            <div class="custom-width">
+                <div class="row pt-2 pb-2">
+                    <ul class="col-md-5 d-flex justify-content-left ms-0 mb-0 ">
+                        <li>
+                            <a href="http://opencart/kontakty"><i class="fa-solid fa-location-dot me-2"></i>Краснодар</a>
+                        </li>
+                        <li class="ms-4">
+                            <a href="tel: {{ telephone }}">{{ telephone }}</a>
+                        </li>
+                    </ul>
+
+                    {% if informations %}
+
+                        <ul class="col-md-7 d-flex justify-content-end ms-0 mb-0">
+                            {% for information in informations %}
+                                <li class="ms-4"><a href="{{ information.href }}">{{ information.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="header border-bottom sticky-top bg-white" id="sticky">
+        <nav class="header-bottom custom-width pt-2 pb-2 ">
+            <div class="row align-items-center">
+                <div class="col-12 col-xl-2 header-logo text-left pe-0">
+                    <a href="{{ base }}" class="">INTEN</a>
+                </div>
+
+                <div class="d-none d-xl-block col-md-2 navbar navbar-expand-xl text-center">
+                    <div class="collapse navbar-collapse text-left">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle custom-border-radius ps-3 pe-3" href="#"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Каталог товаров
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {{ menu }}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="input col-12 ps-0 col-xl-4 ps-5 pe-0 header-search">
+                    {{ search }}
+                </div>
+
+                <div class="col-md-4 d-flex align-items-center d-none d-xl-block text-end">
+
+                    <a href="#" class="btn cart position-relative">
+                        <i class="fa-solid fa-heart fa-xl"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4</span>
+                    </a>
+
+                    {{ cart }}
+
+                </div>
+
+            </div>
+        </nav>
+    </div>
