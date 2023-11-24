@@ -421,15 +421,25 @@ main.main {
   --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
 }
 
-.custom-sort .form-group .input-group-text,
+.custom-sort .form-group .input-group-text {
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+  color: var(--grey-color);
+  font-size: 16px;
+}
 .custom-sort .form-group .form-select {
-  border-radius: 0;
+  border-bottom-right-radius: 12px;
+  border-top-right-radius: 12px;
 }
 .custom-sort .form-group .form-select:hover,
 .custom-sort .form-group option:hover {
   border: 1px solid #dee2e6;
   outline: none;
   box-shadow: none;
+}
+
+.menu-item:active {
+  background-color: white;
 }
 
 .form-check-input:focus {

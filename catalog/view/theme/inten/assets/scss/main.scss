@@ -583,8 +583,19 @@ main.main {
 .custom-sort {
   .form-group {
     .input-group-text,
-    .form-select {
-      border-radius: 0;
+    {
+      border-bottom-left-radius: 12px;
+      border-top-left-radius: 12px;
+      //border: 0px solid var(--links-hover-color);
+
+      color: var(--grey-color);
+      font-size: 16px;
+    }
+
+    .form-select{
+      border-bottom-right-radius: 12px;
+      border-top-right-radius: 12px;
+      //border: 0px solid var(--links-hover-color);
     }
 
     .form-select:hover,
@@ -594,6 +605,10 @@ main.main {
       box-shadow: none;
     }
   }
+}
+
+.menu-item:active{
+  background-color: white;
 }
 
 .form-check-input:focus {
