@@ -11,6 +11,7 @@
         <meta name="keywords" content="{{ keywords }}"/>
     {% endif %}
     <title>{{ title }}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -33,7 +34,6 @@
     <link rel="stylesheet" href="catalog/view/theme/inten/assets/owlcarousel/owl.theme.default.min.css">
     <link href="catalog/view/theme/inten/assets/scss/main.css" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     {% for link in links %}
         <link href="{{ link.href }}" rel="{{ link.rel }}"/>
@@ -45,7 +45,7 @@
 
 <body>
 
-<div class="wrapper">
+<div class="wrapper" id="top">
     <header class="header">
 
         <nav class="header-top d-none d-xl-block">
