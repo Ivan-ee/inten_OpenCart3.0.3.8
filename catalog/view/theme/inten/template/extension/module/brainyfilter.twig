@@ -178,6 +178,7 @@
                                         {% endif %}">
                                     <span class="bf-cell bf-c-1">
                                         <input id="bf-attr-{{ groupUID ~ '_' ~ catId ~ '_' ~ layout_id }}"
+                                               class="bf-input"
                                                data-filterid="bf-attr-{{ groupUID ~ '_' ~ catId }}"
                                                type="{{ section['control'] }}" 
                                                name="bfp_{{ groupUID }}{% if section['control'] is same as ('checkbox') %}{{ '_' ~ catId }}{% endif %}"
@@ -331,6 +332,7 @@
                                         {% endif %}">
                                         <span class="bf-cell bf-c-1">
                                             <input id="bf-attr-{{ groupUID ~ '_' ~ valueId ~ '_' ~ layout_id }}"
+                                                   class="bf-input"
                                                    data-filterid="bf-attr-{{ groupUID ~ '_' ~ valueId }}"
                                                    type="{{ group['type'] }}" 
                                                    name="bfp_{{ groupUID }}{% if group['type'] is same as ('checkbox') %}{{ '_' ~ valueId }} {% endif %}"
