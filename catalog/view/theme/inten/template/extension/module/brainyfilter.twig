@@ -39,11 +39,11 @@
     }
    .bf-layout-id-{{ layout_id }} .ui-widget-content {
         {{ settings['style']['price_slider_background']['val'] is defined ? 'background: ' ~ settings['style']['price_slider_background']['val'] ~ ';':'' }} 
-        {{ settings['style']['price_slider_border']['val'] is defined ? 'border:1px solid' ~ settings['style']['price_slider_border']['val'] ~ ';':'' }} 
+{#        {{ settings['style']['price_slider_border']['val'] is defined ? 'border:1px solid' ~ settings['style']['price_slider_border']['val'] ~ ';':'' }}#}
     }
     .bf-layout-id-{{ layout_id }} .ui-state-default {
         {{ settings['style']['price_slider_handle_background']['val'] is defined ? 'background:' ~ settings['style']['price_slider_handle_background']['val'] ~ ';':'' }} 
-        {{ settings['style']['price_slider_handle_border']['val'] is defined ? 'border:1px solid' ~ settings['style']['price_slider_handle_border']['val'] ~ ';':'' }} 
+{#        {{ settings['style']['price_slider_handle_border']['val'] is defined ? 'border:1px solid' ~ settings['style']['price_slider_handle_border']['val'] ~ ';':'' }}#}
    }
     .bf-layout-id-{{ layout_id }} .bf-attr-group-header{
         {{ settings['style']['group_block_header_background']['val'] is defined ? 'background:' ~ settings['style']['group_block_header_background']['val'] ~ ';':'' }} 
@@ -61,7 +61,7 @@
     <div class="bf-btn-show"></div>
     <a class="bf-btn-reset" onclick="BrainyFilter.reset();"></a>
     <div class="box bf-check-position {% if isHorizontal %} bf-horizontal {% endif %}">
-        <div class="box-heading">{{ lang_block_title }} {% if isHorizontal %} <a class="bf-toggle-filter-arrow"></a><input type="reset" class="bf-buttonclear" onclick="BrainyFilter.reset();" value="{{ reset }}" /> {% endif %}</div>
+{#        <div class="box-heading">{{ lang_block_title }} {% if isHorizontal %} <a class="bf-toggle-filter-arrow"></a><input type="reset" class="bf-buttonclear" onclick="BrainyFilter.reset();" value="{{ reset }}" /> {% endif %}</div>#}
         <div class="brainyfilter-panel box-content {% if settings['submission']['hide_panel'] %} bf-hide-panel {% endif %}">
             <form class="bf-form 
                     {% if settings['behaviour']['product_count'] %} bf-with-counts {% endif %} 
@@ -382,6 +382,7 @@
         </div>
     </div>
 </div>
+
 <script>
 var bfLang = {
     show_more : '{{ lang_show_more }}',
