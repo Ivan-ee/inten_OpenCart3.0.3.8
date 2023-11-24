@@ -176,6 +176,10 @@ main.main {
   font-weight: bold;
 }
 
+.bf-form div:nth-last-of-type(2) .bf-attr-filter:last-child .bf-cell {
+  border-bottom: none;
+}
+
 .bf-cell {
   border: none;
 }
@@ -251,6 +255,20 @@ main.main {
 }
 .product-cart-offer .offer-new {
   background-color: yellow;
+}
+
+.bf-buttonclear {
+  color: var(--links-hover-color);
+  background-color: white;
+  border: none;
+}
+
+.bf-buttonclear:hover {
+  color: red;
+}
+
+.bf-buttonclear:active {
+  color: #600000;
 }
 
 .products-details {

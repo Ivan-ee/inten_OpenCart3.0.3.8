@@ -80,28 +80,8 @@ input[type=text].bf-range-max, input[type=text].bf-range-min, input[type=text].b
 .bf-with-float-btn .bf-buttonsubmit {
     display: none;
 }
-.bf-buttonclear {
-	background: url("../image/brainyfilter/sprite.png") no-repeat 0 -24px;
-	color: #8E8E8E;
-	text-decoration: underline;
-	padding-left: 18px;
-	padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    line-height: 16px;
-	cursor: pointer;
-	border: 0;
-	margin: 0;
-	min-height: 16px;
-}
-.bf-buttonclear-box {    
-	border: 0;
-        padding: 8px 10px;
-}
-.bf-buttonclear:hover {
-	background: url("../image/brainyfilter/sprite.png") no-repeat 0 -53px;
-	color: #B83D3D;
-}
+
+
 .ajax-shadow {
 	position: absolute;
 	z-index: 1000;
@@ -910,14 +890,7 @@ only screen and (     -o-min-device-pixel-ratio: 3/2),     /* 3/2 */
 only screen and (        min-device-pixel-ratio: 1.5),       /* 1.5 */
 only screen and (                min-resolution: 144dpi), /* 144px */
 only screen and (                min-resolution: 1.5dppx) {
-    .bf-buttonclear {        
-        background-image: url("../image/brainyfilter/sprite@2x.png")!important;
-        background-size: 16px 181px;
-    }
-    .bf-buttonclear:hover {
-        background-image: url("../image/brainyfilter/sprite@2x.png")!important;
-        background-size: 16px 181px;
-    }
+
     .bf-cross, .bf-close-btn, .bf-arrow {
         background-image: url("../image/brainyfilter/sprite@2x.png")!important;
         background-size: 16px 181px !important;

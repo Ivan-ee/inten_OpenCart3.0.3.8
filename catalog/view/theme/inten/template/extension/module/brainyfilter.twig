@@ -378,7 +378,7 @@
                 {% endfor %}
                 {% if not isHorizontal or settings['submission']['submit_type'] == 'button' %} <div class="bf-buttonclear-box"{% if isHorizontal and settings['submission']['submit_button_type'] == 'float' %} style="display:none;" {% endif %}>
                          <input type="button" value="{{ lang_submit }}" class="btn btn-primary bf-buttonsubmit" onclick="BrainyFilter.sendRequest(jQuery(this));BrainyFilter.loadingAnimation();return false;" {% if settings['submission']['submit_button_type'] != 'fix' and settings['submission']['submit_type'] != 'button' %}style="display:none;" {% endif %} />
-                   {% if not isHorizontal %}<input type="reset" class="bf-buttonclear" onclick="BrainyFilter.reset();return false;" value="{{ reset }}" />{% endif %}  
+                   {% if not isHorizontal %}<input type="reset" class="bf-buttonclear" onclick="BrainyFilter.reset();return false;" value="{{ reset }}" />{% endif %}
                 </div> {% endif %}
             </form>
         </div>
