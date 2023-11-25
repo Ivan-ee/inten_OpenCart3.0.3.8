@@ -111,16 +111,6 @@ var LiveSearchJs = function () {
             }
         });
 
-        $(live_search.selector).on('keydown', function (e) {
-            if (e.keyCode === 13) {
-                e.preventDefault();
-                // Вызываем код AJAX-запроса напрямую
-                var filter_name = $(live_search.selector).val();
-                // Остальной код, который обычно выполняется внутри 'source' и 'success'
-                // ...
-            }
-        });
-
         $(document).bind( "mouseup touchend", function(e){
             var container = $('.live-search');
             if (!container.is(e.target) && container.has(e.target).length === 0) {
