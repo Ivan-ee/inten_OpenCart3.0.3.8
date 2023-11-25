@@ -26,11 +26,14 @@ var LiveSearchJs = function () {
                     if(cat_id > 0){
                         live_search_href = live_search_href + encodeURIComponent(filter_name) + '&cat_id=' + Math.abs(cat_id);
                         all_search_href = all_search_href + encodeURIComponent(filter_name) + '&category_id=' + Math.abs(cat_id);
+                        console.log(all_search_href, 1);
                     }
                     else{
                         live_search_href = live_search_href + encodeURIComponent(filter_name);
                         all_search_href = all_search_href + encodeURIComponent(filter_name);
+                        console.log(all_search_href, 2);
                     }
+                    console.log(all_search_href, 3);
 
                     var html  = '<li style="text-align: center;height:10px;">';
                     html += '<img class="loading" src="catalog/view/javascript/live_search/loading.gif" />';
@@ -45,6 +48,7 @@ var LiveSearchJs = function () {
                             var products = result.products;
                             $('.live-search ul li').remove();
                             $('.result-text').html('');
+                            $('.custom-search-btn').attr('href','');
                             if (!$.isEmptyObject(products)) {
                                 var show_image       = options.module_live_search_show_image;
                                 var show_price       = options.module_live_search_show_price;

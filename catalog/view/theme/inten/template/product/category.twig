@@ -132,13 +132,23 @@
 
                     <div class="row">
 
-                        <div class="col-12">{{ pagination }}</div>
-
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-6 pagination">
+                                    <nav class="">
+                                        {{ pagination }}
+                                    </nav>
+                                </div>
+                                <div class="col-md-6 text-right my-auto">
+                                    {{ results }}
+                                </div>
+                            </div>
+                        </div>
 
                         {% else %}
-
-                            <div class="col-lg-12">{{ text_empty }}</div>
-
+                            <div class="col-12">
+                                <p>{{ text_empty }}</p>
+                            </div>
                         {% endif %}
                     </div>
 
