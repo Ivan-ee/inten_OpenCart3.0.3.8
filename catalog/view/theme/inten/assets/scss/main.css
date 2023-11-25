@@ -213,7 +213,7 @@ main.main {
 
 .dropdown:hover .dropdown-menu {
   display: block;
-  margin-top: 1px;
+  margin-top: 0px;
 }
 
 .owl-carousel-full .owl-item img {

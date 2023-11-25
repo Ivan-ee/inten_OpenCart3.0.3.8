@@ -52,7 +52,6 @@ var LiveSearchJs = function () {
                                 var show_add_button  = options.module_live_search_show_add_button;
 
                                 $('.result-text').html('<a href="'+all_search_href+'" class="view-all-results">'+options.text_view_all_results+' ('+result.total+')</a>');
-                                // $('.custom-search-btn').html('<a href="'+all_search_href+'" class="view-all-results"></a>');
                                 $('.custom-search-btn').attr('href', all_search_href);
                                 $.each(products, function(index,product) {
                                     var html = '<li>';
@@ -109,6 +108,16 @@ var LiveSearchJs = function () {
             },
             'select': function(product) {
                 $(live_search.selector).val(product.name);
+            }
+        });
+
+        $(live_search.selector).on('keydown', function (e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                // Вызываем код AJAX-запроса напрямую
+                var filter_name = $(live_search.selector).val();
+                // Остальной код, который обычно выполняется внутри 'source' и 'success'
+                // ...
             }
         });
 
