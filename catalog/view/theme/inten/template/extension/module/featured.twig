@@ -14,15 +14,6 @@
 
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                             <div class="product-cart">
-{#                                <div class="product-cart-offer">#}
-{#                                    <div class="offer-hit">Хит</div>#}
-{#                                </div>#}
-{#                                <div class="product-cart-wishlist">#}
-{#                                    <button type="button" class="btn-cart"#}
-{#                                            onclick="wishlist.add('{{ product.product_id }}');">#}
-{#                                        <i class="fa-regular fa-heart fa-xl"></i>#}
-{#                                    </button>#}
-{#                                </div>#}
                                 <div class="product-thumb">
                                     <a href="{{ product.href }}"> <img src="{{ product.thumb }}"
                                                                        alt="{{ produtc.name }}"></a>
@@ -39,11 +30,6 @@
                                             {{ product.price }}
                                         </div>
                                         <div class="product-links">
-{#                                            <button type="button" class="btn btn-gray"#}
-{#                                                    onclick="wishlist.add('{{ product.product_id }}');">#}
-{#                                                <i class="fa-regular fa-heart fa-xl"></i>#}
-{#                                            </button>#}
-
                                             <button type="button" class="btn btn-gray"
                                                     onclick="cart.add('{{ product.product_id }}');">В корзину
                                             </button>

@@ -26,15 +26,21 @@
             </div>
         </div>
 
-        <div class="container-fluid ps-0 pe-0">
-            <div class="row">
+        <div class="container-fluid ps-0 pe-0" id="content">
+
+            <div class="row pe-0 ps-0">
+
+                <h1 class="section-title category-page ms-2 mb-4">
+                    <span>{{ heading_title }}</span>
+                </h1>
 
                 {{ column_left }}
 
-                <div class="col-lg-12 col-md-8 pe-0 ps-0">
-                    <div class="row">
+                <div class="col-9 pe-0 ps-0" >
 
-                        <div class="col-sm-4">
+                    <div class="row pe-0 ps-0">
+
+                        <div class="col-sm-6 custom-sort">
                             <div class="form-group input-group mb-3">
                                 <label class="input-group-text" for="input-sort">{{ text_sort }}</label>
                                 <select id="input-sort" class="form-select" onchange="location = this.value;">
@@ -50,7 +56,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-4 mb-5">
+                        <div class="col-sm-6 mb-1 custom-sort">
                             <div class="form-group input-group input-group mb-3">
                                 <label class="input-group-text" for="input-limit">{{ text_limit }}</label>
                                 <select id="input-limit" class="form-select" onchange="location = this.value;">
@@ -65,64 +71,76 @@
                                 </select>
                             </div>
                         </div>
+
                     </div>
+
                     <div class="row">
+
 
                         {% if products %}
 
-                            {% for product in products %}
+                        {% for product in products %}
 
-                                <div class="col-3 mb-3">
-                                    <div class="product-cart">
-                                        <div class="product-cart-offer">
-                                            <div class="offer-hit">Хит</div>
-                                        </div>
-                                        <div class="product-cart-wishlist">
-                                            <button type="button" class="btn-cart"
-                                                    onclick="wishlist.add('{{ product.product_id }}');">
-                                                <i class="fa-regular fa-heart fa-xl"></i>
-                                            </button>
-                                        </div>
-                                        <div class="product-thumb">
-                                            <a href="{{ product.href }}"> <img src="{{ product.thumb }}"
-                                                                               alt="{{ produtc.name }}"></a>
-                                        </div>
-                                        <div class="products-details">
-                                            <h4>
-                                                <a href="{{ product.href }}">{{ product.name }}</a>
-                                            </h4>
-                                            <p class="product-expect">
-                                                {{ product.description }}
-                                            </p>
-                                            <div class="product-bottom-details d-flex justify-content-between align-items-center">
-                                                <div class="product-price">
-                                                    {{ product.price }}
-                                                </div>
-                                                <div class="product-links">
-                                                    <button type="button" class="btn btn-gray"
-                                                            onclick="cart.add('{{ product.product_id }}');">В корзину
-                                                    </button>
-                                                </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 mb-3">
+                                <div class="product-cart">
+                                    {#                                <div class="product-cart-offer"> #}
+                                    {#                                    <div class="offer-hit">Хит</div> #}
+                                    {#                                </div> #}
+                                    {#                                <div class="product-cart-wishlist"> #}
+                                    {#                                    <button type="button" class="btn-cart" #}
+                                    {#                                            onclick="wishlist.add('{{ product.product_id }}');"> #}
+                                    {#                                        <i class="fa-regular fa-heart fa-xl"></i> #}
+                                    {#                                    </button> #}
+                                    {#                                </div> #}
+                                    <div class="product-thumb">
+                                        <a href="{{ product.href }}"> <img src="{{ product.thumb }}"
+                                                                           alt="{{ produtc.name }}"></a>
+                                    </div>
+                                    <div class="products-details">
+                                        <h4>
+                                            <a href="{{ product.href }}">{{ product.name }}</a>
+                                        </h4>
+                                        <p class="product-expect">
+                                            {{ product.description }}
+                                        </p>
+                                        <div class="product-bottom-details d-flex justify-content-between align-items-center">
+                                            <div class="product-price">
+                                                {{ product.price }}
+                                            </div>
+                                            <div class="product-links">
+                                                {#                                            <button type="button" class="btn btn-gray" #}
+                                                {#                                                    onclick="wishlist.add('{{ product.product_id }}');"> #}
+                                                {#                                                <i class="fa-regular fa-heart fa-xl"></i> #}
+                                                {#                                            </button> #}
+
+                                                <button type="button" class="btn btn-gray"
+                                                        onclick="cart.add('{{ product.product_id }}');">В корзину
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                            {% endfor %}
+                        {% endfor %}
 
-                            <div class="col-12">{{ pagination }}</div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-12">{{ pagination }}</div>
+
 
                         {% else %}
 
                             <div class="col-lg-12">{{ text_empty }}</div>
 
                         {% endif %}
-
-
                     </div>
+
                 </div>
-
-
             </div>
         </div>
     </div>

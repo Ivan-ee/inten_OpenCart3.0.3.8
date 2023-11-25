@@ -52,6 +52,8 @@ var LiveSearchJs = function () {
                                 var show_add_button  = options.module_live_search_show_add_button;
 
                                 $('.result-text').html('<a href="'+all_search_href+'" class="view-all-results">'+options.text_view_all_results+' ('+result.total+')</a>');
+                                // $('.custom-search-btn').html('<a href="'+all_search_href+'" class="view-all-results"></a>');
+                                $('.custom-search-btn').attr('href', all_search_href);
                                 $.each(products, function(index,product) {
                                     var html = '<li>';
                                     // show_add_button
