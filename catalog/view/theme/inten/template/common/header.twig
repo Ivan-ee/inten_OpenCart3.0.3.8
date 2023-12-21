@@ -14,14 +14,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
+    <link rel='stylesheet'
+          href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 
     {% for style in styles %}
         <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
@@ -45,75 +42,78 @@
 
 <body>
 
-<div class="wrapper" id="top">
-    <header class="header">
+<div class="wrapper custom-width" id="top">
+    <div class="header-top">
 
-        <nav class="header-top d-none d-xl-block">
-            <div class="custom-width">
-                <div class="row pt-2 pb-2">
-                    <ul class="col-md-5 d-flex justify-content-left ms-0 mb-0 ">
-                        <li>
-                            <a href="https://inten-dev.ru/index.php?route=information/information&information_id=9"><i class="fa-solid fa-location-dot me-2"></i>Краснодар</a>
-                        </li>
-                        <li class="ms-4">
-                            <a href="tel: {{ telephone }}">{{ telephone }}</a>
-                        </li>
-                    </ul>
-
-                    {% if informations %}
-
-                        <ul class="col-md-7 d-flex justify-content-end ms-0 mb-0">
-                            {% for information in informations %}
-                                <li class="ms-4"><a href="{{ information.href }}">{{ information.title }}</a></li>
-                            {% endfor %}
-                        </ul>
-
-                    {% endif %}
-
-
-                </div>
+        <nav class="row d-flex align-items-center mt-3 mb-3">
+            <div class="col-3 position-relative"><a href="#"><i class="fi fi-rr-marker me-3"></i>Краснодар</a></div>
+            <div class="col-5 d-flex">
+                <div class="me-3"><a href="#">Акции<span class="red-circle"></span></a></div>
+                <div class="ms-3 me-3"><a href="#">Компания</a></div>
+                <div class="ms-3 me-3"><a href="#">Услуги</a></div>
+                <div class="ms-3 me-3"><a href="#">Доставка</a></div>
+                <div class="ms-3 me-3"><a href="#">Оплата</a></div>
+                <div class="ms-3 me-3"><a href="#">Контакты</a></div>
             </div>
+            <div class="col-4 text-end"><a href="tel:8 (861) 202-54-44" class="tel">8 (861) 202-54-44</a></div>
         </nav>
-    </header>
 
-    <div class="header border-bottom sticky-top bg-white" id="sticky">
-        <nav class="header-bottom custom-width pt-2 pb-2 ">
-            <div class="row align-items-center">
-                <div class="col-12 col-xl-2 header-logo text-left pe-0">
-                    <a href="{{ base }}" class="">INTEN</a>
-                </div>
+    </div>
 
-                <div class="d-none d-xl-block col-md-2 navbar navbar-expand-xl text-center">
-                    <div class="collapse navbar-collapse text-left">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle custom-border-radius ps-3 pe-3" href="#"
-                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Каталог товаров
-                                </a>
-                                <ul class="dropdown-menu">
-                                    {{ menu }}
-                                </ul>
-                            </li>
-                        </ul>
+    <header class="header-bottom sticky-top" id="sticky">
+        <nav class="row d-flex align-items-center">
+            <div class="col-3 header-title">
+                <div class="header-block pt-2 pb-2 d-flex justify-content-between align-items-center">
+                    <a href="{{ base }}" class="ms-4">INTEN</a>
+                    <div class="header-mini-block me-2">
+                        <span>Каталог</span>
+                        <i class="fi fi-rr-angle-small-down"></i>
                     </div>
                 </div>
-
-                <div class="input col-12 ps-0 col-xl-4 ps-5 pe-0 header-search">
-                    {{ search }}
-                </div>
-
-                <div class="col-md-4 d-flex align-items-center d-none d-xl-block text-end">
-
-                    <a href="#" class="btn cart position-relative">
-                        <i class="fa-solid fa-heart fa-xl"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4</span>
-                    </a>
-
-                    {{ cart }}
-
-                </div>
-
+            </div>
+            <div class="col-5 header-search">
+                {{ search }}
             </div>
         </nav>
-    </div>
+
+
+{#        <nav class="header-bottom  pt-2 pb-2 ">#}
+{#            <div class="row align-items-center">#}
+{#                <div class="col-12 col-xl-2 header-logo text-left pe-0">#}
+{#                    <a href="{{ base }}">INTEN</a>#}
+{#                </div>#}
+
+{#                <div class="d-none d-xl-block col-md-2 navbar navbar-expand-xl text-center">#}
+{#                    <div class="collapse navbar-collapse text-left">#}
+{#                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">#}
+{#                            <li class="nav-item dropdown">#}
+{#                                <a class="nav-link dropdown-toggle custom-border-radius ps-3 pe-3" href="#"#}
+{#                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                                    Каталог товаров#}
+{#                                </a>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                    {{ menu }}#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </div>#}
+
+{#                <div class="input col-12 ps-0 col-xl-4 ps-5 pe-0 header-search">#}
+{#                    {{ search }}#}
+{#                </div>#}
+
+{#                <div class="col-md-4 d-flex align-items-center d-none d-xl-block text-end">#}
+
+{#                    <a href="#" class="btn cart position-relative">#}
+{#                        <i class="fa-solid fa-heart fa-xl"></i>#}
+{#                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4</span>#}
+{#                    </a>#}
+
+{#                    {{ cart }}#}
+
+{#                </div>#}
+
+{#            </div>#}
+{#        </nav>#}
+    </header>
