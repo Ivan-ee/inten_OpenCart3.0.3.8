@@ -226,4 +226,23 @@ main.main {
   }
 }
 
+main{
+  .menu{
+    .menu-item{
+      list-style-type: none;
+    }
+
+    .last-menu-item{
+      border-top: 1px solid #e7e7e7;
+      margin-top: 20px;
+    }
+
+    .menu-item:hover{
+      transition: all 0.3s;
+      color: var(--text-hover-color);
+    }
+
+  }
+}
+
 

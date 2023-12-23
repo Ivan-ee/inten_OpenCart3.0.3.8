@@ -175,4 +175,16 @@ main.main {
   margin-bottom: 5px;
 }
 
+main .menu .menu-item {
+  list-style-type: none;
+}
+main .menu .last-menu-item {
+  border-top: 1px solid #e7e7e7;
+  margin-top: 20px;
+}
+main .menu .menu-item:hover {
+  transition: all 0.3s;
+  color: var(--text-hover-color);
+}
+
 /*# sourceMappingURL=main.css.map */

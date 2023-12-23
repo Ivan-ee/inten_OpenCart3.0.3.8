@@ -1,21 +1,29 @@
 {{ header }}
 
-    <main class="main custom-width">
+    <main class="main" id="main">
 
-        {{ content_top }}
+    <div class="row">
+        <div class="col-3 menu">
+            {{ menu }}
+        </div>
+        <div class="col-9" style=" background-color: red;">
+            555
+        </div>
+    </div>
 
-        <section class="mt-4 mb-4 pt-5 pb-5 ps-5 pe-5 bg-light custom-border-radius">
-            <div class="fs-1 fw-bold">Нужна наша помощь?</div>
-            <div class="fs-5 mb-3">Оставьте заявку и мы подберём нужный товар</div>
-            <form class="mb-3 form-input">
-                <input class="custom-border-radius pt-3 pb-3 ps-3 fs-6 w-25 me-3" type="text" name="name" placeholder="Ваше имя">
-                <input class="custom-border-radius pt-3 pb-3 ps-3 fs-6 w-25 me-3" type="tel" name="tel" placeholder="+7 (999) 000-00-00">
-                <button class="btn btn-gray pt-3 pb-3 ps-3 pe-3 fs-6" type="submit">Отправить</button>
-            </form>
-            <div>
-                Нажимая кнопку «‎Отправить»‎ вы соглашаетесь с политикой обработки персональных данных
-            </div>
-        </section>
+
+{#        <section class="mt-4 mb-4 pt-5 pb-5 ps-5 pe-5 bg-light custom-border-radius">#}
+{#            <div class="fs-1 fw-bold">Нужна наша помощь?</div>#}
+{#            <div class="fs-5 mb-3">Оставьте заявку и мы подберём нужный товар</div>#}
+{#            <form class="mb-3 form-input">#}
+{#                <input class="custom-border-radius pt-3 pb-3 ps-3 fs-6 w-25 me-3" type="text" name="name" placeholder="Ваше имя">#}
+{#                <input class="custom-border-radius pt-3 pb-3 ps-3 fs-6 w-25 me-3" type="tel" name="tel" placeholder="+7 (999) 000-00-00">#}
+{#                <button class="btn btn-gray pt-3 pb-3 ps-3 pe-3 fs-6" type="submit">Отправить</button>#}
+{#            </form>#}
+{#            <div>#}
+{#                Нажимая кнопку «‎Отправить»‎ вы соглашаетесь с политикой обработки персональных данных#}
+{#            </div>#}
+{#        </section>#}
 
     </main>
 

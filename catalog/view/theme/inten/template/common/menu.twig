@@ -2,7 +2,7 @@
 
     {% for category in categories %}
 
-        <li class="">
+        <li class="menu-item{% if loop.last %} last-menu-item{% endif %}">
             <a class="dropdown-item d-flex align-items-center menu-item pt-1 pb-1" href="{{ category.href }}">
                 <img alt="{{category.name}}" src="{{ category.image }}" class="me-3">
                 {{category.name}}

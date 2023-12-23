@@ -17,7 +17,7 @@ class ControllerCommonMenu extends Controller {
         foreach ($categories as $category) {
 
             if($category['image']){
-                $image = $this->model_tool_image->resize($category['image'], 40, 40);
+                $image = $this->model_tool_image->resize($category['image'], 20, 20);
             } else {
                 $image = false;
             }
