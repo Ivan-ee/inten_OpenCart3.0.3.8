@@ -234,4 +234,10 @@ main .home-block .first {
   padding: 24px 14px 24px 20px;
 }
 
+@media screen and (min-width: 1081px) {
+  .custom-width {
+    max-width: 45%;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
