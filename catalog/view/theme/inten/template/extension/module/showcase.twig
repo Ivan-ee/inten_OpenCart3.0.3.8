@@ -1,13 +1,13 @@
 <div id="home-categories">
     <div class="block">
         <h2>{{ heading_new }}</h2>
-        {% for category in popular_categories %}
+        {% for category in new_categories %}
             <div class="category">{{ category.name }}</div>
         {% endfor %}
     </div>
     <div class="block">
         <h2>{{ heading_bestseller }}</h2>
-        {% for category in new_categories %}
+        {% for category in bestseller_categories %}
             <div class="category">{{ category.name }}</div>
         {% endfor %}
     </div>

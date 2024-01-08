@@ -31,38 +31,33 @@ class ModelExtensionModuleShowcase extends Model
 
     public function getBestSellerCategories($limit)
     {
-        $category_data = $this->cache->get('category.bestseller.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit);
+        $category_data = array();
 
-        if (!$category_data) {
-            $category_data = array();
+        $query = $this->db->query("
+        SELECT c.category_id, COUNT(op.product_id) AS total
+        FROM " . DB_PREFIX . "order_product op
+        LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id)
+        LEFT JOIN `" . DB_PREFIX . "product` p ON (op.product_id = p.product_id)
+        LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)
+        LEFT JOIN " . DB_PREFIX . "category c ON (p2c.category_id = c.category_id)
+        LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id)
+        WHERE o.order_status_id > '0' AND p.status = '1' AND p.date_available <= NOW() AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'
+        GROUP BY c.category_id
+        ORDER BY total DESC
+        LIMIT " . (int)$limit
+        );
 
-            $query = $this->db->query("
-            SELECT c.category_id, COUNT(op.product_id) AS total
-            FROM " . DB_PREFIX . "order_product op
-            LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id)
-            LEFT JOIN `" . DB_PREFIX . "product` p ON (op.product_id = p.product_id)
-            LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)
-            LEFT JOIN " . DB_PREFIX . "category c ON (p2c.category_id = c.category_id)
-            LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id)
-            WHERE o.order_status_id > '0' AND p.status = '1' AND p.date_available <= NOW() AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'
-            GROUP BY c.category_id
-            ORDER BY total DESC
-            LIMIT " . (int)$limit
-            );
-
-            foreach ($query->rows as $result) {
-                $category_data[$result['category_id']] = $this->getCategory($result['category_id']);
-            }
-
-            $this->cache->set('category.bestseller.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit, $category_data);
+        foreach ($query->rows as $result) {
+            $category_data[$result['category_id']] = $this->getCategory($result['category_id']);
         }
 
         return $category_data;
     }
 
+
     public function getCategoriesWithSpecials($limit)
     {
-        $sql = "
+        $result = "
         SELECT c.category_id, cd.name
         FROM " . DB_PREFIX . "product p
         LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)
@@ -83,9 +78,9 @@ class ModelExtensionModuleShowcase extends Model
         ORDER BY c.sort_order ASC
         LIMIT " . (int)$limit;
 
-        $query = $this->db->query($sql);
+        $result = $this->db->query($result);
 
-        return $query->rows;
+        return $result->rows;
     }
 
 
