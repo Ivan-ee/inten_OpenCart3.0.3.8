@@ -10,8 +10,22 @@ class ControllerExtensionModuleShowcase extends Controller {
         $this->load->model('setting/module');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+
+            $this->load->model('tool/upload');
+            $this->request->post['block_images'] = array();
+
+            foreach ($this->request->files['block_images']['name'] as $key => $value) {
+                if (!empty($value) && is_file($this->request->files['block_images']['tmp_name'][$key])) {
+                    $upload_info = $this->model_tool_upload->upload('block_images', $key);
+
+                    if ($upload_info) {
+                        $this->request->post['block_images'][] = $upload_info['file'];
+                    }
+                }
+            }
+
             if (!isset($this->request->get['module_id'])) {
-                $this->model_setting_module->addModule('featured', $this->request->post);
+                $this->model_setting_module->addModule('showcase', $this->request->post);
             } else {
                 $this->model_setting_module->editModule($this->request->get['module_id'], $this->request->post);
             }
@@ -60,19 +74,19 @@ class ControllerExtensionModuleShowcase extends Controller {
         if (!isset($this->request->get['module_id'])) {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('extension/module/featured', 'user_token=' . $this->session->data['user_token'], true)
+                'href' => $this->url->link('extension/module/showcase', 'user_token=' . $this->session->data['user_token'], true)
             );
         } else {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('extension/module/featured', 'user_token=' . $this->session->data['user_token'] . '&module_id=' . $this->request->get['module_id'], true)
+                'href' => $this->url->link('extension/module/showcase', 'user_token=' . $this->session->data['user_token'] . '&module_id=' . $this->request->get['module_id'], true)
             );
         }
 
         if (!isset($this->request->get['module_id'])) {
-            $data['action'] = $this->url->link('extension/module/featured', 'user_token=' . $this->session->data['user_token'], true);
+            $data['action'] = $this->url->link('extension/module/showcase', 'user_token=' . $this->session->data['user_token'], true);
         } else {
-            $data['action'] = $this->url->link('extension/module/featured', 'user_token=' . $this->session->data['user_token'] . '&module_id=' . $this->request->get['module_id'], true);
+            $data['action'] = $this->url->link('extension/module/showcase', 'user_token=' . $this->session->data['user_token'] . '&module_id=' . $this->request->get['module_id'], true);
         }
 
         $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
@@ -91,52 +105,18 @@ class ControllerExtensionModuleShowcase extends Controller {
             $data['name'] = '';
         }
 
-        $this->load->model('catalog/product');
 
-        $data['products'] = array();
-
-        if (!empty($this->request->post['product'])) {
-            $products = $this->request->post['product'];
-        } elseif (!empty($module_info['product'])) {
-            $products = $module_info['product'];
+        if (isset($this->request->post['block_images'])) {
+            $data['block_images'] = $this->request->post['block_images'];
+        } elseif (!empty($module_info['block_images'])) {
+            $data['block_images'] = $module_info['block_images'];
         } else {
-            $products = array();
+            $data['block_images'] = array();
         }
 
-        foreach ($products as $product_id) {
-            $product_info = $this->model_catalog_product->getProduct($product_id);
 
-            if ($product_info) {
-                $data['products'][] = array(
-                    'product_id' => $product_info['product_id'],
-                    'name'       => $product_info['name']
-                );
-            }
-        }
 
-        if (isset($this->request->post['limit'])) {
-            $data['limit'] = $this->request->post['limit'];
-        } elseif (!empty($module_info)) {
-            $data['limit'] = $module_info['limit'];
-        } else {
-            $data['limit'] = 5;
-        }
 
-        if (isset($this->request->post['width'])) {
-            $data['width'] = $this->request->post['width'];
-        } elseif (!empty($module_info)) {
-            $data['width'] = $module_info['width'];
-        } else {
-            $data['width'] = 200;
-        }
-
-        if (isset($this->request->post['height'])) {
-            $data['height'] = $this->request->post['height'];
-        } elseif (!empty($module_info)) {
-            $data['height'] = $module_info['height'];
-        } else {
-            $data['height'] = 200;
-        }
 
         if (isset($this->request->post['status'])) {
             $data['status'] = $this->request->post['status'];
@@ -150,11 +130,11 @@ class ControllerExtensionModuleShowcase extends Controller {
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('extension/module/featured', $data));
+        $this->response->setOutput($this->load->view('extension/module/showcase', $data));
     }
 
     protected function validate() {
-        if (!$this->user->hasPermission('modify', 'extension/module/featured')) {
+        if (!$this->user->hasPermission('modify', 'extension/module/showcase')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
@@ -162,13 +142,6 @@ class ControllerExtensionModuleShowcase extends Controller {
             $this->error['name'] = $this->language->get('error_name');
         }
 
-        if (!$this->request->post['width']) {
-            $this->error['width'] = $this->language->get('error_width');
-        }
-
-        if (!$this->request->post['height']) {
-            $this->error['height'] = $this->language->get('error_height');
-        }
 
         return !$this->error;
     }
