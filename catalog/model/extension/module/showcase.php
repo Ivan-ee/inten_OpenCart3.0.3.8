@@ -34,25 +34,30 @@ class ModelExtensionModuleShowcase extends Model
         $category_data = array();
 
         $query = $this->db->query("
-        SELECT c.category_id, COUNT(op.product_id) AS total
+        SELECT c.category_id, cd.name AS category_name
         FROM " . DB_PREFIX . "order_product op
         LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id)
         LEFT JOIN `" . DB_PREFIX . "product` p ON (op.product_id = p.product_id)
         LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)
         LEFT JOIN " . DB_PREFIX . "category c ON (p2c.category_id = c.category_id)
+        LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "')
         LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id)
         WHERE o.order_status_id > '0' AND p.status = '1' AND p.date_available <= NOW() AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'
         GROUP BY c.category_id
-        ORDER BY total DESC
+        ORDER BY category_id DESC
         LIMIT " . (int)$limit
         );
 
         foreach ($query->rows as $result) {
-            $category_data[$result['category_id']] = $this->getCategory($result['category_id']);
+            $category_data[$result['category_id']] = array(
+                'category_id' => $result['category_id'],
+                'name' => $result['category_name']
+            );
         }
 
         return $category_data;
     }
+
 
 
     public function getCategoriesWithSpecials($limit)
