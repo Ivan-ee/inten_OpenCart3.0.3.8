@@ -1,32 +1,29 @@
 <?php
 // Heading
-$_['heading_title']    = 'Витрина категорий';
+$_['heading_title']     = 'Витрина категорий';
 
 // Text
-$_['text_extension']   = 'Расширения';
-$_['text_success']     = 'Настройки успешно изменены!';
-$_['text_edit']        = 'Настройки модуля';
+$_['text_success']      = 'Настройки успешно изменены!';
+$_['text_list']         = 'Список баннеров';
+$_['text_add']          = 'Добавить';
+$_['text_edit']         = 'Редактирование';
+$_['text_default']      = 'По умолчанию';
+
+// Column
+$_['column_name']       = 'Название баннера';
+$_['column_status']     = 'Статус';
+$_['column_action']     = 'Действие';
 
 // Entry
-$_['entry_name']       = 'Название модуля';
-$_['entry_category']   = 'Название категории';
-$_['text_add_image'] = 'Добавить изображение';
-$_['error_block_image_url'] = 'Ошибка URL изображения';
-$_['entry_block_images_upload'] = 'Upload Block Images';
-
-
-$_['entry_product']    = 'Товары';
-$_['entry_limit']      = 'Лимит';
-$_['entry_width']      = 'Ширина';
-$_['entry_height']     = 'Высота';
-$_['entry_status']     = 'Статус';
-
-// Help
-$_['help_product']     = '(Автодополнение)';
+$_['entry_name']        = 'Название баннера';
+$_['entry_title']       = 'Заголовок';
+$_['entry_link']        = 'Ссылка';
+$_['entry_image']       = 'Изображение';
+$_['entry_status']      = 'Статус';
+$_['entry_sort_order']  = 'Порядок сортировки';
 
 // Error
-$_['error_permission'] = 'У Вас нет прав для управления данным модулем!';
-$_['error_name']       = 'Название модуля должно содержать от 3 до 64 символов!';
-$_['error_width']      = 'Введите ширину изображения!';
-$_['error_height']     = 'Введите высоту изображения!';
+$_['error_permission'] = 'У Вас нет прав для изменения настроек!';
+$_['error_name']       = 'Название баннера должно быть от 3 до 64 символов!';
+$_['error_title']      = 'Заголовок должен быть от 2 до 64 символов!';
 
