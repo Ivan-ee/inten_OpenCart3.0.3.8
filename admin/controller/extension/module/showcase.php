@@ -1,8 +1,11 @@
 <?php
-class ControllerExtensionModuleShowcase extends Controller {
+
+class ControllerExtensionModuleShowcase extends Controller
+{
     private $error = array();
 
-    public function index() {
+    public function index()
+    {
         $this->load->language('extension/module/showcase');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +47,8 @@ class ControllerExtensionModuleShowcase extends Controller {
 //        $this->getForm();
 //    }
 
-    public function edit() {
+    public function edit()
+    {
         $this->load->language('extension/module/showcase');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -52,7 +56,7 @@ class ControllerExtensionModuleShowcase extends Controller {
         $this->load->model('extension/module/showcase');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_extension_module_showcase->editBanner($this->request->get['banner_id'], $this->request->post);
+            $this->model_extension_module_showcase->editBanner($this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -76,9 +80,8 @@ class ControllerExtensionModuleShowcase extends Controller {
         $this->getForm();
     }
 
-    protected function getForm() {
-//        $data['text_form'] = !isset($this->request->get['banner_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
-
+    protected function getForm()
+    {
         if (isset($this->error['warning'])) {
             $data['error_warning'] = $this->error['warning'];
         } else {
@@ -109,8 +112,6 @@ class ControllerExtensionModuleShowcase extends Controller {
 
         $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
-        $banner_info = $this->model_extension_module_showcase->getBanner($this->request->get['banner_id']);
-
         $data['user_token'] = $this->session->data['user_token'];
 
         if (isset($this->request->post['status'])) {
@@ -125,37 +126,21 @@ class ControllerExtensionModuleShowcase extends Controller {
 
         $data['languages'] = $this->model_localisation_language->getLanguages();
 
+        $banner_info = $this->model_extension_module_showcase->getBanner();
+
+        $data['banners'] = array();
+
+        foreach ($banner_info as $banner) {
+            $data['banners'][] = array(
+                'showcase_images_id' => $banner['showcase_images_id'],
+                'image' => $banner['image'],
+                'title' => $banner['title'],
+                'link' => $banner['link'],
+            );
+        }
         $this->load->model('tool/image');
 
-        if (isset($this->request->post['banner_image'])) {
-            $banner_images = $this->request->post['banner_image'];
-        } elseif (isset($this->request->get['banner_id'])) {
-            $banner_images = $this->model_extension_module_showcase->getBannerImages($this->request->get['banner_id']);
-        } else {
-            $banner_images = array();
-        }
-
-        $data['banner_images'] = array();
-
-        foreach ($banner_images as $key => $value) {
-            foreach ($value as $banner_image) {
-                if (is_file(DIR_IMAGE . $banner_image['image'])) {
-                    $image = $banner_image['image'];
-                    $thumb = $banner_image['image'];
-                } else {
-                    $image = '';
-                    $thumb = 'no_image.png';
-                }
-
-                $data['banner_images'][$key][] = array(
-                    'title'      => $banner_image['title'],
-                    'link'       => $banner_image['link'],
-                    'image'      => $image,
-                    'thumb'      => $this->model_tool_image->resize($thumb, 100, 100),
-                );
-            }
-        }
-
+        $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
         $data['header'] = $this->load->controller('common/header');
@@ -165,7 +150,8 @@ class ControllerExtensionModuleShowcase extends Controller {
         $this->response->setOutput($this->load->view('extension/module/showcase', $data));
     }
 
-    protected function validateForm() {
+    protected function validateForm()
+    {
         if (!$this->user->hasPermission('modify', 'extension/module/showcase')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
@@ -187,7 +173,8 @@ class ControllerExtensionModuleShowcase extends Controller {
         return !$this->error;
     }
 
-    protected function validateDelete() {
+    protected function validateDelete()
+    {
         if (!$this->user->hasPermission('modify', 'design/banner')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
