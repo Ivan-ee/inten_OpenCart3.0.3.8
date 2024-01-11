@@ -15,38 +15,6 @@ class ControllerExtensionModuleShowcase extends Controller
         $this->getForm();
     }
 
-//    public function add() {
-//        $this->load->language('design/banner');
-//
-//        $this->document->setTitle($this->language->get('heading_title'));
-//
-//        $this->load->model('design/banner');
-//
-//        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-//            $this->model_extension_module_showcase->addBanner($this->request->post);
-//
-//            $this->session->data['success'] = $this->language->get('text_success');
-//
-//            $url = '';
-//
-//            if (isset($this->request->get['sort'])) {
-//                $url .= '&sort=' . $this->request->get['sort'];
-//            }
-//
-//            if (isset($this->request->get['order'])) {
-//                $url .= '&order=' . $this->request->get['order'];
-//            }
-//
-//            if (isset($this->request->get['page'])) {
-//                $url .= '&page=' . $this->request->get['page'];
-//            }
-//
-//            $this->response->redirect($this->url->link('design/banner', 'user_token=' . $this->session->data['user_token'] . $url, true));
-//        }
-//
-//        $this->getForm();
-//    }
-
     public function edit()
     {
         $this->load->language('extension/module/showcase');
@@ -55,24 +23,28 @@ class ControllerExtensionModuleShowcase extends Controller
 
         $this->load->model('extension/module/showcase');
 
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_extension_module_showcase->editBanner($this->request->post);
+        // Добавим проверку на наличие разрешения на модификацию
+        if (!$this->user->hasPermission('modify', 'extension/module/showcase')) {
+            $this->error['warning'] = $this->language->get('error_permission');
+        }
 
-            $this->session->data['success'] = $this->language->get('text_success');
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+            $status = $this->request->post['status'];
+            $bannerImages = $this->request->post['banner_image'];
+
+            foreach ($bannerImages as $key => $data) {
+                $showcaseImagesId = $key;
+                $link = $data['link'];
+                $image = $data['image'];
+
+                // Выполните запрос к базе данных для обновления данных
+                $this->model_extension_module_showcase->updateShowcaseImage($showcaseImagesId, $link, $image);
+
+
+                $this->session->data['success'] = $this->language->get('text_success');
+            }
 
             $url = '';
-
-            if (isset($this->request->get['sort'])) {
-                $url .= '&sort=' . $this->request->get['sort'];
-            }
-
-            if (isset($this->request->get['order'])) {
-                $url .= '&order=' . $this->request->get['order'];
-            }
-
-            if (isset($this->request->get['page'])) {
-                $url .= '&page=' . $this->request->get['page'];
-            }
 
             $this->response->redirect($this->url->link('extension/module/showcase', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
@@ -141,7 +113,6 @@ class ControllerExtensionModuleShowcase extends Controller
         $this->load->model('tool/image');
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
-        $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
@@ -156,19 +127,7 @@ class ControllerExtensionModuleShowcase extends Controller
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
-//        if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
-//            $this->error['name'] = $this->language->get('error_name');
-//        }
-
-        if (isset($this->request->post['banner_image'])) {
-            foreach ($this->request->post['banner_image'] as $language_id => $value) {
-                foreach ($value as $banner_image_id => $banner_image) {
-                    if ((utf8_strlen($banner_image['title']) < 2) || (utf8_strlen($banner_image['title']) > 64)) {
-                        $this->error['banner_image'][$language_id][$banner_image_id] = $this->language->get('error_title');
-                    }
-                }
-            }
-        }
+//        var_dump($_POST['banner_image']);
 
         return !$this->error;
     }
