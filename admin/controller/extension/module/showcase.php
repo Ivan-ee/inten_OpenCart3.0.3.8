@@ -32,13 +32,21 @@ class ControllerExtensionModuleShowcase extends Controller
             $status = $this->request->post['status'];
             $bannerImages = $this->request->post['banner_image'];
 
+
+
             foreach ($bannerImages as $key => $data) {
                 $showcaseImagesId = $key;
+                $title = $data['title'];
                 $link = $data['link'];
                 $image = $data['image'];
 
-                // Выполните запрос к базе данных для обновления данных
-                $this->model_extension_module_showcase->updateShowcaseImage($showcaseImagesId, $link, $image);
+                //  catalog/showcase/div.actual-offers__section-img_container.png
+
+                $image = strstr($image, "catalog/");
+
+//                $this->tte($image);
+
+                $this->model_extension_module_showcase->updateShowcaseImage($showcaseImagesId, $title, $link, $image);
 
 
                 $this->session->data['success'] = $this->language->get('text_success');
@@ -58,12 +66,6 @@ class ControllerExtensionModuleShowcase extends Controller
             $data['error_warning'] = $this->error['warning'];
         } else {
             $data['error_warning'] = '';
-        }
-
-        if (isset($this->error['banner_image'])) {
-            $data['error_banner_image'] = $this->error['banner_image'];
-        } else {
-            $data['error_banner_image'] = array();
         }
 
         $url = '';
@@ -86,31 +88,41 @@ class ControllerExtensionModuleShowcase extends Controller
 
         $data['user_token'] = $this->session->data['user_token'];
 
-        if (isset($this->request->post['status'])) {
-            $data['status'] = $this->request->post['status'];
-        } elseif (!empty($banner_info)) {
-            $data['status'] = $banner_info['status'];
-        } else {
-            $data['status'] = true;
-        }
+
+
+//        if (isset($this->request->post['status'])) {
+//            $data['status'] = $this->request->post['status'];
+//        } elseif (!empty($banner_info)) {
+//            $data['status'] = $banner_info['status'];
+//        } else {
+//            $data['status'] = true;
+//        }
 
         $this->load->model('localisation/language');
 
         $data['languages'] = $this->model_localisation_language->getLanguages();
 
+
         $banner_info = $this->model_extension_module_showcase->getBanner();
 
+
         $data['banners'] = array();
+
+        $this->load->model('tool/image');
 
         foreach ($banner_info as $banner) {
             $data['banners'][] = array(
                 'showcase_images_id' => $banner['showcase_images_id'],
-                'image' => $banner['image'],
+                'image' => $this->model_tool_image->resize($banner['image'], 100, 100),
                 'title' => $banner['title'],
                 'link' => $banner['link'],
             );
+
+            $this->tt( $data['banners']);
         }
-        $this->load->model('tool/image');
+
+
+
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
@@ -127,17 +139,27 @@ class ControllerExtensionModuleShowcase extends Controller
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
-//        var_dump($_POST['banner_image']);
-
         return !$this->error;
     }
 
     protected function validateDelete()
     {
-        if (!$this->user->hasPermission('modify', 'design/banner')) {
+        if (!$this->user->hasPermission('modify', 'extension/module/showcase')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
         return !$this->error;
+    }
+
+    function tt($str){
+        echo "<pre>";
+        print_r($str);
+        echo "</pre>";
+    }
+    function tte($str){
+        echo "<pre>";
+        print_r($str);
+        echo "</pre>";
+        exit();
     }
 }
