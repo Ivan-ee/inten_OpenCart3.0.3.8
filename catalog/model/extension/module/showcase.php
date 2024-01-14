@@ -2,6 +2,22 @@
 
 class ModelExtensionModuleShowcase extends Model
 {
+    public function getStatus() {
+        $query = $this->db->query("SELECT status FROM " . DB_PREFIX . "showcase WHERE id = '1'");
+
+        if ($query->num_rows) {
+            return $query->row['status'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function getBannerById($id) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "showcase_images WHERE showcase_images_id = '" . (int)$id . "'");
+
+        return $query->row;
+    }
+
     public function getLatestCategories($limit)
     {
         $query = $this->db->query("SELECT DISTINCT c.category_id, cd.name, p.date_added

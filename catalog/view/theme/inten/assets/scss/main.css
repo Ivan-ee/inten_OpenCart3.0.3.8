@@ -234,6 +234,18 @@ main .home-block .first {
   padding: 24px 14px 24px 20px;
 }
 
+.showcase-block .showcase-title {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--text-color);
+}
+.showcase-block .showcase-category {
+  font-size: 14px;
+  font-weight: normal;
+  color: #8C8C8C;
+  margin-bottom: 4px;
+}
+
 @media screen and (min-width: 1921px) {
   .custom-width {
     max-width: 45%;
