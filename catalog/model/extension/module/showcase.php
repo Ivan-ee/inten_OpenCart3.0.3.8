@@ -2,7 +2,8 @@
 
 class ModelExtensionModuleShowcase extends Model
 {
-    public function getStatus() {
+    public function getStatus()
+    {
         $query = $this->db->query("SELECT status FROM " . DB_PREFIX . "showcase WHERE id = '1'");
 
         if ($query->num_rows) {
@@ -12,7 +13,8 @@ class ModelExtensionModuleShowcase extends Model
         }
     }
 
-    public function getBannerById($id) {
+    public function getBannerById($id)
+    {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "showcase_images WHERE showcase_images_id = '" . (int)$id . "'");
 
         return $query->row;
@@ -74,8 +76,6 @@ class ModelExtensionModuleShowcase extends Model
         return $category_data;
     }
 
-
-
     public function getCategoriesWithSpecials($limit)
     {
         $result = "
@@ -103,6 +103,4 @@ class ModelExtensionModuleShowcase extends Model
 
         return $result->rows;
     }
-
-
 }

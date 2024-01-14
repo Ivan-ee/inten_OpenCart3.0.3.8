@@ -244,6 +244,10 @@ main .home-block .first {
   font-weight: normal;
   color: #8C8C8C;
   margin-bottom: 4px;
+  text-decoration: none;
+}
+.showcase-block .showcase-category:hover {
+  color: var(--text-hover-color);
 }
 
 @media screen and (min-width: 1921px) {

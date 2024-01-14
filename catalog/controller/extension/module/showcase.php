@@ -21,6 +21,18 @@ class ControllerExtensionModuleShowcase extends Controller
         $data['bestseller_categories'] = $this->model_extension_module_showcase->getBestSellerCategories(4);
         $data['sale_categories'] = $this->model_extension_module_showcase->getCategoriesWithSpecials(4);
 
+        foreach ($data['new_categories'] as &$category) {
+            $category['href'] = $this->url->link('product/category', 'path=' . $category['category_id']);
+        }
+
+        foreach ($data['bestseller_categories'] as &$category) {
+            $category['href'] = $this->url->link('product/category', 'path=' . $category['category_id']);
+        }
+
+        foreach ($data['sale_categories'] as &$category) {
+            $category['href'] = $this->url->link('product/category', 'path=' . $category['category_id']);
+        }
+
         return $this->load->view('extension/module/showcase', $data);
     }
 }
