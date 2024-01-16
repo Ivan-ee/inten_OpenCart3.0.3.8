@@ -74,7 +74,7 @@ var LiveSearchJs = function () {
                                         html += '<div class="product-image"><img alt="' + product.name + '" src="' + product.image + '"></div>';
                                     }
                                     // show name & extra_info
-                                    html += '<div class="product-name">' + product.name ;
+                                    html += '<div class="product-name">' + '<i class="fi fi-rs-search"></i>' + product.name;
                                     if(show_description){
                                         html += '<p class="product-description">' + product.extra_info + '</p>';
                                     }
