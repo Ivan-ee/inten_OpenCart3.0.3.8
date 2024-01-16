@@ -245,6 +245,11 @@ main {
 
   .home-block {
 
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+
+
+
     .home-block-item {
 
       a {
@@ -303,6 +308,10 @@ main {
     .first {
       min-width: 283px;
       padding: 24px 14px 24px 20px;
+    }
+
+    .last{
+      margin-right: 0 ;
     }
   }
 }

@@ -186,6 +186,10 @@ main .menu .menu-item:hover {
   transition: all 0.3s;
   color: var(--text-hover-color);
 }
+main .home-block {
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
 main .home-block .home-block-item {
   margin: 0 auto;
   max-width: 183px;
@@ -232,6 +236,9 @@ main .home-block .home-block-item .btn-sales:hover {
 main .home-block .first {
   min-width: 283px;
   padding: 24px 14px 24px 20px;
+}
+main .home-block .last {
+  margin-right: 0;
 }
 
 .showcase-block .showcase-title {
