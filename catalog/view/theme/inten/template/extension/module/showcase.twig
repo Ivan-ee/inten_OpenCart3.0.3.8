@@ -1,16 +1,16 @@
 {% if status == 1 %}
-    <div id="home-categories" class="row mt-5">
+    <div id="home-categories" class="row showcase mt-5">
         <div class="col-4 showcase-block">
             <h2 class="showcase-title">{{ banner_new_categories.title }}</h2>
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <a href="{{ banner_new_categories.link }}">
                         <img src="{{ baseUrl }}image/{{ banner_new_categories.image }}">
                     </a>
                 </div>
                 <div class="col-6">
                     {% for category in new_categories %}
-                        <a href="{{ category.href }}" class="showcase-category">{{ category.name }}</a>
+                        <p class="showcase-p"><a href="{{ category.href }}" class="showcase-category">{{ category.name }}</a></p>
                     {% endfor %}
                 </div>
             </div>
@@ -18,14 +18,14 @@
         <div class="col-4 showcase-block ">
             <h2 class="showcase-title">{{ banner_bestseller_categories.title }}</h2>
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <a href="{{ banner_bestseller_categories.link }}">
                         <img src="{{ baseUrl }}image/{{ banner_bestseller_categories.image }}">
                     </a>
                 </div>
                 <div class="col-6">
                     {% for category in bestseller_categories %}
-                        <a href="{{ category.href }}" class="showcase-category">{{ category.name }}</a>
+                        <p class="showcase-p"><a href="{{ category.href }}" class="showcase-category">{{ category.name }}</a></p>
                     {% endfor %}
                 </div>
             </div>
@@ -33,14 +33,14 @@
         <div class="col-4 showcase-block">
             <h2 class="showcase-title">{{ banner_sale_categories.title }}</h2>
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <a href="{{ banner_sale_categories.link }}">
                         <img src="{{ baseUrl }}image/{{ banner_sale_categories.image }}">
                     </a>
                 </div>
                 <div class="col-6">
                     {% for category in sale_categories %}
-                        <a href="{{ category.href }}" class="showcase-category">{{ category.name }}</a>
+                        <p class="showcase-p"><a href="{{ category.href }}" class="showcase-category">{{ category.name }}</a></p>
                     {% endfor %}
                 </div>
             </div>

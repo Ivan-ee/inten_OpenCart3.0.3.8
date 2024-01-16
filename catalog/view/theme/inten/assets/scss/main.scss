@@ -316,7 +316,14 @@ main {
   }
 }
 
+.showcase{
+  margin: 0 auto;
+}
+
 .showcase-block{
+  min-width: 275px;
+  padding-left: 0;
+  padding-right: 0;
 
   .showcase-title{
     font-weight: bold;
@@ -332,6 +339,10 @@ main {
     margin-bottom: 4px;
 
     text-decoration: none;
+  }
+
+  .showcase-p{
+    margin: 0;
   }
 
   .showcase-category:hover{

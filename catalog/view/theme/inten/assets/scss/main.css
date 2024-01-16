@@ -241,6 +241,15 @@ main .home-block .last {
   margin-right: 0;
 }
 
+.showcase {
+  margin: 0 auto;
+}
+
+.showcase-block {
+  min-width: 275px;
+  padding-left: 0;
+  padding-right: 0;
+}
 .showcase-block .showcase-title {
   font-weight: bold;
   font-size: 18px;
@@ -252,6 +261,9 @@ main .home-block .last {
   color: #8C8C8C;
   margin-bottom: 4px;
   text-decoration: none;
+}
+.showcase-block .showcase-p {
+  margin: 0;
 }
 .showcase-block .showcase-category:hover {
   color: var(--text-hover-color);
