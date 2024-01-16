@@ -2,24 +2,22 @@
     "use strict";
 
     $(document).ready(function () {
-        $(".owl-carousel-full").owlCarousel({
-            margin: 20,
-            dots: false,
-            responsive: {
-                0: {
-                    items: 1
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:10,
+            nav:false,
+            responsive:{
+                0:{
+                    items:1
                 },
-                500: {
-                    items: 2
+                600:{
+                    items:3
                 },
-                700: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
+                1000:{
+                    items:5
                 }
             }
-        });
+        })
     });
 
     $('.quantity button').on('click', function () {
