@@ -8,11 +8,15 @@ $_['text_success']     = 'Настройки успешно изменены';
 $_['text_edit']        = 'Настройки модуля';
 
 // Entry
-$_['entry_name']       = 'Название модуля';
-$_['entry_limit']      = 'Лимит';
-$_['entry_width']      = 'Ширина';
-$_['entry_height']     = 'Высота';
-$_['entry_status']     = 'Статус';
+$_['entry_name']       = 'Название акции';
+$_['entry_description']      = 'Описание';
+$_['entry_special_desk']      = 'Условия акции';
+$_['entry_product']    = 'Товары';
+$_['entry_block_image']    = 'Фото для блока';
+$_['entry_page_image']    = 'Фото для страницы';
+
+
+$_['help_product']     = '(Автодополнение)';
 
 // Error
 $_['error_permission'] = 'У Вас нет прав для управления данным модулем!';

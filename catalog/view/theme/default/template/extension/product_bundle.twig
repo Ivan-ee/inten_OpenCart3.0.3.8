@@ -1,0 +1,391 @@
+{{ header }}
+<div id="container" class="container j-container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="product-page-content {{ class }}" itemscope itemtype="http://schema.org/Product">
+	  {{ content_top }}
+	  {% for xbundle in xbundles %}
+	  <div class="xbundle_container" id="bundle{{ xbundle.bundle_id }}">
+		{% set i = 0 %}
+		{% for product in xbundle.wproducts %}
+			{% if i > 0 %}<div class="xbundle_plus">+</div>{% endif %}
+			{% set i = i+1 %}
+			<div class="xbundle_products">
+				<h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+				<div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>
+				{% if product.minimum > 1 %}
+				<div class="product-quantity">
+					<p>x{{ product.minimum }}</p>
+				</div>
+				{% endif %}
+				</div>
+				<p class="price">
+				  	{% if product.special %}
+						{{ product.special }}
+						<div class="regular-price"><span>{{ product.price }}</span></div>
+					{% else %}
+						{{ product.price }}
+						<div class="regular-price">  </div>
+				  	{% endif %}
+				</p>
+				<input type="hidden" name="products[]" value="{{ product.product_id }}" />
+			</div>
+		{% endfor %}
+		{% if xbundle.countdown_end_date %}
+		<script type="text/javascript">
+		$(document).ready(function() { 
+			$('.countdown{{ xbundle.bundle_id }}').downCount({
+				date: '{{ xbundle.countdown_end_date }}',
+				offset: +1
+			});
+		});
+		</script>
+		{% endif %}
+			<div class="xbundle_info">
+				<h1 class="xbundle_title">{{ xbundle.name }}</h1>
+				<p class="xbundle_save"><span>{{ xbundle.total }}</span></p>
+				<p class="xbundle_price">{{ xbundle.bundleprice }}</p>
+				<p class="xbundle_save">{{ text_you_save }} {{ xbundle.save }}</p>
+
+				{% if xbundle.countdown_end_date %}
+					<ul class="downcoo countdown{{ xbundle.bundle_id }}">
+						<li>
+							<span class="clock-o"></span>
+						</li>
+						<li>
+							<span class="days"></span>
+						</li>
+						<li>
+							<span class="hours"></span>
+						</li>
+						<li>
+							<span class="minutes"></span>
+						</li>
+						<li>
+							<span class="seconds last"></span>
+						</li>
+					</ul>
+				{% endif %}
+
+				<button rel="{{ xbundle.bundle_id }}" class="addtocart btn btn-lg btn-primary">{{ text_buy_now }}</button>
+			</div>
+	  </div>
+	  <div class="xbundle_description">{{ xbundle.description }}</div>
+	  <div class="xbundlemodel" id="xbundle_{{ xbundle.bundle_id }}">
+		<div class="xbundle_model_dialog">
+			<div class="xbundle_model_dialog_content">
+				<div class="xbundle_close"><span aria-hidden="true">&times;</span></div>
+				<div class="xbundle_model_dialog_body">
+					<h3>{{ text_option }}</h3>
+					{% for product in xbundle.wproducts %}
+						{% if product.options %}
+					<div class="col_s_6">
+						<div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+						<h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+						{% for option in product.options %}
+						{% if option.type == 'select' %}
+						<div class="form-group{% if option.required %} required {% endif %}">
+						  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+						  <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control">
+							<option value="">{{ text_select }}</option>
+							{% for option_value in option.product_option_value %}
+							<option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
+							{% if option_value.price %}
+							({{ option_value.price_prefix }}{{ option_value.price }})
+							{% endif %} </option>
+							{% endfor %}
+						  </select>
+						</div>
+						{% endif %}
+						 {% if option.type == 'radio' %}
+						<div class="form-group{% if option.required %} required {% endif %}">
+						  <label class="control-label">{{ option.name }}</label>
+						  <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+							<div class="radio">
+							  <label>
+								<input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+								{% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}                  
+								{{ option_value.name }}
+								{% if option_value.price %}
+								({{ option_value.price_prefix }}{{ option_value.price }})
+								{% endif %} </label>
+							</div>
+							{% endfor %} </div>
+						</div>
+						{% endif %}
+						{% if option.type == 'checkbox' %}
+						<div class="form-group{% if option.required %} required {% endif %}">
+						  <label class="control-label">{{ option.name }}</label>
+						  <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+							<div class="checkbox">
+							  <label>
+								<input type="checkbox" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" />
+								{% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}
+								{{ option_value.name }}
+								{% if option_value.price %}
+								({{ option_value.price_prefix }}{{ option_value.price }})
+								{% endif %} </label>
+							</div>
+							{% endfor %} </div>
+						</div>
+						{% endif %}
+						{% if option.type == 'image' %}
+						<div class="form-group{% if option.required %} required {% endif %}">
+						  <label class="control-label">{{ option.name }}</label>
+						  <div id="input-option{{ option.product_option_id }}">
+							{% for option_value in option.product_option_value %}
+							<div class="radio">
+							  <label>
+								<input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+								<img src="{{ option_value.image }}" alt="{{ option_value.name ~ option_value.price ? ' ' ~ option_value.price_prefix ~ option_value.price }}" class="img-thumbnail" /> {{ option_value.name }}
+								{% if option_value.price %}
+								({{ option_value.price_prefix }}{{ option_value.price }})
+								{% endif %} 
+							  </label>
+							</div>
+							{% endfor %}
+						  </div>
+						</div>
+						{% endif %}
+						{% if option.type == 'text' %}
+					<div class="form-group{% if option.required %} required {% endif %}">
+					  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+					  <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control" />
+					</div>
+					{% endif %}
+					{% if option.type == 'textarea' %}
+					<div class="form-group{% if option.required %} required {% endif %}">
+					  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+					  <textarea name="option[{{ option.product_option_id }}]" rows="5" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control">{{ option.value }}</textarea>
+					</div>
+					{% endif %}
+					{% if option.type == 'file' %}
+					<div class="form-group{% if option.required %} required {% endif %}">
+					  <label class="control-label">{{ option.name }}</label>
+					  <button type="button" id="button-upload{{ option.product_option_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default btn-block"><i class="fa fa-upload"></i> {{ button_upload }}</button>
+					  <input type="hidden" name="option[{{ option.product_option_id }}]" value="" id="input-option{{ option.product_option_id }}" />
+					</div>
+					{% endif %}
+					{% if option.type == 'date' %}
+					<div class="form-group{% if option.required %} required {% endif %}">
+					  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+					  <div class="input-group date">
+						<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD" id="input-option{{ option.product_option_id }}" class="form-control" />
+						<span class="input-group-btn">
+						<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+						</span></div>
+					</div>
+					{% endif %}
+					{% if option.type == 'datetime' %}
+					<div class="form-group{% if option.required %} required {% endif %}">
+					  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+					  <div class="input-group datetime">
+						<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option.product_option_id }}" class="form-control" />
+						<span class="input-group-btn">
+						<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+						</span></div>
+					</div>
+					{% endif %}
+					{% if option.type == 'time' %}
+					<div class="form-group{% if option.required %} required {% endif %}">
+					  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+					  <div class="input-group time">
+						<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="HH:mm" id="input-option{{ option.product_option_id }}" class="form-control" />
+						<span class="input-group-btn">
+						<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+						</span></div>
+					</div>
+					{% endif %}
+					{% endfor %}
+					</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+					<div class="xbundle_clear"></div>
+					<div class="col_s_12">
+						<button rel="{{ xbundle.bundle_id }}" class="addtocartwithoption btn btn-primary">{{ text_buy_now }}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	 {% endfor %}
+	  {{ content_bottom }}
+	  </div>
+    {{ column_right }}</div>
+</div>
+<script>
+$('.xbundle_close').on('click',function(){
+ $('.xbundlemodel').fadeOut(400);
+ $("body").removeClass("xbundle_scroll");
+ $('.sticky-wrapper').removeClass('journal_header');
+ $('.boxed-footer').removeClass('journal_footer');
+ $('#content').removeClass('journal_content');
+});
+
+var xbundle_container_width = $(".xbundle_container").width();
+if(xbundle_container_width < 400){
+	$('.xbundle_plus').addClass('center_plus');
+}
+
+$('.addtocart').on('click',function(){
+ var rel = $(this).attr('rel');
+ $.ajax({
+		url: 'index.php?route=extension/xbundle/addtocart&bundle_id='+rel,
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('#button-cart').button('loading');
+		},
+		complete: function() {
+			$('#button-cart').button('reset');
+		},
+		success: function(json) {
+			$('.alert, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+			if (json['error']) {
+				if (json['error']['option']) {
+				 $('.sticky-wrapper').addClass('journal_header');
+				 $('.boxed-footer').addClass('journal_footer');
+				 $('#content').addClass('journal_content');
+				 $('#xbundle_'+rel).fadeIn(400);
+				 $("body").addClass("xbundle_scroll");
+				}
+				
+				if (json['error']['recurring']) {
+					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+				}
+				
+				$('.text-danger').parent().addClass('has-error');
+			}
+			
+			if (json['success']) {
+				url ='index.php?route=checkout/cart'
+				location = url;
+			}
+		}
+	});
+});
+
+$('.addtocartwithoption').on('click',function(){
+ var rel = $(this).attr('rel');
+ $.ajax({
+		url: 'index.php?route=extension/xbundle/addtocart&bundle_id='+rel,
+		type: 'post',
+		dataType: 'json',
+		cache: false,
+		data: $('#xbundle_'+rel+' input[type=\'text\'], #xbundle_'+rel+' input[type=\'hidden\'], #xbundle_'+rel+' input[type=\'radio\']:checked, #xbundle_'+rel+' input[type=\'checkbox\']:checked, #xbundle_'+rel+' select, #xbundle_'+rel+' textarea'),
+		beforeSend: function() {
+			$('#button-cart').button('loading');
+		},
+		complete: function() {
+			$('#button-cart').button('reset');
+		},
+		success: function(json) {
+			$('.alert, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+			if (json['error']) {
+				if (json['error']['option']) {
+					for (i in json['error']['option']) {
+						var element = $('#input-option' + i.replace('_', '-'));
+						
+						if (element.parent().hasClass('input-group')) {
+							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						} else {
+							element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						}
+					}
+				}
+				
+				if (json['error']['recurring']) {
+					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+				}
+
+				$('.text-danger').parent().addClass('has-error');
+			}
+			
+			if (json['success']) {
+				url ='index.php?route=checkout/cart'
+				location = url;
+			}
+		}
+	});
+});
+</script>
+<script type="text/javascript"><!--
+if ($.fn.datepicker) {
+	$('.date').datetimepicker({
+		pickTime: false
+	});
+
+	$('.datetime').datetimepicker({
+		pickDate: true,
+		pickTime: true
+	});
+
+	$('.time').datetimepicker({
+		pickDate: false
+	});
+}
+
+$('button[id^=\'button-upload\']').on('click', function() {
+	var node = this;
+	
+	$('#form-upload').remove();
+	
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+	
+	$('#form-upload input[name=\'file\']').trigger('click');
+	
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'file\']').val() != '') {
+			clearInterval(timer);
+			
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(node).button('loading');
+				},
+				complete: function() {
+					$(node).button('reset');
+				},
+				success: function(json) {
+					$('.text-danger').remove();
+					
+					if (json['error']) {
+						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
+					
+					if (json['success']) {
+						alert(json['success']);
+						
+						$(node).parent().find('input').attr('value', json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+//--></script>
+{{ footer }} 

@@ -1,0 +1,11 @@
+{% if xbundles|length > 0 %}
+<div class="list-group">
+ {% for xbundle in xbundles %}
+  {% if xbundle.bundle_id == bundle_id %}
+  <a href="{{ xbundle.href }}" class="list-group-item active">{{ xbundle.name }}</a>
+ {% else %}
+  <a href="{{ xbundle.href }}" class="list-group-item">{{ xbundle.name }}</a>
+  {% endif %}
+ {% endfor %}
+</div>
+{% endif %}

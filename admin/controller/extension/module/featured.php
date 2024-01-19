@@ -114,6 +114,8 @@ class ControllerExtensionModuleFeatured extends Controller {
             }
         }
 
+
+
         if (isset($this->request->post['limit'])) {
             $data['limit'] = $this->request->post['limit'];
         } elseif (!empty($module_info)) {

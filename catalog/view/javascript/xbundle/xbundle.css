@@ -1,0 +1,218 @@
+.xbundle_container{
+	position: relative;
+	border: 1px solid #ddd;
+	min-height: 180px;
+	box-shadow: 5px 5px 5px #f4f4f4;
+	margin-bottom: 30px;
+}
+.swiper-viewport-bundle .xbundle_container{
+	margin-bottom: 0;
+}
+.swiper-viewport-bundle{
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+.xbundle_title{
+    color: #919191;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+}
+.xbundle_products{
+	display: table-cell;
+    margin: 15px;
+    text-align: center;
+    border: 1px solid #ccc;
+    width: 22%;
+    background: #fff;
+	padding-bottom: 10px;
+}
+.xbundle_products h4{
+	display: block;
+	height: 46px;
+	overflow: hidden;
+	font-weight: bold;
+	padding: 10px;
+	font-size: 14px;
+	line-height: 14px;
+}
+.xbundle_products h4 a{
+	color: #2f2f2f;
+	font-size: 14px;
+}
+.xbundle_products .image img{
+	margin:0 auto;
+	padding: 0 10px;
+}
+.xbundle_products .price{
+	font-size: 20px;
+    font-weight: bold;
+	border-top: 1px solid #eee;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+.xbundle_container .xbundle_plus{
+	display: table-cell;
+    font-size: 37px;
+    position: relative;
+    vertical-align: middle;
+    padding: 20px;
+    text-align: center;
+    background: #f5f5f5;
+}
+.xbundle_container .xbundle_info{
+	display: table-cell;
+    padding: 20px;
+    border: 1px solid #ebebeb;
+    background-color: #f5f5f5;
+    position: relative;
+    margin: 15px;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+}
+.xbundle_products .image{
+	position:relative;
+}
+.xbundle_products .image .product-quantity{
+	position:absolute;
+	bottom: 0;
+    right: 0;
+}
+.xbundle_products .product-quantity p{
+	background-color:#d7145d;
+	color:#fff;
+	padding:5px 7px;
+	font-size:16px;
+	font-weight:bold;
+}
+.xbundle_container .xbundle_info .xbundle_save{
+	font-size:14px;
+	color: #d7145d;
+}
+.xbundle_container .xbundle_info .xbundle_save span{
+	text-decoration: line-through;
+}
+.xbundle_container .xbundle_info .xbundle_price{
+	font-size:20px;
+	font-weight:bold;
+}
+.xbundle_products .discount{
+	background:#ddd;
+	color:#000;
+	padding:4px 6px;
+	font-size:19px;
+	font-weight:bold;
+	display:inline-block;
+	margin-bottom:0;
+	margin-right:5px;
+}
+.xbundle_products .regular-price{
+	display:inline-block;
+	text-decoration:line-through;
+	color:#d7145d;
+	font-size:15px;
+	padding-right:5px;
+}
+.xbundle_model{
+	background-color:rgba(0,0,0,0.8);
+}
+.xbundlemodel{
+	position:fixed;
+	background-color:rgba(0,0,0,0.8);
+	bottom: 0;
+    left: 0;
+    outline: 0 none;
+    right: 0;
+    top: 0;
+    z-index: 1040;
+	overflow-y:scroll;
+    overflow-x:hidden;
+	display:none;
+}
+.xbundle_model_dialog{
+	background-color:#fff;
+    width: 600px;
+    left: 50%;
+    margin-left: -300px;
+	position: absolute;
+	top:15px;
+	padding-bottom: 15px;
+	
+}
+.xbundle_model_dialog_content{
+	background-clip: padding-box;
+    background-color: #fff;
+    outline: 0 none;
+    position: relative;
+}
+.xbundle_model_dialog_body{
+	padding: 15px;
+    position: relative;
+}
+.col_s_6{
+	padding:0 15px;
+	width:44%;
+	float:left;
+}
+.col_s_12{
+	padding:0 15px;
+	width:100%;
+}
+.xbundle_clear{
+	clear:both;
+}
+.xbundle_close{
+	background-color: #fff;
+    color: #000;
+    font-size: 28px;
+    right: 0;
+    padding: 12px;
+    position: absolute;
+	cursor:pointer;
+	z-index: 1;
+}
+#column-left .center_plus{
+	top:0 !important;
+    margin: 0 auto;
+	text-align: center; 
+	left:45%;
+}
+.xbundle_scroll{
+	overflow:hidden;
+}
+.xbundle_scroll header, .xbundle_scroll.is-sticky footer{
+	z-index:0!important;
+} 
+@media (max-width:786px){
+	.xbundle_model_dialog{
+		left: 0;
+		margin: 20px auto;
+		width: 98%;
+	}
+	.col_s_6{
+		padding:0 15px;
+		width:100%;
+		float:inhert;
+	}
+	.xbundle_close{
+		left:94%;
+	}
+}
+@media (max-width:560px){
+	.xbundle_container>div{
+		display:block !important;
+		margin:0 !important;
+		width:100% !important;
+	}
+}
+
+/* Journal fix */
+.journal_header{
+	z-index:2 !important;
+}
+.journal_footer{
+	z-index:2 !important;
+}

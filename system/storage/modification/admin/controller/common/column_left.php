@@ -129,6 +129,33 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Extension
+
+				$bundle = array();
+			if ($this->user->hasPermission('access', 'extension/bundle')) {		
+				$bundle[] = array(
+					'name'	   => $this->language->get('text_xbundles_list'),
+					'href'     => $this->url->link('extension/bundle', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);					
+			}
+			
+			if ($this->user->hasPermission('access', 'extension/bundlesetting')) {	
+				$bundle[] = array(
+					'name'	   => $this->language->get('text_setting'),
+					'href'     => $this->url->link('extension/bundlesetting', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);					
+			}
+			if ($bundle) {			
+				$data['menus'][] = array(
+					'id'       => 'menu-bundle',
+					'icon'	   => 'fa-percent', 
+					'name'	   => $this->language->get('text_xbundles'),
+					'href'     => '',
+					'children' => $bundle
+				);		
+			}
+				
 			$marketplace = array();
 
 			if ($this->user->hasPermission('access', 'marketplace/marketplace')) {

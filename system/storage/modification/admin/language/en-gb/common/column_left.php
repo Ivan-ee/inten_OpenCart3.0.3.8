@@ -1,5 +1,9 @@
 <?php
 // Text
+
+                $_['text_xbundles'] = 'Bundles';
+                $_['text_xbundles_list'] = 'Bundles';
+            
 $_['text_api']                  = 'API';
 $_['text_attribute']            = 'Attributes';
 $_['text_attribute_group']      = 'Attribute Groups';

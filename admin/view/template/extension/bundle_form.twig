@@ -1,0 +1,335 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-bundle" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+	  {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		{% endfor %}
+      </ul>
+    </div>
+  </div>
+<div class="container-fluid">
+	{% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+   {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-bundle" class="form-horizontal">
+			<ul class="nav nav-tabs">
+			  <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+			  <li><a href="#tab-data" data-toggle="tab">{{ tab_make_bundle }}</a></li>
+			  <li><a href="#tab-links" data-toggle="tab">{{ tab_links }}</a></li>
+            </ul>
+			 <div class="tab-content">
+				
+				<div class="tab-pane active in" id="tab-general">
+				  <ul class="nav nav-tabs" id="language">
+				   {% for language in languages %}
+					 <li><a href="#language{{ language.language_id }}" data-toggle="tab">
+					 <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" />
+					 {{ language.name }}</a></li>
+					{% endfor %}
+				  </ul>
+				  <div class="tab-content">
+				  {% for language in languages %}
+					<div class="tab-pane" id="language{{ language.language_id }}">
+						  <div class="form-group required">
+							<label class="col-sm-2 control-label" for="input-name{{ language.language_id }}">{{ entry_name }}</label>
+							<div class="col-sm-10">
+								<input type="text" name="category_description[{{ language.language_id }}][name]" value="{{ bundle_description[language.language_id] ? bundle_description[language.language_id].name }}" placeholder="{{ entry_name }}" id="input-name{{ language.language_id }}" class="form-control" />
+							  {% if error_name[language.language_id] %}
+							  <div class="text-danger">{{ error_name[language.language_id] }}</div>
+							{% endif %}
+							</div>
+						  </div>
+						  <div class="form-group">
+							<label class="col-sm-2 control-label" for="input-description{{ language.language_id }}">{{ entry_description }}</label>
+							<div class="col-sm-10">
+							  <textarea name="category_description[{{ language.language_id }}][description]" placeholder="{{ entry_description }}" id="input-description{{ language.language_id }}" data-toggle="summernote" data-lang="{{ summernote }}" class="form-control">{{ bundle_description[language.language_id] ? bundle_description[language.language_id].description }}</textarea>
+							</div>
+						  </div>
+					</div>
+					{% endfor %}
+				   <div class="form-group">
+						<label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+						<div class="col-sm-10">
+						  <input type="text" name="sort_order" value="{{ sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
+						</div>
+				   </div>
+				   <div class="form-group">
+						<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+						<div class="col-sm-10">
+						  <select name="status" id="input-status" class="form-control">
+							{% if status %}
+							<option value="1" selected="selected">{{ text_enabled }}</option>
+							<option value="0">{{ text_disabled }}</option>
+							{% else %}
+							<option value="1">{{ text_enabled }}</option>
+							<option value="0" selected="selected">{{ text_disabled }}</option>
+							{% endif %}
+						  </select>
+						</div>
+				   </div>
+				</div>
+			  </div>
+			  <div class="tab-pane" id="tab-data">
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-bundle"><span data-toggle="tooltip" title="{{ help_bundle }}">{{ entry_product }}</span></label>
+						<div class="col-sm-10">
+						  <input type="text" name="bundle" value="" placeholder="{{ entry_product }}" id="input-bundled" class="form-control" />
+						  <div id="product-bundled" class="well well-sm" style="height: 150px; overflow: auto;">
+							 {% for product_bundle in product_bundles %}
+							<div id="product-bundled{{ product_bundle.product_id }}"><i class="fa fa-minus-circle"></i> {{ product_bundle.name }}
+							  <input type="hidden" name="product_bundle[]" value="{{ product_bundle.product_id }}" />
+							</div>
+							{% endfor %}
+						  </div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-discount">{{ text_discount }}</label>
+						<div class="col-sm-10">
+						   <div class="table-responsive">
+							  <table class="table table-bordered table-hover">
+								 <thead>
+									<tr>
+										<td>{{ text_customer_group }}</td>
+										<td>{{ text_discount }}</td>
+									</tr>
+								 </thead>								
+								 <tbody>
+								  {% for group in customergroups %}
+								    <tr>
+									  <td>{{ group.name }}</td>
+									  <td><input type="text" name="bundle_discount[{{ group.customer_group_id }}][disount]" value="{{ bundle_discount[group.customer_group_id] ? bundle_discount[group.customer_group_id].discount }}" placeholder="{{ text_discount }}" id="input-disount{{ group.customer_group_id }}" class="form-control" /></td>
+									</tr>
+								  {% endfor %}
+								 </tbody>
+							  </table>
+							</div>
+						</div>
+				   </div>
+				   <div class="form-group">
+						<label class="col-sm-2 control-label" for="input-top"><span data-toggle="tooltip" title="{{ help_top }}">{{ entry_top }}</span></label>
+						<div class="col-sm-10">
+						  <div class="checkbox">
+							<label>
+							  {% if top %}
+							  <input type="checkbox" name="top" value="1" checked="checked" id="input-top" />
+							  {% else %}
+							  <input type="checkbox" name="top" value="1" id="input-top" />
+							  {% endif %}
+							  &nbsp; </label>
+						  </div>
+						</div>
+				   </div>
+				   <div class="form-group">
+						<label class="col-sm-2 control-label" for="input-date_start">{{ entry_date_start }}</label>
+						<div class="col-sm-3">
+						  <div class="input-group date">
+							<input type="text" name="date_start" value="{{ date_start }}" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" id="input-date_start" class="form-control" />
+							<span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button></span>
+						  </div>
+					    </div>
+				   </div>
+				   <div class="form-group">
+					   <label class="col-sm-2 control-label" for="input-date_end;">{{ entry_date_end }}</label>
+					   <div class="col-sm-3">
+						  <div class="input-group date">
+							<input type="text" name="date_end" value="{{ date_end }}" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" id="input-date_end" class="form-control" />
+							<span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button></span>
+						  </div>
+					  </div>
+				   </div>
+			  </div>
+			  <div class="tab-pane" id="tab-links">
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-category"><span data-toggle="tooltip" title="{{ help_category }}">{{ entry_category }}</span></label>
+					<div class="col-sm-10">
+					  <input type="text" name="category" value="" placeholder="{{ entry_category }}" id="input-category" class="form-control" />
+					  <div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
+						{% for product_category in product_categories %}
+						<div id="product-category{{ product_category.category_id }}"><i class="fa fa-minus-circle"></i> {{ product_category.name }}
+						  <input type="hidden" name="product_category[]" value="{{ product_category.category_id }}" />
+						</div>
+						{% endfor %}
+					  </div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-related"><span data-toggle="tooltip" title="{{ help_related }}">{{ entry_related }}</span></label>
+					<div class="col-sm-10">
+					  <input type="text" name="related" value="" placeholder="{{ entry_related }}" id="input-related" class="form-control" />
+					  <div id="product-related" class="well well-sm" style="height: 150px; overflow: auto;">
+						{% for product_related in product_relateds %}
+						<div id="product-related{{ product_related.product_id }}"><i class="fa fa-minus-circle"></i> {{ product_related.name }}
+						  <input type="hidden" name="product_related[]" value="{{ product_related.product_id }}" />
+						</div>
+						{% endfor %}
+					  </div>
+					</div>
+                </div>
+                <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_store }}</label>
+                <div class="col-sm-10">
+                  <div class="well well-sm" style="height: 150px; overflow: auto;">
+                    <div class="checkbox">
+                      <label>
+                        {% if 0 in bundle_store %}
+                        <input type="checkbox" name="bundle_store[]" value="0" checked="checked" />
+                        {{ text_default }}
+                        {% else %}
+                        <input type="checkbox" name="bundle_store[]" value="0" />
+                        {{ text_default }}
+						{% endif %}
+                      </label>
+                    </div>
+                    {% for store in stores %}
+                    <div class="checkbox">
+                      <label>
+                        {% if store.store_id in bundle_store %}
+                        <input type="checkbox" name="bundle_store[]" value="{{ store.store_id }}" checked="checked" />
+                        {{ store.name }}
+                        {% else %}
+                        <input type="checkbox" name="bundle_store[]" value="{{ store.store_id }}" />
+                        {{ store.name }}
+                        {% endif %}
+                      </label>
+                    </div>
+                   {% endfor %}
+                  </div>
+                </div>
+              </div>
+			  </div>
+		  </div>
+        </form>
+      </div>
+      <div style="background:#aaccdf;padding:15px;text-align:center;"><strong style="color:#233746;font-size:15px;">                                                                                                                                                                                                                                                                  Другие модули для Opencart 3.x на нашем сайте <a href="https://opencart3x.ru" target="_blank">opencart3x.ru</a></strong></div>
+    </div>
+</div>
+<script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+  <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+  <script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
+  <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+<script type="text/javascript"><!--
+// Category
+$('input[name=\'category\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+			dataType: 'json',			
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['name'],
+						value: item['category_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'category\']').val('');
+		
+		$('#product-category' + item['value']).remove();
+		
+		$('#product-category').append('<div id="product-category' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="product_category[]" value="' + item['value'] + '" /></div>');	
+	}
+});
+
+$('#product-category').delegate('.fa-minus-circle', 'click', function() {
+	$(this).parent().remove();
+});
+
+
+// Related
+$('input[name=\'related\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+			dataType: 'json',			
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['name'],
+						value: item['product_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'related\']').val('');
+		
+		$('#product-related' + item['value']).remove();
+		
+		$('#product-related').append('<div id="product-related' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="product_related[]" value="' + item['value'] + '" /></div>');	
+	}	
+});
+
+$('#product-related').delegate('.fa-minus-circle', 'click', function() {
+	$(this).parent().remove();
+});
+
+
+// Bundle
+$('input[name=\'bundle\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+			dataType: 'json',			
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['name'],
+						value: item['product_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'bundled\']').val('');
+		
+		$('#product-bundled' + item['value']).remove();
+		
+		$('#product-bundled').append('<div id="product-bundled' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="product_bundle[]" value="' + item['value'] + '" /></div>');	
+	}	
+});
+
+$('#product-bundled').delegate('.fa-minus-circle', 'click', function() {
+	$(this).parent().remove();
+});
+
+
+$('#language a:first').tab('show');
+//--></script>
+<script type="text/javascript"><!--
+	$('.date').datetimepicker({
+		language: '{{ datepicker }}',
+		pickTime: false
+	});
+
+	$('.time').datetimepicker({
+		language: '{{ datepicker }}',
+		pickDate: false
+	});
+
+	$('.datetime').datetimepicker({
+		language: '{{ datepicker }}',
+		pickDate: true,
+		pickTime: true
+	});
+//--></script>
+</div>
+{{ footer }}

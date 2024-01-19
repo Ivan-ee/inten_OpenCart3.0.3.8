@@ -1,0 +1,30 @@
+.downcoo {
+	text-align:center;
+	padding:0;
+}
+.downcoo li{
+	display:inline-block !important;
+	padding:3px;
+}
+.downcoo li span{
+	font-weight:bold;
+	font-size:14px;
+}
+
+#triangle-topleft {
+	width: 0;
+	height: 0;
+	border-top: 60px solid red;
+	border-right: 60px solid transparent;
+	display:inline-block;
+	position:absolute;
+        z-index:9999;
+}
+
+.save-discount{
+	color:#fff;
+	position:absolute;	
+	bottom:18px;
+	left:5px;
+	font-weight:bold;
+}

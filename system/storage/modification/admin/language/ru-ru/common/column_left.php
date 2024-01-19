@@ -1,5 +1,9 @@
 <?php
 // Text
+
+                $_['text_xbundles'] = 'Вместе дешевле';
+                $_['text_xbundles_list'] = 'Комплекты';
+            
 $_['text_api']                  = 'API';
 $_['text_attribute']            = 'Атрибуты';
 $_['text_attribute_group']      = 'Группы атрибутов';
