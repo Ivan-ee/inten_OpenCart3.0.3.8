@@ -43,55 +43,54 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-description">{{ entry_description }}</label>
+                        <div class="col-sm-10">
+                            <textarea name="description" placeholder="{{ entry_description }}" id="input-description" class="form-control custom-textarea">{{ description }}</textarea>
+                            {% if error_name %}
+                                <div class="text-danger">{{ error_description }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-block-image">{{ entry_block_image }}</label>
                         <div class="col-sm-10">
                             <div class="input-group">
-                                <input type="text" name="block_image" value="{{ block_image }}"
-                                       placeholder="{{ entry_block_image }}" id="input-block-image"
-                                       class="form-control"/>
+                                <input type="text" name="block_image" value="{{ block_image }}" placeholder="{{ entry_block_image }}" id="input-block-image" class="form-control"/>
                                 <span class="input-group-btn">
-                <button type="button" id="btn-upload-block-image" class="btn btn-primary"><i
-                            class="fa fa-upload"></i></button>
+                <button type="button" id="btn-upload-block-image" class="btn btn-primary"><i class="fa fa-upload"></i></button>
             </span>
                             </div>
+                            {% if block_image %}
+                                <img src="{{ block_image }}" alt="Block Image" style="max-width: 100px; max-height: 100px; margin-top: 10px;"/>
+                            {% endif %}
                             {% if error_block_image %}
                                 <div class="text-danger">{{ error_block_image }}</div>
                             {% endif %}
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-page-image">{{ entry_page_image }}</label>
                         <div class="col-sm-10">
                             <div class="input-group">
-                                <input type="text" name="page_image" value="{{ page_image }}"
-                                       placeholder="{{ entry_page_image }}" id="input-page-image" class="form-control"/>
+                                <input type="text" name="page_image" value="{{ page_image }}" placeholder="{{ entry_page_image }}" id="input-page-image" class="form-control"/>
                                 <span class="input-group-btn">
-                <button type="button" id="btn-upload-page-image" class="btn btn-primary"><i
-                            class="fa fa-upload"></i></button>
+                <button type="button" id="btn-upload-page-image" class="btn btn-primary"><i class="fa fa-upload"></i></button>
             </span>
                             </div>
+                            {% if page_image %}
+                                <img src="{{ page_image }}" alt="Page Image" style="max-width: 100px; max-height: 100px; margin-top: 10px;"/>
+                            {% endif %}
                             {% if error_page_image %}
                                 <div class="text-danger">{{ error_page_image }}</div>
                             {% endif %}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-description">{{ entry_description }}</label>
+                        <label class="col-sm-2 control-label" for="input-entry_special_desk">{{ entry_special_desk }}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="description" value="{{ description }}"
-                                   placeholder="{{ entry_description }}" id="input-description" class="form-control"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label"
-                               for="input-entry_special_desk">{{ entry_special_desk }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="special_desk" value="{{ special_desk }}"
-                                   placeholder="{{ entry_special_desk }}" id="input-entry_special_desk"
-                                   class="form-control"/>
-                            {% if error_width %}
-                                <div class="text-danger">{{ error_entry_special_desk }}</div>
+                            <textarea name="special_desk" placeholder="{{ entry_special_desk }}" id="input-entry_special_desk" class="form-control custom-textarea">{{ special_desk }}</textarea>
+                            {% if error_special_desk %}
+                                <div class="text-danger">{{ error_special_desk }}</div>
                             {% endif %}
                         </div>
                     </div>
