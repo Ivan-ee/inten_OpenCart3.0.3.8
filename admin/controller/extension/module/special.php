@@ -125,13 +125,18 @@ class ControllerExtensionModuleSpecial extends Controller {
             $products = array();
         }
 
+        $this->load->model('tool/image');
+
         foreach ($products as $product_id) {
             $product_info = $this->model_catalog_product->getProduct($product_id);
+
+//            $this->tt($product_info);
 
             if ($product_info) {
                 $data['products'][] = array(
                     'product_id' => $product_info['product_id'],
-                    'name'       => $product_info['name']
+                    'name'       => $product_info['name'],
+                    'image' => $this->model_tool_image->resize($product_info['image'],  40, 40),
                 );
             }
         }
@@ -148,6 +153,8 @@ class ControllerExtensionModuleSpecial extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
+//        $this->tt($data);
+
 		$this->response->setOutput($this->load->view('extension/module/special', $data));
 	}
 
@@ -162,4 +169,12 @@ class ControllerExtensionModuleSpecial extends Controller {
 
 		return !$this->error;
 	}
+
+    private function tt($data)
+    {
+        echo '<pre>';
+        var_dump($data);
+        echo '</pre>';
+    }
+
 }
