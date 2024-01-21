@@ -130,7 +130,6 @@ class ControllerExtensionModuleSpecial extends Controller {
         foreach ($products as $product_id) {
             $product_info = $this->model_catalog_product->getProduct($product_id);
 
-//            $this->tt($product_info);
 
             if ($product_info) {
                 $data['products'][] = array(

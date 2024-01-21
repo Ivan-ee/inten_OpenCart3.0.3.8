@@ -1243,6 +1243,7 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model'])) {
 			$this->load->model('catalog/product');
 			$this->load->model('catalog/option');
+			$this->load->model('tool/image');
 
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
@@ -1270,6 +1271,8 @@ class ControllerCatalogProduct extends Controller {
 			);
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
+
+//            $this->tte($results);
 
 			foreach ($results as $result) {
 				$option_data = array();
@@ -1313,7 +1316,8 @@ class ControllerCatalogProduct extends Controller {
 					'name'       => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
 					'model'      => $result['model'],
 					'option'     => $option_data,
-					'price'      => $result['price']
+					'price'      => $result['price'],
+                    'image'      => $this->model_tool_image->resize($result['image'], 40, 40),
 				);
 			}
 		}
@@ -1321,4 +1325,16 @@ class ControllerCatalogProduct extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+    function tt($str){
+        echo "<pre>";
+        print_r($str);
+        echo "</pre>";
+    }
+    function tte($str){
+        echo "<pre>";
+        print_r($str);
+        echo "</pre>";
+        exit();
+    }
 }

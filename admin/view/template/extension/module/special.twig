@@ -136,6 +136,7 @@
                                 <tbody>
                                 {% for product in products %}
                                     <tr id="special-product{{ product.product_id }}">
+                                        <td><img src="{{ product.image }}" alt="{{ product.name }}" style="max-width: 50px; max-height: 50px;"></td>
                                         <td>{{ product.name }}</td>
                                         <td>{{ product.discount }}</td>
                                     </tr>
@@ -215,6 +216,7 @@
                             return {
                                 label: item['name'],
                                 value: item['product_id'],
+                                image: item['image']
                             }
                         }));
                     }
@@ -227,9 +229,11 @@
 
                 $('#special-product').append('<div id="special-product' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="product[]" value="' + item['value'] + '" /></div>');
 
-                $('#product-table tbody').append('<tr id="special-product' + item['value'] + '">\
-    <td>' + item['label'] + '</td>\
-    </tr>');
+                $('#product-table tbody').append(
+                    '<tr id="special-product' + item['value'] + '">\
+                    <td><img src="' + item['image'] + '" alt="' + item['label'] + '" style="max-width: 50px; max-height: 50px;"></td>\
+                    <td>' + item['label'] + '</td>\
+                </tr>');
             }
         });
 
