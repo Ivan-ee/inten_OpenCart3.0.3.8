@@ -129,16 +129,19 @@
                             <table class="table table-bordered" id="product-table">
                                 <thead>
                                 <tr>
+                                    <th>Фото</th>
                                     <th>Название</th>
-                                    <th>Скидка в рублях</th>
+                                    <th>Цена</th>
+                                    <th>Акционная цена</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for product in products %}
                                     <tr id="special-product{{ product.product_id }}">
-                                        <td><img src="{{ product.image }}" alt="{{ product.name }}" style="max-width: 50px; max-height: 50px;"></td>
+                                        <td><img src="{{ product.image }}" alt="{{ product.name }}" style="max-width: 100px; max-height: 100px;"></td>
                                         <td>{{ product.name }}</td>
-                                        <td>{{ product.discount }}</td>
+                                        <td>{{ product.price }}</td>
+                                        <td>{{ product.special }}</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -216,6 +219,7 @@
                             return {
                                 label: item['name'],
                                 value: item['product_id'],
+                                price: item['price'],
                                 image: item['image']
                             }
                         }));
@@ -231,8 +235,10 @@
 
                 $('#product-table tbody').append(
                     '<tr id="special-product' + item['value'] + '">\
-                    <td><img src="' + item['image'] + '" alt="' + item['label'] + '" style="max-width: 50px; max-height: 50px;"></td>\
+                    <td><img src="' + item['image'] + '" alt="' + item['label'] + '" style="max-width: 100px; max-height: 100px;"></td>\
                     <td>' + item['label'] + '</td>\
+                    <td>' + item['price'] + '</td>\
+                    <td>' + item['discount'] + '</td>\
                 </tr>');
             }
         });

@@ -129,13 +129,18 @@ class ControllerExtensionModuleSpecial extends Controller {
 
         foreach ($products as $product_id) {
             $product_info = $this->model_catalog_product->getProduct($product_id);
+            $product_info_special = $this->model_catalog_product->getProductSpecialsWithName($product_id, $data['name']);
+
+            $this->tt($product_info_special);
 
 
             if ($product_info) {
                 $data['products'][] = array(
                     'product_id' => $product_info['product_id'],
                     'name'       => $product_info['name'],
-                    'image' => $this->model_tool_image->resize($product_info['image'],  40, 40),
+                    'price'       => $product_info['price'],
+                    'special' => !empty($product_info_special) ? $product_info_special[0]['price'] : $product_info['price'],
+                    'image' => $this->model_tool_image->resize($product_info['image'],  100, 100),
                 );
             }
         }

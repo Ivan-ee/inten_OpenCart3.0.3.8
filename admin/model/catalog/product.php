@@ -562,7 +562,13 @@ class ModelCatalogProduct extends Model {
 		return $query->rows;
 	}
 
-	public function getProductRewards($product_id) {
+    public function getProductSpecialsWithName($product_id, $special_name) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_special WHERE product_id = '" . (int)$product_id . "' AND special_name = '" . $this->db->escape($special_name) . "' ORDER BY priority, price");
+
+        return $query->rows;
+    }
+
+    public function getProductRewards($product_id) {
 		$product_reward_data = array();
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_reward WHERE product_id = '" . (int)$product_id . "'");

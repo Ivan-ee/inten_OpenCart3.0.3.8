@@ -1317,7 +1317,7 @@ class ControllerCatalogProduct extends Controller {
 					'model'      => $result['model'],
 					'option'     => $option_data,
 					'price'      => $result['price'],
-                    'image'      => $this->model_tool_image->resize($result['image'], 40, 40),
+                    'image'      => $this->model_tool_image->resize($result['image'], 100, 100),
 				);
 			}
 		}
