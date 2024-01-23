@@ -20,7 +20,22 @@ class ControllerExtensionModuleSpecial extends Controller
             }
 
             $productSpecial = !empty($this->request->post['product_special']) ? $this->request->post['product_special'] : array();
-            $productName = !empty($this->request->post['product_name']) ? $this->request->post['product_name'] : array();
+//            $productName = !empty($this->request->post['product_name']) ? $this->request->post['product_name'] : array();
+
+            foreach ($productSpecial as $productId => $specialPrice) {
+                $specialName = $this->request->post['name'];
+
+                // Проверяем, существует ли товар в таблице по product_id и имени акции
+                $checkProductQuery = $this->db->query("SELECT * FROM oc_product_special WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $specialName . "'");
+
+                if ($checkProductQuery->num_rows) {
+                    // Если товар существует, обновляем цену акции
+                    $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "' WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $specialName . "'");
+                } else {
+                    // Если товар не существует, добавляем новую запись
+                    $this->db->query("INSERT INTO oc_product_special (product_id, price, special_name) VALUES ('" . (int)$productId . "', '" . (float)$specialPrice . "', '" . $specialName . "')");
+                }
+            }
 
 //            $this->tte( $productSpecial);
 //            $this->tte( $productName);
