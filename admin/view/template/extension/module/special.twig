@@ -121,33 +121,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Товары в акции</h3>
-                        </div>
-                        <div class="panel-body">
-                            <table class="table table-bordered" id="product-table">
-                                <thead>
-                                <tr>
-                                    <th>Фото</th>
-                                    <th>Название</th>
-                                    <th>Цена</th>
-                                    <th>Акционная цена</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for product in products %}
-                                    <tr id="special-product{{ product.product_id }}">
-                                        <td><img src="{{ product.image }}" alt="{{ product.name }}" style="max-width: 100px; max-height: 100px;"></td>
-                                        <td>{{ product.name }}</td>
-                                        <td>{{ product.price }}</td>
-                                        <td>{{ product.special }}</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
                         <div class="col-sm-10">
@@ -163,6 +136,38 @@
                         </div>
                     </div>
                 </form>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Товары в акции</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered" id="product-table">
+                            <thead>
+                            <tr>
+                                <th>Фото</th>
+                                <th>Название</th>
+                                <th>Цена</th>
+                                <th>Акционная цена</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for product in products %}
+                                <tr id="special-product{{ product.product_id }}">
+                                    <td><img src="{{ product.image }}" alt="{{ product.name }}"
+                                             style="max-width: 100px; max-height: 100px;"></td>
+                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.price }}</td>
+                                    <td><input name="special_price[{{ product.product_id }}]"
+                                               value="{{ product.special }}"></td>
+                                    <input type="hidden" name="product_name[{{ product.product_id }}]"
+                                           value="{{ product.name }}">
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -220,7 +225,8 @@
                                 label: item['name'],
                                 value: item['product_id'],
                                 price: item['price'],
-                                image: item['image']
+                                image: item['image'],
+                                special: item['special']
                             }
                         }));
                     }
@@ -235,13 +241,34 @@
 
                 $('#product-table tbody').append(
                     '<tr id="special-product' + item['value'] + '">\
-                    <td><img src="' + item['image'] + '" alt="' + item['label'] + '" style="max-width: 100px; max-height: 100px;"></td>\
-                    <td>' + item['label'] + '</td>\
-                    <td>' + item['price'] + '</td>\
-                    <td>' + item['discount'] + '</td>\
-                </tr>');
+        <td><img src="' + item['image'] + '" alt="' + item['label'] + '" style="max-width: 100px; max-height: 100px;"></td>\
+        <td>' + item['label'] + '</td>\
+        <td>' + item['price'] + '</td>\
+        <td><input name="special_price[' + item['value'] + ']" value="' + item['special'] + '"></td>\
+        <td><input type="hidden" name="product_name[' + item['value'] + ']" value="' + item['label'] + '"></td>\
+                    </tr>'
+                );
             }
         });
+
+        $('#form-module').on('submit', function (e) {
+            // Call a function to update the form data with table values
+            updateFormData();
+        });
+
+        function updateFormData() {
+            // Iterate over the rows in the product table
+            $('#product-table tbody tr').each(function () {
+                // Extract data from the current row
+                var productId = $(this).attr('id').replace('special-product', '');
+                var specialPrice = $(this).find('input[name^="special_price["]').val();
+                var productName = $(this).find('input[name^="product_name["]').val();
+
+                // Append hidden fields to the form with the extracted data
+                $('#form-module').append('<input type="hidden" name="product_special[' + productId + ']" value="' + specialPrice + '">');
+                $('#form-module').append('<input type="hidden" name="product_name[' + productId + ']" value="' + productName + '">');
+            });
+        }
 
         $('#special-product').on('click', '.fa-minus-circle', function () {
             // Получить ID продукта
