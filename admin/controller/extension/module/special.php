@@ -15,24 +15,28 @@ class ControllerExtensionModuleSpecial extends Controller
         $this->load->model('catalog/product');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            if (!isset($this->request->get['module_id'])) {
-                $this->model_setting_module->addModule('special', $this->request->post);
-            } else {
-                $this->model_setting_module->editModule($this->request->get['module_id'], $this->request->post);
-            }
+
             $productSpecial = !empty($this->request->post['product_special']) ? $this->request->post['product_special'] : array();
+
+            $module_id = $this->request->get['module_id'] ? $this->request->get['module_id'] : 0;
 
             foreach ($productSpecial as $productId => $specialPrice) {
                 $startDate = $this->request->post['start_date'];
                 $endDate = $this->request->post['end_date'];
 
-                $isProductSpecial = $this->model_catalog_product->isProductSpecialWithId($productId, $this->request->get['module_id']);
+                $isProductSpecial = $this->model_catalog_product->isProductSpecialWithId($productId, $module_id);
 
                 if ($isProductSpecial) {
-                    $this->model_catalog_product->updateProductSpecial($productId, $this->request->get['module_id'], $startDate,$endDate, $specialPrice);
+                    $this->model_catalog_product->updateProductSpecial($productId, $module_id, $startDate,$endDate, $specialPrice);
                 } else {
-                    $this->model_catalog_product->setProductSpecial($productId, $this->request->get['module_id'], $startDate,$endDate, $specialPrice);
+                    $this->model_catalog_product->setProductSpecial($productId, $module_id, $startDate,$endDate, $specialPrice);
                 }
+            }
+
+            if (!isset($this->request->get['module_id'])) {
+                $this->model_setting_module->addModule('special', $this->request->post);
+            } else {
+                $this->model_setting_module->editModule($this->request->get['module_id'], $this->request->post);
             }
 
             $this->cache->delete('product');
