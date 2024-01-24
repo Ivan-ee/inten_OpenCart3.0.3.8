@@ -48,6 +48,12 @@ class ControllerExtensionModuleSpecial extends Controller
             $data['error_warning'] = '';
         }
 
+        if (isset($this->error['start_date'])) {
+            $data['error_start_date'] = $this->error['start_date'];
+        } else {
+            $data['error_start_date'] = '';
+        }
+
         if (isset($this->error['name'])) {
             $data['error_name'] = $this->error['name'];
         } else {

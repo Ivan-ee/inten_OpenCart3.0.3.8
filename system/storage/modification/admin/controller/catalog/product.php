@@ -1254,10 +1254,10 @@ class ControllerCatalogProduct extends Controller {
 			$this->load->model('catalog/option');
 			$this->load->model('tool/image');
 
-            if (isset($this->request->get['special_name'])) {
-                $special_name = $this->request->get['special_name'];
+            if (isset($this->request->get['module_id'])) {
+                $special_id = $this->request->get['module_id'];
             } else {
-                $special_name = '';
+                $special_id = '';
             }
 
             if (isset($this->request->get['filter_name'])) {
@@ -1326,7 +1326,7 @@ class ControllerCatalogProduct extends Controller {
 					}
 				}
 
-                $product_info_special = $this->model_catalog_product->getProductSpecialsWithName($result['product_id'], $special_name);
+                $product_info_special = $this->model_catalog_product->getProductSpecialsWithId($result['product_id'], $special_id);
 
 				$json[] = array(
 					'product_id' => $result['product_id'],
@@ -1343,16 +1343,4 @@ class ControllerCatalogProduct extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
-
-    function tt($str){
-        echo "<pre>";
-        print_r($str);
-        echo "</pre>";
-    }
-    function tte($str){
-        echo "<pre>";
-        print_r($str);
-        echo "</pre>";
-        exit();
-    }
 }

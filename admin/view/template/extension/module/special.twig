@@ -68,6 +68,9 @@
                         <div class="col-sm-10">
                             <div class='input-group date' id='datetimepicker-start'>
                                 <input required type='text' name="start_date" value="{{ start_date }}" id="input-start-date" class="form-control" />
+                                {% if error_start_date %}
+                                    <div class="text-danger">{{ error_start_date }}</div>
+                                {% endif %}
                                 <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
