@@ -583,27 +583,27 @@ class ModelCatalogProduct extends Model {
 		return $query->rows;
 	}
 
-    public function getProductSpecialsWithName($product_id, $special_name) {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_special WHERE product_id = '" . (int)$product_id . "' AND special_name = '" . $this->db->escape($special_name) . "' ORDER BY priority, price");
+    public function getProductSpecialsWithId($product_id, $specialId) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_special WHERE product_id = '" . (int)$product_id . "' AND special_id = '" . (int)$specialId . "' ORDER BY priority, price");
 
         return $query->rows;
     }
 
-    public function isProductSpecialWithName($product_id, $special_name)
+    public function isProductSpecialWithId($product_id, $specialId)
     {
-        $checkProductQuery = $this->db->query("SELECT * FROM oc_product_special WHERE product_id = '" . (int)$product_id . "' AND special_name = '" . $special_name . "'");
+        $checkProductQuery = $this->db->query("SELECT * FROM oc_product_special WHERE product_id = '" . (int)$product_id . "' AND special_id = '" . $specialId . "'");
 
         return $checkProductQuery->num_rows;
     }
 
-    public function updateProductSpecial($productId, $special_name, $startDate, $endDate, $specialPrice)
+    public function updateProductSpecial($productId, $specialId, $startDate, $endDate, $specialPrice)
     {
-        $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "' , date_start = '" . $startDate . "' , date_end = '" . $endDate . "' WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $special_name . "'");
+        $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "' , date_start = '" . $startDate . "' , date_end = '" . $endDate . "' WHERE product_id = '" . (int)$productId . "' AND special_id = '" . $specialId . "'");
     }
 
-    public function setProductSpecial($productId, $specialName, $startDate, $endDate, $specialPrice)
+    public function setProductSpecial($productId, $specialId, $startDate, $endDate, $specialPrice)
     {
-        $this->db->query("INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_name) VALUES ('" . (int)$productId . "', '" . (float)$specialPrice . "', '" . $startDate . "', '" . $endDate . "', '" . $specialName . "')");
+        $this->db->query("INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_id) VALUES ('" . (int)$productId . "', '" . (float)$specialPrice . "', '" . $startDate . "', '" . $endDate . "', '" . $specialId . "')");
     }
 
     public function getProductRewards($product_id) {

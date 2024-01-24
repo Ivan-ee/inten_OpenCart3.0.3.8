@@ -20,20 +20,18 @@ class ControllerExtensionModuleSpecial extends Controller
             } else {
                 $this->model_setting_module->editModule($this->request->get['module_id'], $this->request->post);
             }
-
             $productSpecial = !empty($this->request->post['product_special']) ? $this->request->post['product_special'] : array();
 
             foreach ($productSpecial as $productId => $specialPrice) {
-                $specialName = $this->request->post['name'];
                 $startDate = $this->request->post['start_date'];
                 $endDate = $this->request->post['end_date'];
 
-                $isProductSpecial = $this->model_catalog_product->isProductSpecialWithName($productId, $specialName);
+                $isProductSpecial = $this->model_catalog_product->isProductSpecialWithId($productId, $this->request->get['module_id']);
 
                 if ($isProductSpecial) {
-                    $this->model_catalog_product->updateProductSpecial($productId, $specialName, $startDate,$endDate, $specialPrice);
+                    $this->model_catalog_product->updateProductSpecial($productId, $this->request->get['module_id'], $startDate,$endDate, $specialPrice);
                 } else {
-                    $this->model_catalog_product->setProductSpecial($productId, $specialName, $startDate,$endDate, $specialPrice);
+                    $this->model_catalog_product->setProductSpecial($productId, $this->request->get['module_id'], $startDate,$endDate, $specialPrice);
                 }
             }
 
@@ -166,7 +164,7 @@ class ControllerExtensionModuleSpecial extends Controller
 
         foreach ($products as $product_id) {
             $product_info = $this->model_catalog_product->getProduct($product_id);
-            $product_info_special = $this->model_catalog_product->getProductSpecialsWithName($product_id, $data['name']);
+            $product_info_special = $this->model_catalog_product->getProductSpecialsWithId($product_id, $this->request->get['module_id']);
 
             if ($product_info) {
                 $data['products'][] = array(
