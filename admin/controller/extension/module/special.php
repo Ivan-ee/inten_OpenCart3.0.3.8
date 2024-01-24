@@ -42,6 +42,8 @@ class ControllerExtensionModuleSpecial extends Controller
 			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
 		}
 
+        $this->tt($this->request->post);
+
         if (isset($this->error['warning'])) {
             $data['error_warning'] = $this->error['warning'];
         } else {
@@ -269,14 +271,6 @@ class ControllerExtensionModuleSpecial extends Controller
         echo '<pre>';
         var_dump($data);
         echo '</pre>';
-    }
-
-    function tte($str)
-    {
-        echo "<pre>";
-        print_r($str);
-        echo "</pre>";
-        exit();
     }
 
 }

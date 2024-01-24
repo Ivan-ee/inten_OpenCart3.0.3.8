@@ -85,13 +85,39 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->load->model('setting/module');
 
 		if (isset($this->request->get['module_id']) && $this->validate()) {
-			$this->model_setting_module->deleteModule($this->request->get['module_id']);
+
+            $module_id = $this->request->get['module_id'];
+
+            $isSpecialRows = $this->model_setting_module->isSpecialRowsWithId($module_id);
+
+            if ($isSpecialRows){
+                $this->model_setting_module->deleteSpecialRowsWithId($module_id);
+                $this->model_setting_module->deleteModule($module_id);
+            }
+            else{
+			    $this->model_setting_module->deleteModule($module_id);
+            }
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
 		
 		$this->getList();
 	}
+
+    private function tt($data)
+    {
+        echo '<pre>';
+        var_dump($data);
+        echo '</pre>';
+    }
+
+    function tte($str)
+    {
+        echo "<pre>";
+        print_r($str);
+        echo "</pre>";
+        exit();
+    }
 
 	protected function getList() {
 		$data['text_layout'] = sprintf($this->language->get('text_layout'), $this->url->link('design/layout', 'user_token=' . $this->session->data['user_token'], true));

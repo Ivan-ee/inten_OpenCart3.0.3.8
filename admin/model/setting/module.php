@@ -12,6 +12,16 @@ class ModelSettingModule extends Model {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "module` WHERE `module_id` = '" . (int)$module_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "layout_module` WHERE `code` LIKE '%." . (int)$module_id . "'");
 	}
+
+    public function isSpecialRowsWithId($specialId) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_special WHERE special_id = '" . (int)$specialId . "'");
+
+        return $query->num_rows > 0;
+    }
+
+    public function deleteSpecialRowsWithId($specialId) {
+        $this->db->query("DELETE FROM " . DB_PREFIX . "product_special WHERE special_id = '" . (int)$specialId . "'");
+    }
 		
 	public function getModule($module_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "module` WHERE `module_id` = '" . (int)$module_id . "'");
