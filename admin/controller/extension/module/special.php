@@ -24,16 +24,18 @@ class ControllerExtensionModuleSpecial extends Controller
 
             foreach ($productSpecial as $productId => $specialPrice) {
                 $specialName = $this->request->post['name'];
+                $startDate = $this->request->post['start_date'];
+                $endDate = $this->request->post['end_date'];
 
                 // Проверяем, существует ли товар в таблице по product_id и имени акции
                 $checkProductQuery = $this->db->query("SELECT * FROM oc_product_special WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $specialName . "'");
 
                 if ($checkProductQuery->num_rows) {
                     // Если товар существует, обновляем цену акции
-                    $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "' WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $specialName . "'");
+                    $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "' , date_start = '" . $startDate . "' , date_end = '" . $endDate . "' WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $specialName . "'");
                 } else {
                     // Если товар не существует, добавляем новую запись
-                    $this->db->query("INSERT INTO oc_product_special (product_id, price, special_name) VALUES ('" . (int)$productId . "', '" . (float)$specialPrice . "', '" . $specialName . "')");
+                    $this->db->query("INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_name) VALUES ('" . (int)$productId . "', '" . (float)$specialPrice . "', '" . $startDate . "', '" . $endDate . "', '" . $specialName . "')");
                 }
             }
 
@@ -135,6 +137,22 @@ class ControllerExtensionModuleSpecial extends Controller
             $data['special_desk'] = $module_info['special_desk'];
         } else {
             $data['special_desk'] = '';
+        }
+
+        if (isset($this->request->post['start_date'])) {
+            $data['start_date'] = $this->request->post['start_date'];
+        } elseif (!empty($module_info)) {
+            $data['start_date'] = $module_info['start_date'];
+        } else {
+            $data['start_date'] = '';
+        }
+
+        if (isset($this->request->post['end_date'])) {
+            $data['end_date'] = $this->request->post['end_date'];
+        } elseif (!empty($module_info)) {
+            $data['end_date'] = $module_info['end_date'];
+        } else {
+            $data['end_date'] = '';
         }
 
         $this->load->model('catalog/product');
