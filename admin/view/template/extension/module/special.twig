@@ -46,10 +46,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}"
+                            <input required type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}"
                                    id="input-name" class="form-control"/>
                             {% if error_name %}
                                 <div class="text-danger">{{ error_name }}</div>
@@ -66,30 +66,28 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-start-date">Начало акции</label>
                         <div class="col-sm-10">
                             <div class='input-group date' id='datetimepicker-start'>
-                                <input type='text' name="start_date" value="{{ start_date }}" id="input-start-date" class="form-control" />
+                                <input required type='text' name="start_date" value="{{ start_date }}" id="input-start-date" class="form-control" />
                                 <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-end-date">Окончание акции</label>
                         <div class="col-sm-10">
                             <div class='input-group date' id='datetimepicker-end'>
-                                <input type='text' name="end_date" value="{{ end_date }}" id="input-end-date" class="form-control" />
+                                <input required type='text' name="end_date" value="{{ end_date }}" id="input-end-date" class="form-control" />
                                 <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-block-image">{{ entry_block_image }}</label>
                         <div class="col-sm-10">
@@ -111,11 +109,11 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-page-image">{{ entry_page_image }}</label>
                         <div class="col-sm-10">
                             <div class="input-group">
-                                <input type="text" name="page_image" value="{{ page_image }}"
+                                <input required type="text" name="page_image" value="{{ page_image }}"
                                        placeholder="{{ entry_page_image }}" id="input-page-image" class="form-control"/>
                                 <span class="input-group-btn">
                 <button type="button" id="btn-upload-page-image" class="btn btn-primary"><i
@@ -131,16 +129,20 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label class="col-sm-2 control-label"
                                for="input-entry_special_desk">{{ entry_special_desk }}</label>
                         <div class="col-sm-10">
-                            <textarea name="special_desk" placeholder="{{ entry_special_desk }}"
+                            <textarea required name="special_desk" placeholder="{{ entry_special_desk }}"
                                       id="input-entry_special_desk"
                                       class="form-control custom-textarea">{{ special_desk }}</textarea>
                             {% if error_special_desk %}
                                 <div class="text-danger">{{ error_special_desk }}</div>
                             {% endif %}
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-primary" onclick="insertTextFromTable()">Вставить стандартное описание</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteText()">Удалить описание</button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -196,6 +198,24 @@
         </div>
     </div>
 
+    <script>
+        function insertTextFromTable() {
+            $.ajax({
+                url: 'index.php?route=extension/module/special/addDescription&user_token={{ user_token }}',
+                method: 'GET',
+                success: function(response) {
+                    $('#input-entry_special_desk').val(response.description);
+                },
+                error: function(error) {
+                    console.error('Произошла ошибка:', error);
+                }
+            });
+        }
+
+        function deleteText() {
+            $('#input-entry_special_desk').val('');
+        }
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function () {

@@ -207,6 +207,24 @@ class ControllerExtensionModuleSpecial extends Controller
         return !$this->error;
     }
 
+    public function addDescription() {
+        $json = array();
+
+        if (isset($this->request->get['user_token'])) {
+            $this->load->model('extension/module/special');
+
+            $desk = $this->model_extension_module_special->getDescription(1);
+
+            $json['description'] = $desk['description'];
+
+        } else {
+            $json['error'] = 'Отсутствует токен пользователя';
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
     private function tt($data)
     {
         echo '<pre>';
