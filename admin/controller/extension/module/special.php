@@ -14,7 +14,7 @@ class ControllerExtensionModuleSpecial extends Controller
 
         $this->load->model('catalog/product');
 
-        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
             if (!isset($this->request->get['module_id'])) {
                 $this->model_setting_module->addModule('special', $this->request->post);
             } else {
@@ -27,7 +27,7 @@ class ControllerExtensionModuleSpecial extends Controller
                 $specialName = $this->request->post['name'];
                 $startDate = $this->request->post['start_date'];
                 $endDate = $this->request->post['end_date'];
-                
+
                 $isProductSpecial = $this->model_catalog_product->isProductSpecialWithName($productId, $specialName);
 
                 if ($isProductSpecial) {

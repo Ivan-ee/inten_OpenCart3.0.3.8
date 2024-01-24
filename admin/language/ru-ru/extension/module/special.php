@@ -10,6 +10,7 @@ $_['text_edit']        = 'Настройки модуля';
 // Entry
 $_['entry_name']       = 'Название акции';
 $_['entry_description']      = 'Описание';
+$_['entry_status']      = 'Статус';
 $_['entry_special_desk']      = 'Условия акции';
 $_['entry_product']    = 'Товары';
 $_['entry_block_image']    = 'Фото для блока';

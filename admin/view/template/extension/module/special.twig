@@ -33,6 +33,20 @@
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module"
                       class="form-horizontal">
                     <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="status" id="input-status" class="form-control">
+                                {% if status %}
+                                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                                    <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                    <option value="1">{{ text_enabled }}</option>
+                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
                         <div class="col-sm-10">
                             <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}"
@@ -145,44 +159,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-                        <div class="col-sm-10">
-                            <select name="status" id="input-status" class="form-control">
-                                {% if status %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
-                        </div>
-                    </div>
                 </form>
 
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="width: 60%; margin: auto">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Товары в акции</h3>
+                        <h3 class="panel-title"><i class="fa fa-shopping-cart"></i>Товары участвующие в акции</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" >
                         <table class="table table-bordered" id="product-table">
                             <thead>
                             <tr>
-                                <th>Фото</th>
-                                <th>Название</th>
-                                <th>Цена</th>
-                                <th>Акционная цена</th>
+                                <th style="text-align: center">Фото</th>
+                                <th style="text-align: center">Название</th>
+                                <th style="text-align: center">Цена (руб)</th>
+                                <th style="text-align: center">Акционная цена (руб)</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for product in products %}
                                 <tr id="special-product{{ product.product_id }}">
-                                    <td><img src="{{ product.image }}" alt="{{ product.name }}"
+                                    <td style="text-align: center"><img src="{{ product.image }}" alt="{{ product.name }}"
                                              style="max-width: 100px; max-height: 100px;"></td>
-                                    <td>{{ product.name }}</td>
-                                    <td>{{ product.price }}</td>
-                                    <td><input name="special_price[{{ product.product_id }}]"
+                                    <td style="text-align: center">{{ product.name }}</td>
+                                    <td style="text-align: center">{{ product.price }}</td>
+                                    <td style="text-align: center"><input name="special_price[{{ product.product_id }}]"
                                                value="{{ product.special }}"></td>
                                     <input type="hidden" name="product_name[{{ product.product_id }}]"
                                            value="{{ product.name }}">
@@ -265,10 +265,10 @@
 
                 $('#product-table tbody').append(
                     '<tr id="special-product' + item['value'] + '">\
-        <td><img src="' + item['image'] + '" alt="' + item['label'] + '" style="max-width: 100px; max-height: 100px;"></td>\
-        <td>' + item['label'] + '</td>\
-        <td>' + item['price'] + '</td>\
-        <td><input name="special_price[' + item['value'] + ']" value="' + item['special'] + '"></td>\
+        <td style="text-align: center"><img src="' + item['image'] + '" alt="' + item['label'] + '" style="max-width: 100px; max-height: 100px;"></td>\
+        <td style="text-align: center">' + item['label'] + '</td>\
+        <td style="text-align: center">' + item['price'] + '</td>\
+        <td style="text-align: center"><input name="special_price[' + item['value'] + ']" value="' + item['special'] + '"></td>\
         <td><input type="hidden" name="product_name[' + item['value'] + ']" value="' + item['label'] + '"></td>\
                     </tr>'
                 );
