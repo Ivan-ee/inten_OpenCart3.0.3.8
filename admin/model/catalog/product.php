@@ -568,6 +568,23 @@ class ModelCatalogProduct extends Model {
         return $query->rows;
     }
 
+    public function isProductSpecialWithName($product_id, $special_name)
+    {
+        $checkProductQuery = $this->db->query("SELECT * FROM oc_product_special WHERE product_id = '" . (int)$product_id . "' AND special_name = '" . $special_name . "'");
+
+        return $checkProductQuery->num_rows;
+    }
+
+    public function updateProductSpecial($productId, $special_name, $startDate, $endDate, $specialPrice)
+    {
+        $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "' , date_start = '" . $startDate . "' , date_end = '" . $endDate . "' WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $special_name . "'");
+    }
+
+    public function setProductSpecial($productId, $specialName, $startDate, $endDate, $specialPrice)
+    {
+        $this->db->query("INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_name) VALUES ('" . (int)$productId . "', '" . (float)$specialPrice . "', '" . $startDate . "', '" . $endDate . "', '" . $specialName . "')");
+    }
+
     public function getProductRewards($product_id) {
 		$product_reward_data = array();
 

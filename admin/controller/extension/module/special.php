@@ -12,6 +12,8 @@ class ControllerExtensionModuleSpecial extends Controller
 
         $this->load->model('setting/module');
 
+        $this->load->model('catalog/product');
+
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
             if (!isset($this->request->get['module_id'])) {
                 $this->model_setting_module->addModule('special', $this->request->post);
@@ -20,27 +22,20 @@ class ControllerExtensionModuleSpecial extends Controller
             }
 
             $productSpecial = !empty($this->request->post['product_special']) ? $this->request->post['product_special'] : array();
-//            $productName = !empty($this->request->post['product_name']) ? $this->request->post['product_name'] : array();
 
             foreach ($productSpecial as $productId => $specialPrice) {
                 $specialName = $this->request->post['name'];
                 $startDate = $this->request->post['start_date'];
                 $endDate = $this->request->post['end_date'];
+                
+                $isProductSpecial = $this->model_catalog_product->isProductSpecialWithName($productId, $specialName);
 
-                // Проверяем, существует ли товар в таблице по product_id и имени акции
-                $checkProductQuery = $this->db->query("SELECT * FROM oc_product_special WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $specialName . "'");
-
-                if ($checkProductQuery->num_rows) {
-                    // Если товар существует, обновляем цену акции
-                    $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "' , date_start = '" . $startDate . "' , date_end = '" . $endDate . "' WHERE product_id = '" . (int)$productId . "' AND special_name = '" . $specialName . "'");
+                if ($isProductSpecial) {
+                    $this->model_catalog_product->updateProductSpecial($productId, $specialName, $startDate,$endDate, $specialPrice);
                 } else {
-                    // Если товар не существует, добавляем новую запись
-                    $this->db->query("INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_name) VALUES ('" . (int)$productId . "', '" . (float)$specialPrice . "', '" . $startDate . "', '" . $endDate . "', '" . $specialName . "')");
+                    $this->model_catalog_product->setProductSpecial($productId, $specialName, $startDate,$endDate, $specialPrice);
                 }
             }
-
-//            $this->tte( $productSpecial);
-//            $this->tte( $productName);
 
             $this->cache->delete('product');
 
@@ -173,13 +168,6 @@ class ControllerExtensionModuleSpecial extends Controller
             $product_info = $this->model_catalog_product->getProduct($product_id);
             $product_info_special = $this->model_catalog_product->getProductSpecialsWithName($product_id, $data['name']);
 
-//            $this->tt($product_info_special);
-
-            $rr = $product_info_special == false ? false : $product_info_special;
-
-//            var_dump($rr);
-
-
             if ($product_info) {
                 $data['products'][] = array(
                     'product_id' => $product_info['product_id'],
@@ -202,8 +190,6 @@ class ControllerExtensionModuleSpecial extends Controller
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
-
-//        $this->tt($data);
 
         $this->response->setOutput($this->load->view('extension/module/special', $data));
     }
