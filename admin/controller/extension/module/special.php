@@ -48,17 +48,36 @@ class ControllerExtensionModuleSpecial extends Controller
             $data['error_warning'] = '';
         }
 
+        if (isset($this->error['name'])) {
+            $data['error_name'] = $this->error['name'];
+        } else {
+            $data['error_name'] = '';
+        }
+
         if (isset($this->error['start_date'])) {
             $data['error_start_date'] = $this->error['start_date'];
         } else {
             $data['error_start_date'] = '';
         }
 
-        if (isset($this->error['name'])) {
-            $data['error_name'] = $this->error['name'];
+        if (isset($this->error['end_date'])) {
+            $data['error_end_date'] = $this->error['end_date'];
         } else {
-            $data['error_name'] = '';
+            $data['error_end_date'] = '';
         }
+
+        if (isset($this->error['page_image'])) {
+            $data['error_page_image'] = $this->error['page_image'];
+        } else {
+            $data['error_page_image'] = '';
+        }
+
+        if (isset($this->error['special_desk'])) {
+            $data['error_special_desk'] = $this->error['special_desk'];
+        } else {
+            $data['error_special_desk'] = '';
+        }
+
 
         $data['breadcrumbs'] = array();
 
@@ -206,6 +225,22 @@ class ControllerExtensionModuleSpecial extends Controller
 
         if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
             $this->error['name'] = $this->language->get('error_name');
+        }
+
+        if ((utf8_strlen($this->request->post['start_date']) < 3)) {
+            $this->error['start_date'] = $this->language->get('error_start_date');
+        }
+
+        if ((utf8_strlen($this->request->post['end_date']) < 3)) {
+            $this->error['end_date'] = $this->language->get('error_end_date');
+        }
+
+        if ((utf8_strlen($this->request->post['page_image']) < 3)) {
+            $this->error['page_image'] = $this->language->get('error_page_image');
+        }
+
+        if ((utf8_strlen($this->request->post['special_desk']) < 3)) {
+            $this->error['special_desk'] = $this->language->get('error_special_desk');
         }
 
         return !$this->error;
