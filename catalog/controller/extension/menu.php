@@ -8,12 +8,12 @@ class ControllerExtensionMenu extends Controller
         $lang_id = (int)$this->config->get('config_language_id');
         $menu_id = isset($data['id']) ? (int)$data['id'] : 0;
         if (isset($data['tpl'])) {
-            $tpl = __DIR__ . "/menu/{$data['tpl']}.php";
+            $tpl = __DIR__ . "/menu_tpl/{$data['tpl']}.php";
             if (!file_exists($tpl)) {
-                $tpl = __DIR__ . "/menu/base.php";
+                $tpl = __DIR__ . "/menu_tpl/base.php";
             }
         } else {
-            $tpl = __DIR__ . "/menu/base.php";
+            $tpl = __DIR__ . "/menu_tpl/base.php";
         }
 
         $this->load->model("extension/menu");
@@ -27,6 +27,7 @@ class ControllerExtensionMenu extends Controller
             }
             $menu_tree = $this->model_extension_menu->getMapTree($menu_data);
             $data_menu = $this->model_extension_menu->treeToHtml($menu_tree, $tpl);
+            $this->dump($menu_tree);
             $this->cache->set("menu_{$menu_id}_{$lang_id}_{$tpl_md5}", $data_menu);
         }
         return $data_menu;
