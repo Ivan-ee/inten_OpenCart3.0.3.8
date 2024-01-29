@@ -27,9 +27,10 @@ class ControllerExtensionMenu extends Controller
             }
             $menu_tree = $this->model_extension_menu->getMapTree($menu_data);
             $data_menu = $this->model_extension_menu->treeToHtml($menu_tree, $tpl);
-            $this->dump($menu_tree);
+
             $this->cache->set("menu_{$menu_id}_{$lang_id}_{$tpl_md5}", $data_menu);
         }
+
         return $data_menu;
     }
 
