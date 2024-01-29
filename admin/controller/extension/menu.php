@@ -60,8 +60,6 @@ class ControllerExtensionMenu extends Controller
             ];
         }
 
-        var_dump($data);
-
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
@@ -154,9 +152,9 @@ class ControllerExtensionMenu extends Controller
         $data['footer'] = $this->load->controller('common/footer');
 
         if (isset($this->request->get['menu_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-            $data['ctmenu_data'] = $this->model_extension_menu->getMenu($this->request->get['menu_id']);
+            $data['menu_data'] = $this->model_extension_menu->getMenu($this->request->get['menu_id']);
         } elseif (isset($this->request->post['menu'])) {
-            $data['ctmenu_data'] = $this->request->post['menu'];
+            $data['menu_data'] = $this->request->post['menu'];
         }
 
         $this->response->setOutput($this->load->view('extension/menu/menu_form', $data));
@@ -310,7 +308,6 @@ class ControllerExtensionMenu extends Controller
             $data['menu_description'] = $this->request->post['menu_description'];
         }
 
-
         if (isset($this->request->get['menu_link_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
             $data['menu_description'] = $this->model_extension_menu->getMenuLink($this->request->get['menu_link_id']);
         } elseif (isset($this->request->post['menu'])) {
@@ -335,7 +332,7 @@ class ControllerExtensionMenu extends Controller
 
         $menu_data = $this->model_extension_menu->getTreeItems($menu_id);
         $menu_tree = $this->model_extension_menu->getMapTree($menu_data);
-        $data['ctmenu_select'] = $this->treeToHtml($menu_tree, 'select', '', $parent_id);
+        $data['menu_select'] = $this->treeToHtml($menu_tree, 'select', '', $parent_id);
 
         $this->response->setOutput($this->load->view('extension/menu/menu_link_form', $data));
     }
