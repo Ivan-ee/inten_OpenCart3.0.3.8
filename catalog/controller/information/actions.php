@@ -18,8 +18,6 @@ class ControllerInformationActions extends Controller
 
         $newArray = [];
 
-        $product = [];
-
         $monthTranslations = [
             'January' => 'января',
             'February' => 'февраля',
@@ -87,7 +85,7 @@ class ControllerInformationActions extends Controller
 
             $action_info['id'] = $action['module_id'];
 
-            $data['href'] = $this->url->link('information/view', 'action_id=' . $action_info['id']);
+            $action_info['href'] = $this->url->link('information/view', 'action_id=' . $action_info['id']);
 
             $this->load->model('catalog/product');
 
@@ -97,14 +95,17 @@ class ControllerInformationActions extends Controller
 
             $product['thumb'] = $this->model_tool_image->resize($product['image'], 80, 60);
 
+            $action_info['product_thumb'] = $product['thumb'];
+            $action_info['product_name'] = $product['name'];
+
             $newArray[] = $action_info;
         }
 
         $data['actions'] = $newArray;
 
-        $data['product'] = $product;
+//        $data['product'] = $product;
 
-//        tt($data['actions']);
+//        tt($data);
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
