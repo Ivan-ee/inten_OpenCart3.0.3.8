@@ -36,8 +36,12 @@ class ControllerInformationActions extends Controller
         foreach ($actions as $action) {
             $action_info = json_decode($action['setting'], true);
 
-            $product_count = count($action_info['product']);
+            $product_count = count($action_info['product']) - 1;
             $product_label = '';
+
+            if ($product_count === 0) {
+                $product_label = '';
+            }
 
             if ($product_count > 0) {
                 $product_label = 'Ещё ' . $product_count . ' товар';
@@ -102,8 +106,6 @@ class ControllerInformationActions extends Controller
         }
 
         $data['actions'] = $newArray;
-
-//        $data['product'] = $product;
 
 //        tt($data);
 
