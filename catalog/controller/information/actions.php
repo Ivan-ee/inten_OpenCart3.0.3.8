@@ -38,6 +38,25 @@ class ControllerInformationActions extends Controller
         foreach ($actions as $action) {
             $action_info = json_decode($action['setting'], true);
 
+            $product_count = count($action_info['product']);
+            $product_label = '';
+
+            if ($product_count > 0) {
+                $product_label = 'Ещё ' . $product_count . ' товар';
+
+                if ($product_count % 10 == 1 && $product_count % 100 != 11) {
+                    $product_label .= '';
+                } elseif ($product_count % 10 >= 2 && $product_count % 10 <= 4 && ($product_count % 100 < 10 || $product_count % 100 >= 20)) {
+                    $product_label .= 'а';
+                } else {
+                    $product_label .= 'ов';
+                }
+
+                $product_label .= ' →';
+            }
+
+            $action_info['product_label'] = $product_label;
+
             $start_datetime = new DateTime($action_info['start_date']);
             $end_datetime = new DateTime($action_info['end_date']);
 
@@ -85,7 +104,7 @@ class ControllerInformationActions extends Controller
 
         $data['product'] = $product;
 
-//        tt($data['product']);
+//        tt($data['actions']);
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
