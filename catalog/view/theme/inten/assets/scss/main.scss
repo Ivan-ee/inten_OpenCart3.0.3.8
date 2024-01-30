@@ -74,7 +74,7 @@ main.main {
   background-color: white;
 
   .custom-col {
-    width: 45%;
+    width: 54%;
   }
 
   .header-title {
@@ -191,7 +191,7 @@ main.main {
 
         padding: 11px;
 
-        min-width: 90px;
+        width: auto;
         height: 64px;
 
         display: flex;
@@ -200,15 +200,6 @@ main.main {
         justify-content: center;
         text-align: center;
       }
-    }
-
-    .last {
-      a {
-        min-width: 46px;
-        padding: 5px;
-      }
-
-
     }
 
     .button-item:hover {

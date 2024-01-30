@@ -64,7 +64,7 @@ main.main {
   background-color: white;
 }
 .header-bottom .custom-col {
-  width: 45%;
+  width: 54%;
 }
 .header-bottom .header-title {
   font-size: 30px;
@@ -152,17 +152,13 @@ main.main {
   color: var(--text-color);
   text-decoration: none;
   padding: 11px;
-  min-width: 90px;
+  width: auto;
   height: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-}
-.header-bottom .header-buttons .last a {
-  min-width: 46px;
-  padding: 5px;
 }
 .header-bottom .header-buttons .button-item:hover {
   transition: all 0.3s;
