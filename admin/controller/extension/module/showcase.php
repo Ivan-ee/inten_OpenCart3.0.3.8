@@ -125,12 +125,4 @@ class ControllerExtensionModuleShowcase extends Controller
 
         return !$this->error;
     }
-
-    function tte($str)
-    {
-        echo "<pre>";
-        print_r($str);
-        echo "</pre>";
-        exit();
-    }
 }

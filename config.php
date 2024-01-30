@@ -28,3 +28,18 @@ define('DB_PASSWORD', '');
 define('DB_DATABASE', 'inten');
 define('DB_PORT', '3306');
 define('DB_PREFIX', 'oc_');
+
+function tte($str)
+{
+    echo "<pre>";
+    print_r($str);
+    echo "</pre>";
+    exit();
+}
+
+function tt($str)
+{
+    echo "<pre>";
+    print_r($str);
+    echo "</pre>";
+}
