@@ -1,11 +1,16 @@
 <?php
-class ControllerInformationActions extends Controller {
+
+class ControllerInformationActions extends Controller
+{
     private $error = array();
 
-    public function index() {
+    public function index()
+    {
         $this->load->language('information/actions');
 
         $this->document->setTitle($this->language->get('heading_title'));
+
+        $data['name'] = $this->language->get('heading_title');
 
         $this->load->model('catalog/actions');
 
@@ -13,20 +18,21 @@ class ControllerInformationActions extends Controller {
 
         $newArray = [];
 
-        // Массив перевода месяцев
+        $product = [];
+
         $monthTranslations = [
-            'January'   => 'января',
-            'February'  => 'февраля',
-            'March'     => 'марта',
-            'April'     => 'апреля',
-            'May'       => 'мая',
-            'June'      => 'июня',
-            'July'      => 'июля',
-            'August'    => 'августа',
+            'January' => 'января',
+            'February' => 'февраля',
+            'March' => 'марта',
+            'April' => 'апреля',
+            'May' => 'мая',
+            'June' => 'июня',
+            'July' => 'июля',
+            'August' => 'августа',
             'September' => 'сентября',
-            'October'   => 'октября',
-            'November'  => 'ноября',
-            'December'  => 'декабря',
+            'October' => 'октября',
+            'November' => 'ноября',
+            'December' => 'декабря',
         ];
 
         foreach ($actions as $action) {
@@ -58,14 +64,28 @@ class ControllerInformationActions extends Controller {
                 $date_range = "в {$start_formatted}";
             }
 
-            $action_info['formatted_date_range'] = $date_range;
+            $action_info['date'] = $date_range;
+
+            $action_info['id'] = $action['module_id'];
+
+            $data['href'] = $this->url->link('information/view', 'action_id=' . $action_info['id']);
+
+            $this->load->model('catalog/product');
+
+            $product = $this->model_catalog_product->getProduct($action_info['product'][0]);
+
+            $this->load->model('tool/image');
+
+            $product['thumb'] = $this->model_tool_image->resize($product['image'], 80, 60);
 
             $newArray[] = $action_info;
         }
 
         $data['actions'] = $newArray;
 
-        tt($data['actions']);
+        $data['product'] = $product;
+
+//        tt($data['product']);
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
@@ -77,7 +97,8 @@ class ControllerInformationActions extends Controller {
         $this->response->setOutput($this->load->view('information/actions', $data));
     }
 
-    protected function validate() {
+    protected function validate()
+    {
         return !$this->error;
     }
 }

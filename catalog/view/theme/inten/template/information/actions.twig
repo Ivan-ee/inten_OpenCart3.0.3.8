@@ -1,51 +1,30 @@
 {{ header }}
 
-<div class="actions">
+<div class="actions mt-1">
+    <h1 class="title">{{ name }}</h1>
     <div class="row">
         <div class="col-3">
 
         </div>
         <div class="col-9">
             {% for action in actions %}
-                <p>{{ action.name }}</p>
+                <div class="block d-flex">
+                    <div class="block-image">
+                        <img src="{{ action.block_image }}" alt="{{ action.name }}">
+                    </div>
+                    <div class="block-content">
+                        <h2><a href="{{ href }}">{{ action.name }}</a></h2>
+                        <p>{{ action.date }}</p>
+                    </div>
+                    <div class="block-product">
+                        <div>
+                            <img src="{{ product.thumb }}" alt="{{ product.name }}">
+                            <h4>{{ product.name }}</h4>
+                            <a href="{{ href }}">еще 5 товаров</a>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-
-
-
-{#            <div class="block-msi">#}
-{#                <div class="block-title">#}
-{#                    <h2>{{ action.name  }}</h2>#}
-{#                    <h3>{{ 'Моноблоки МЅІ'|trans }}</h3>#}
-{#                    <p>{{ 'с 30 января по 13 февраля 2024 года'|trans }}</p>#}
-{#                </div>#}
-
-{#                <div class="block-content">#}
-{#                    <div class="block-item">#}
-{#                        <div class="block-image">#}
-{#                            <img src="{{ image_url }}" alt="{{ image_alt }}">#}
-{#                        </div>#}
-{#                        <div class="block-info">#}
-{#                            <h4>{{ product_name }}</h4>#}
-{#                            <p>{{ product_description }}</p>#}
-{#                            <div class="block-price">#}
-{#                                <span class="old-price">{{ old_price }}</span>#}
-{#                                <span class="new-price">{{ new_price }}</span>#}
-{#                            </div>#}
-{#                            <div class="block-actions">#}
-{#                                <a href="{{ product_link }}" class="btn btn-primary">{{ 'Подробнее'|trans }}</a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-
-{#                    <div class="block-more">#}
-{#                        <a href="{{ more_products_link }}">{{ 'Ещё 5 товаров →'|trans }}</a>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-
-
-
-
         </div>
     </div>
 </div>

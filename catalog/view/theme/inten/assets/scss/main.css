@@ -277,6 +277,73 @@ main .home-block .last {
   z-index: 10;
 }
 
+.actions .title {
+  font-weight: bold;
+  color: black;
+}
+.actions .block {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+  padding: 20px;
+}
+.actions .block:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+.actions .block-image {
+  margin-right: 20px;
+}
+.actions .block-image img {
+  width: 260px;
+  height: 190px;
+  border-radius: 8px;
+}
+.actions .block-content {
+  transition: all 0.3s;
+  padding-right: 100px;
+  border-right: #d9d9d9 1px solid;
+}
+.actions .block-content h2 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.actions .block-content h2 a {
+  color: black;
+  text-decoration: none;
+}
+.actions .block-content h2 a:hover {
+  color: var(--text-hover-color);
+}
+.actions .block-content p {
+  font-size: 15px;
+  color: var(--text-color);
+}
+.actions .block-product {
+  margin: 0 auto;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.actions .block-product div {
+  margin: 0;
+  text-align: center;
+}
+.actions .block-product h4 {
+  margin-top: 10px;
+  color: var(--text-color);
+}
+.actions .block-product a {
+  transition: all 0.3s;
+  color: #0d61af;
+  text-decoration: none;
+  font-size: 16px;
+}
+.actions .block-product a:hover {
+  color: var(--text-hover-color);
+}
+
 @media screen and (min-width: 1921px) {
   .custom-width {
     max-width: 45%;
