@@ -7,28 +7,17 @@ class ControllerExtensionMenu extends Controller
     {
         $lang_id = (int)$this->config->get('config_language_id');
         $menu_id = isset($data['id']) ? (int)$data['id'] : 0;
-        if (isset($data['tpl'])) {
-            $tpl = __DIR__ . "/menu_tpl/{$data['tpl']}.php";
-            if (!file_exists($tpl)) {
-                $tpl = __DIR__ . "/menu_tpl/base.php";
-            }
-        } else {
-            $tpl = __DIR__ . "/menu_tpl/base.php";
-        }
 
         $this->load->model("extension/menu");
-        $tpl_md5 = md5($tpl);
-        $data_menu = $this->cache->get("menu_{$menu_id}_{$lang_id}_{$tpl_md5}");
+        $data_menu = $this->cache->get("menu_{$menu_id}_{$lang_id}");
 
         if (!$data_menu) {
             $menu_data = $this->model_extension_menu->getTreeItems($menu_id);
             if (!$menu_data) {
                 return null;
             }
-            $menu_tree = $this->model_extension_menu->getMapTree($menu_data);
-            $data_menu = $this->model_extension_menu->treeToHtml($menu_tree, $tpl);
-
-            $this->cache->set("menu_{$menu_id}_{$lang_id}_{$tpl_md5}", $data_menu);
+            $data_menu = $this->model_extension_menu->getMapTree($menu_data);
+            $this->cache->set("menu_{$menu_id}_{$lang_id}", $data_menu);
         }
 
         return $data_menu;
