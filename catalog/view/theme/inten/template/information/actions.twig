@@ -1,3 +1,53 @@
 {{ header }}
 
+<div class="actions">
+    <div class="row">
+        <div class="col-3">
+
+        </div>
+        <div class="col-9">
+            {% for action in actions %}
+                <p>{{ action.name }}</p>
+            {% endfor %}
+
+
+
+{#            <div class="block-msi">#}
+{#                <div class="block-title">#}
+{#                    <h2>{{ action.name  }}</h2>#}
+{#                    <h3>{{ 'Моноблоки МЅІ'|trans }}</h3>#}
+{#                    <p>{{ 'с 30 января по 13 февраля 2024 года'|trans }}</p>#}
+{#                </div>#}
+
+{#                <div class="block-content">#}
+{#                    <div class="block-item">#}
+{#                        <div class="block-image">#}
+{#                            <img src="{{ image_url }}" alt="{{ image_alt }}">#}
+{#                        </div>#}
+{#                        <div class="block-info">#}
+{#                            <h4>{{ product_name }}</h4>#}
+{#                            <p>{{ product_description }}</p>#}
+{#                            <div class="block-price">#}
+{#                                <span class="old-price">{{ old_price }}</span>#}
+{#                                <span class="new-price">{{ new_price }}</span>#}
+{#                            </div>#}
+{#                            <div class="block-actions">#}
+{#                                <a href="{{ product_link }}" class="btn btn-primary">{{ 'Подробнее'|trans }}</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+
+{#                    <div class="block-more">#}
+{#                        <a href="{{ more_products_link }}">{{ 'Ещё 5 товаров →'|trans }}</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+
+
+
+        </div>
+    </div>
+</div>
+
 {{ footer }}
