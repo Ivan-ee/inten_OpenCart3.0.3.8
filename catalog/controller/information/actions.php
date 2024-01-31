@@ -64,11 +64,16 @@ class ControllerInformationActions extends Controller
 
             $start_formatted = $start_datetime->format('d ');
 
-            if ($start_datetime->format('Y') !== $end_datetime->format('Y')) {
-                $start_formatted .= $start_datetime->format(' Y');
-            } elseif ($start_datetime->format('n') !== $end_datetime->format('n')) {
+            if ($start_datetime->format('n') !== $end_datetime->format('n')) {
+                $start_formatted .= $monthTranslations[$start_datetime->format('F')];
+            } elseif ($start_datetime->format('Y') !== $end_datetime->format('Y')){
                 $start_formatted .= $monthTranslations[$start_datetime->format('F')];
             }
+
+            if ($start_datetime->format('Y') !== $end_datetime->format('Y')) {
+                $start_formatted .= $start_datetime->format(' Y');
+            }
+
 
             $end_formatted = $end_datetime->format('d ');
 
