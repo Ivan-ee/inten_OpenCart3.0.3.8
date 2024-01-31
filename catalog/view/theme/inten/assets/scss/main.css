@@ -300,7 +300,6 @@ main .home-block .last {
 }
 .actions .block-content {
   transition: all 0.3s;
-  padding-right: 100px;
   border-right: #d9d9d9 1px solid;
   min-width: 300px;
   max-width: 300px;
