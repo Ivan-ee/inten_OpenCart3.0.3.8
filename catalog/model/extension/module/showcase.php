@@ -92,7 +92,6 @@ class ModelExtensionModuleShowcase extends Model
             WHERE p_special.status = '1'
               AND p_special.date_available <= NOW()
               AND p2c_special.category_id = c.category_id
-              AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "'
               AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW()))
         )
         GROUP BY c.category_id, cd.name
