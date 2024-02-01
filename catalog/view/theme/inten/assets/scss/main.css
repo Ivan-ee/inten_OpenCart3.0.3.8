@@ -35,6 +35,14 @@ main.main {
   margin-right: calc(-50vw + 50%);
 }
 
+.base-main {
+  background-color: whitesmoke;
+}
+
+.footer {
+  background-color: #2b2b2b;
+}
+
 .header-top {
   font-size: 16px;
   background-color: white;
@@ -288,14 +296,38 @@ main .home-block .last {
   font-weight: bold;
   color: black;
 }
+.actions .actions-menu {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  height: 100%;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+}
+.actions .actions-menu .menu-item {
+  margin: 5px 15px;
+}
+.actions .actions-menu a {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: all 0.3s;
+}
+.actions .actions-menu a:hover {
+  color: var(--text-hover-color);
+}
+.actions .actions-menu:hover {
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.18);
+}
 .actions .block {
-  box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
   border-radius: 8px;
   transition: box-shadow 0.3s ease;
-  padding: 20px;
+  padding: 24px;
 }
 .actions .block:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.18);
 }
 .actions .block-image {
   margin-right: 20px;

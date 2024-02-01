@@ -1,32 +1,38 @@
 {{ header }}
 
-<div class="actions mt-1">
-    <h1 class="title">{{ name }}</h1>
-    <div class="row">
-        <div class="col-3">
-
-        </div>
-        <div class="col-9">
-            {% for action in actions %}
-                <div class="block d-flex mb-3">
-                    <div class="block-image">
-                        <img src="{{ action.block_image }}" alt="{{ action.name }}">
+<main class="base-main important-width">
+    <div class="actions custom-width mt-3 mb-3">
+        <h1 class="title mb-3">{{ name }}</h1>
+        <div class="row">
+            <div class="col-3 actions-menu">
+                {% for menu_item in top_menu_items %}
+                    <div class="menu-item">
+                        <a href="{{ menu_item.link }}">{{ menu_item.title }}</a>
                     </div>
-                    <div class="block-content">
-                        <h2><a href="{{ action.href }}">{{ action.name }}</a></h2>
-                        <p>{{ action.date }}</p>
-                    </div>
-                    <div class="block-product">
-                        <div>
-                            <img src="{{ action.product_thumb }}" alt="{{ action.product_name }}">
-                            <h4>{{ action.product_name }}</h4>
-                            <a href="{{ action.href }}">{{action.product_label}}</a>
+                {% endfor %}
+            </div>
+            <div class="col-9">
+                {% for action in actions %}
+                    <div class="block d-flex mb-2">
+                        <div class="block-image">
+                            <img src="{{ action.block_image }}" alt="{{ action.name }}">
+                        </div>
+                        <div class="block-content">
+                            <h2><a href="{{ action.href }}">{{ action.name }}</a></h2>
+                            <p>{{ action.date }}</p>
+                        </div>
+                        <div class="block-product">
+                            <div>
+                                <img src="{{ action.product_thumb }}" alt="{{ action.product_name }}">
+                                <h4>{{ action.product_name }}</h4>
+                                <a href="{{ action.href }}">{{ action.product_label }}</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
+</main>
 
 {{ footer }}
