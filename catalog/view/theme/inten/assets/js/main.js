@@ -50,6 +50,10 @@
         header.classList.add('sticky-top');
     });
 
+    window.addEventListener('scroll', function () {
+        document.getElementById('sticky').classList.toggle('scroll', window.scrollY > 40);
+    });
+
 })(jQuery);
 
 

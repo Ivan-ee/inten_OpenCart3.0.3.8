@@ -112,7 +112,6 @@ class ControllerInformationActions extends Controller
 
         $data['actions'] = $newArray;
 
-//        tt($data);
         $data['top_menu_items'] = $this->load->controller('extension/menu', ['id' => 1]);
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');

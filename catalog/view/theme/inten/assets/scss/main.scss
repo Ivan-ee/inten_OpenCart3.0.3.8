@@ -34,8 +34,8 @@ main.main {
 
 .important-width {
   width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
+  margin-left: calc(-50vw + 49%);
+  margin-right: calc(-50vw + 49%);
 }
 
 .base-main{
@@ -81,6 +81,11 @@ main.main {
     position: absolute;
     top: 27px;
   }
+}
+
+.scroll{
+  //border-bottom: 1px solid #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-bottom {
