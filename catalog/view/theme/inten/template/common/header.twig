@@ -46,9 +46,9 @@
 <body>
 
 <div class="wrapper custom-width" id="top">
-    <div class="header-top">
-        <nav class="row d-flex align-items-center mt-3">
-            <div class="col-3 position-relative"><a href="#"><i class="fi fi-rr-marker me-3"></i>Краснодар</a></div>
+    <div class="header-top important-width">
+        <nav class="row custom-width d-flex align-items-center mt-3">
+            <div class="col-3 position-relative ps-0"><a href="#"><i class="fi fi-rr-marker me-3"></i>Краснодар</a></div>
             <div class="col-6 d-flex">
                 {% for menu_item in top_menu_items %}
                     {% if loop.first %}
@@ -63,9 +63,9 @@
         </nav>
     </div>
 
-    <header class="header-bottom sticky-top pt-3 pb-3 mb-2" id="sticky">
-        <nav class="row d-flex align-items-center">
-            <div class="col-3 header-title">
+    <header class="header-bottom important-width sticky-top pt-3 pb-3 mb-2" id="sticky">
+        <nav class="row custom-width d-flex align-items-center">
+            <div class="col-3 header-title ps-0">
                 <div class="header-block pt-2 pb-2 d-flex justify-content-between align-items-center">
                     <a href="{{ base }}" class="ms-4">INTEN</a>
                     <div class="header-mini-block me-2">
