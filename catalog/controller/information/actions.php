@@ -74,7 +74,6 @@ class ControllerInformationActions extends Controller
                 $start_formatted .= $start_datetime->format(' Y');
             }
 
-
             $end_formatted = $end_datetime->format('d ');
 
             $end_formatted .= $monthTranslations[$end_datetime->format('F')];
@@ -94,7 +93,7 @@ class ControllerInformationActions extends Controller
 
             $action_info['id'] = $action['module_id'];
 
-            $action_info['href'] = $this->url->link('information/view', 'action_id=' . $action_info['id']);
+            $action_info['href'] = $this->url->link('information/action', 'action_id=' . $action_info['id']);
 
             $this->load->model('catalog/product');
 
@@ -121,10 +120,5 @@ class ControllerInformationActions extends Controller
         $data['header'] = $this->load->controller('common/header');
 
         $this->response->setOutput($this->load->view('information/actions', $data));
-    }
-
-    protected function validate()
-    {
-        return !$this->error;
     }
 }

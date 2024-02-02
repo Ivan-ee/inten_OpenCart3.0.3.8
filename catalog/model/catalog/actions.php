@@ -8,4 +8,10 @@ class ModelCatalogActions extends Model {
         return $query->rows;
     }
 
+    public function getActionById($id)
+    {
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "module` WHERE `module_id` = $id");
+        return $query->row;
+    }
+
 }
