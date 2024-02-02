@@ -565,8 +565,12 @@ main {
     }
   }
 
+  .description{
+    white-space: pre-line;
+  }
+
   .p-text{
-    margin-left: 15px;
+    margin-left: 20px;
     font-size: 18px;
 
     color: black;
@@ -670,6 +674,7 @@ main {
 
     .accordion-button::after {
       margin-left: 5px;
+      color: #0d61af;
     }
 
     .accordion-button{
@@ -689,6 +694,13 @@ main {
     --bs-accordion-btn-focus-box-shadow: none;
   }
 
+}
+
+.p-date{
+  color: #666;
+  line-height: 18px;
+  font-size: 18px;
+  margin-left: 20px;
 }
 
 @keyframes blink {

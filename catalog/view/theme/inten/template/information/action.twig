@@ -26,27 +26,28 @@
                         <img src="{{ action_info.page_image }}" alt="{{ action_info.name }}">
                     </div>
                     <div class="row mt-4">
-                        <div class="col-7 mt-4">
+                        <div class="col-8 mt-4" style="max-width: 590px">
                             <p class="p-text">Привлекательные цены на товары из списка!</p>
+                            <div class="description p-text">{{ description }}</div>
                         </div>
-                        <div class="col-5" style="width: auto; margin-left: 100px;">
+                        <div class="col-4" style="width: auto; ">
                             <div class="timer">
                                 <p>До завершения акции:</p>
                                 <div class="d-flex justify-content-center" id="countdown">
                                     <div class="timer-block text-center me-2">
                                         <span id="days">00</span>
-                                        <div class="unit">дней</div>
+                                        <div class="unit" id="day">дней</div>
                                     </div>
                                     <div class="timer-block text-center me-2">
                                         <span id="hours">00</span>
-                                        <div class="unit">часов</div>
+                                        <div class="unit" id="hour">часов</div>
                                     </div>
 
                                     <div class="timer-block d-flex">
                                         <div class="colon ">:</div>
-                                        <div>
+                                        <div class="text-center">
                                             <span id="minutes">00</span>
-                                            <div class="unit">минут</div>
+                                            <div class="unit" id="minute">минут</div>
                                         </div>
                                     </div>
                                 </div>
@@ -74,6 +75,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col-10 p-date">
+                            Срок проведения акции: {{ date }}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-3">
@@ -99,8 +105,8 @@
 
         const countdownTimer = setInterval(function () {
             const now = new Date();
-
             const distance = countdownDate - now;
+
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -109,11 +115,22 @@
             document.getElementById('hours').innerText = hours;
             document.getElementById('minutes').innerText = minutes;
 
+            document.getElementById('day').innerText = getDeclension(days, ['день', 'дня', 'дней']);
+            document.getElementById('hour').innerText =getDeclension(hours, ['час', 'часа', 'часов']);
+
+            document.getElementById('minute').innerText =getDeclension(minutes, ['минута', 'минуты', 'минут']);
+
             if (distance < 0) {
                 clearInterval(countdownTimer);
                 document.getElementById('countdown').innerHTML = '<div class="expired">Время вышло!</div>';
             }
         }, 1000);
+
+        // Функция для склонения слов
+        function getDeclension(number, titles) {
+            const cases = [2, 0, 1, 1, 1, 2];
+            return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+        }
     });
 </script>
 

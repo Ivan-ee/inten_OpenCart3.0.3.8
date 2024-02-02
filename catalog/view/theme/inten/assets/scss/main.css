@@ -440,8 +440,11 @@ main .home-block .last {
   width: 860px;
   height: 300px;
 }
+.action-block .description {
+  white-space: pre-line;
+}
 .action-block .p-text {
-  margin-left: 15px;
+  margin-left: 20px;
   font-size: 18px;
   color: black;
 }
@@ -530,6 +533,7 @@ main .home-block .last {
 }
 .action-accordion .accordion .accordion-button::after {
   margin-left: 5px;
+  color: #0d61af;
 }
 .action-accordion .accordion .accordion-button {
   background-color: white;
@@ -541,6 +545,13 @@ main .home-block .last {
 }
 .action-accordion .accordion .accordion-button:hover {
   color: var(--text-hover-color);
+}
+
+.p-date {
+  color: #666;
+  line-height: 18px;
+  font-size: 18px;
+  margin-left: 20px;
 }
 
 @keyframes blink {
