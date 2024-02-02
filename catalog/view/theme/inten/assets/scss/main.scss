@@ -634,12 +634,24 @@ main {
       line-height: 1;
       text-align: center;
     }
+
   }
+}
+
+.colon {
+  color: #333;
+  font-size: 32px;
+  font-weight: 700;
+  display: inline-block;
+  margin-right: 10px;
+  opacity: 1;
+  animation: blink 1s infinite alternate;
 }
 
 .action-accordion{
   .accordion-body {
     max-width: 858px;
+    white-space: pre-line;
   }
 
   .accordion{
@@ -669,12 +681,22 @@ main {
       color: #0d61af;
     }
 
+    .accordion-button:hover{
+      color: var(--text-hover-color);
+    }
+
     --bs-accordion-btn-focus-border-color: none;
     --bs-accordion-btn-focus-box-shadow: none;
   }
 
-  .accordion:focus{
+}
 
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

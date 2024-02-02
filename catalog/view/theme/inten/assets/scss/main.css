@@ -500,8 +500,19 @@ main .home-block .last {
   text-align: center;
 }
 
+.colon {
+  color: #333;
+  font-size: 32px;
+  font-weight: 700;
+  display: inline-block;
+  margin-right: 10px;
+  opacity: 1;
+  animation: blink 1s infinite alternate;
+}
+
 .action-accordion .accordion-body {
   max-width: 858px;
+  white-space: pre-line;
 }
 .action-accordion .accordion {
   background-color: white !important;
@@ -527,6 +538,18 @@ main .home-block .last {
   letter-spacing: 0.2px;
   line-height: 24px;
   color: #0d61af;
+}
+.action-accordion .accordion .accordion-button:hover {
+  color: var(--text-hover-color);
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 @media screen and (min-width: 1921px) {
   .custom-width {
