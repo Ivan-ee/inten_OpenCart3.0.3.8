@@ -466,6 +466,68 @@ main .home-block .last {
   margin: 0;
 }
 
+.timer {
+  padding: 10px 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
+.timer p {
+  color: #333;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.timer .timer-item {
+  text-align: center;
+}
+.timer .expired {
+  color: #333;
+  font-weight: 700;
+  font-size: 26px;
+}
+.timer .timer-block {
+  color: #333;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 1.07px;
+  line-height: 32px;
+}
+.timer .timer-block .unit {
+  font-size: 14px;
+  font-weight: lighter;
+  line-height: 1;
+  text-align: center;
+}
+
+.action-accordion .accordion-body {
+  max-width: 858px;
+}
+.action-accordion .accordion {
+  background-color: white !important;
+  border: none !important;
+  border-radius: 0 !important;
+  --bs-accordion-btn-focus-border-color: none;
+  --bs-accordion-btn-focus-box-shadow: none;
+}
+.action-accordion .accordion .accordion-item {
+  border: none !important;
+  border-radius: 0 !important;
+}
+.action-accordion .accordion .accordion-button:not(.collapsed) {
+  box-shadow: none;
+}
+.action-accordion .accordion .accordion-button::after {
+  margin-left: 5px;
+}
+.action-accordion .accordion .accordion-button {
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+  line-height: 24px;
+  color: #0d61af;
+}
 @media screen and (min-width: 1921px) {
   .custom-width {
     max-width: 45%;

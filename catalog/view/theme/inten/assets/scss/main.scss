@@ -598,6 +598,86 @@ main {
   }
 }
 
+.timer{
+  padding: 10px 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+
+  p{
+    color: #333;
+    font-size: 12px;
+    letter-spacing: .4px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .timer-item{
+    text-align: center;
+  }
+
+  .expired{
+    color: #333;
+    font-weight: 700;
+    font-size: 26px;
+  }
+
+  .timer-block{
+    color: #333;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1.07px;
+    line-height: 32px;
+
+    .unit{
+      font-size: 14px;
+      font-weight: lighter;
+      line-height: 1;
+      text-align: center;
+    }
+  }
+}
+
+.action-accordion{
+  .accordion-body {
+    max-width: 858px;
+  }
+
+  .accordion{
+    background-color: white!important;
+    border: none!important;
+    border-radius: 0!important;
+
+    .accordion-item{
+      border: none!important;
+      border-radius: 0!important;
+    }
+
+    .accordion-button:not(.collapsed) {
+      box-shadow: none;
+    }
+
+    .accordion-button::after {
+      margin-left: 5px;
+    }
+
+    .accordion-button{
+      background-color: white;
+      border: none;
+      font-size: 18px;
+      letter-spacing: .2px;
+      line-height: 24px;
+      color: #0d61af;
+    }
+
+    --bs-accordion-btn-focus-border-color: none;
+    --bs-accordion-btn-focus-box-shadow: none;
+  }
+
+  .accordion:focus{
+
+  }
+}
+
 @media screen and (min-width: 1921px) {
   .custom-width {
     max-width: 45%;
