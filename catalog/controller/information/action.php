@@ -32,7 +32,12 @@ class ControllerInformationAction extends Controller {
             'text' => $this->language->get($action_info['name']),
         );
 
-//        tt($data);
+        $dateTime = new DateTime($action_info['end_date']);
+
+        $formattedDate = $dateTime->format('Y-m-d H:i:s');
+
+        $data['date_countdown'] = $formattedDate;
+
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');

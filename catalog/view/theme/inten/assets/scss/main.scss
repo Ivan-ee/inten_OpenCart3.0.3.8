@@ -540,8 +540,10 @@ main {
 .action-block{
   .action-title{
     color: black;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 1.1;
+
+    font-family: inherit;
 
     font-size: 32px;
 

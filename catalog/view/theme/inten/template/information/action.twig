@@ -8,7 +8,7 @@
                     {% if loop.last %}
                         <li class="breadcrumb-last"><p>{{ breadcrumb.text }}</p></li>
                     {% else %}
-                            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -21,58 +21,86 @@
                 </div>
             </div>
             <div class="row">
-                    <div class="col-9 action-info">
-                        <div>
-                            <img src="{{ action_info.page_image }}" alt="{{ action_info.name }}">
+                <div class="col-9 action-info">
+                    <div>
+                        <img src="{{ action_info.page_image }}" alt="{{ action_info.name }}">
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-7">
+                            <p class="p-text">Привлекательные цены на товары из списка!</p>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col-9">
-                                <p class="p-text">Привлекательные цены на товары из списка!</p>
-                                <div class="accordion">
-                                    <div class="accordion-item">
-                                        <a class="accordion-link" href="#">Section 1</a>
-                                        <div class="accordion-content">
-                                            <p>{{ special_desk }}</p>
+                        <div class="col-5">
+                            <div id="countdown">
+                                <div>
+                                    <span id="days"></span>
+                                    <div class="smalltext">Days</div>
+                                </div>
+                                <div>
+                                    <span id="hours"></span>
+                                    <div class="smalltext">Hours</div>
+                                </div>
+                                <div>
+                                    <span id="minutes"></span>
+                                    <div class="smalltext">Minutes</div>
+                                </div>
+                                <div>
+                                    <span id="seconds"></span>
+                                    <div class="smalltext">Seconds</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                            Accordion Item #1
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse"
+                                         data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {{ action_info.special_desk }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const accordionItems = document.querySelectorAll('.accordion-item');
+    document.addEventListener('DOMContentLoaded', function () {
 
-        accordionItems.forEach(item => {
-            const accordionLink = item.querySelector('.accordion-link');
+        const countdownDate = new Date('{{ date_countdown }}');
 
-            accordionLink.addEventListener('click', function(e) {
-                e.preventDefault();
+        const countdownTimer = setInterval(function () {
+            const now = new Date();
 
-                const content = item.querySelector('.accordion-content');
+            const distance = countdownDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-                if (content.style.display === 'block') {
-                    content.style.display = 'none';
-                } else {
-                    closeAllAccordionItems();
-                    content.style.display = 'block';
-                }
-            });
-        });
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
 
-        function closeAllAccordionItems() {
-            accordionItems.forEach(item => {
-                const content = item.querySelector('.accordion-content');
-                content.style.display = 'none';
-            });
-        }
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById('countdown').innerHTML = '<div class="expired">Время вышло!</div>';
+            }
+        }, 1000);
     });
-
 </script>
+
 
 {{ footer }}
