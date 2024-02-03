@@ -12,7 +12,9 @@ class ControllerInformationAction extends Controller {
 
         $action_info = json_decode($row_data['setting'], true);
 
-        $data['action_info'] = $action_info;
+        $data['name'] = $action_info['name'];
+
+        $data['page_image'] = $action_info['page_image'];
 
         $data['description'] = $action_info['description'];
 
@@ -87,26 +89,26 @@ class ControllerInformationAction extends Controller {
 
         $data['date'] = $date_range;
 
+        $module_id = $this->request->get['action_id'];
+
         $this->load->model('catalog/product');
 
         $products = [];
 
         foreach ($action_info['product'] as $product_id) {
-            // Здесь предполагается, что $this->model_catalog_product->getProduct возвращает информацию о продукте по его ID
             $product_info = $this->model_catalog_product->getProduct($product_id);
-
-            tt($product_info);
-
+            $action_price = $this->model_catalog_product->getProductSpecialPrice($product_id, $module_id);
             if ($product_info) {
-                // Добавляем информацию о продукте в массив $products
                 $products[] = [
                     'product_id' => $product_id,
                     'name' => $product_info['name'],
                     'image' => $product_info['image'],
-                    'price' => $action_info['product_special'], // Здесь может понадобиться коррекция в зависимости от вашей логики
-                    // Другие поля продукта, которые вам нужны
+                    'price' => $product_info['price'],
+                    'action_price' => $action_price,
                 ];
             }
+
+            tt($products);
         }
 
 

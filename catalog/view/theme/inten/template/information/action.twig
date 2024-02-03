@@ -17,13 +17,13 @@
         <div class="action-block mb-4">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="action-title">{{ action_info.name }}</h1>
+                    <h1 class="action-title">{{ name }}</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-9 action-info">
                     <div>
-                        <img src="{{ action_info.page_image }}" alt="{{ action_info.name }}">
+                        <img src="{{ page_image }}" alt="{{ name }}">
                     </div>
                     <div class="row mt-4">
                         <div class="col-8 mt-4" style="max-width: 590px">
@@ -38,13 +38,13 @@
                                         <span id="days">00</span>
                                         <div class="unit" id="day">дней</div>
                                     </div>
-                                    <div class="timer-block text-center me-1">
+                                    <div class="timer-block text-center">
                                         <span id="hours">00</span>
                                         <div class="unit" id="hour">часов</div>
                                     </div>
 
                                     <div class="timer-block d-flex">
-                                        <div class="colon">:</div>
+                                        <div class="colon me-1">:</div>
                                         <div class="text-center">
                                             <span id="minutes">00</span>
                                             <div class="unit" id="minute">минут</div>

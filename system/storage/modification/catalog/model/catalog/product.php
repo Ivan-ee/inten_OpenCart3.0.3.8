@@ -289,6 +289,20 @@ class ModelCatalogProduct extends Model {
 		return $product_data;
 	}
 
+    public function getProductSpecialPrice($productId, $specialId)
+    {
+        $productId = (int)$productId;
+        $specialId = (int)$specialId;
+
+        $query = $this->db->query("SELECT price FROM " . DB_PREFIX . "product_special WHERE product_id = '" . $productId . "' AND special_id = '" . $specialId . "'");
+
+        if ($query->num_rows) {
+            return $query->row['price'];
+        } else {
+            return 0;
+        }
+    }
+
 	public function getLatestProducts($limit) {
 		$product_data = $this->cache->get('product.latest.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit);
 
