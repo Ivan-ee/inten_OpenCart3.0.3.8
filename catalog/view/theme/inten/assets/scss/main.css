@@ -429,9 +429,9 @@ main .home-block .last {
   width: auto;
   background-color: white;
   border-radius: 8px;
+  height: min-content;
   padding: 0 0 10px 0;
   margin-left: 1rem;
-  height: auto;
 }
 .action-block .action-info img {
   border-top-left-radius: 8px;
