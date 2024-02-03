@@ -262,21 +262,9 @@
             });
         }
 
-        // $('#special-product').on('click', '.fa-minus-circle', function () {
-        //
-        //     var productId = $(this).parent().attr('id').replace('special-product', '');
-        //
-        //     console.log(productId)
-        //
-        //     $('#product-table tbody tr#special-product' + productId).remove();
-        //
-        //     $(this).parent().remove();
-        // });
-
         $('#special-product').on('click', '.fa-minus-circle', function () {
             var productId = $(this).parent().attr('id').replace('special-product', '');
 
-            // Сохраняем ссылку на элемент
             var $elementToRemove = $(this).parent();
 
             $.ajax({
@@ -290,12 +278,9 @@
                 success: function (json) {
                     if (json['success']) {
                         $('#product-table tbody tr#special-product' + productId).remove();
-                        console.log("delete");
 
-                        // Используем сохраненную ссылку
                         $elementToRemove.remove();
                     } else {
-                        // Обработка ошибки
                         alert('Ошибка при удалении продукта.');
                     }
                 },
@@ -304,8 +289,6 @@
                 }
             });
         });
-
-
         //--></script>
 
     <script type="text/javascript">

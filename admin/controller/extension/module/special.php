@@ -82,7 +82,6 @@ class ControllerExtensionModuleSpecial extends Controller
             $data['error_special_desk'] = '';
         }
 
-
         $data['breadcrumbs'] = array();
 
         $data['breadcrumbs'][] = array(
@@ -214,6 +213,8 @@ class ControllerExtensionModuleSpecial extends Controller
             $data['status'] = '';
         }
 
+        $data['module_id'] = $this->request->get['module_id'];
+
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
@@ -269,13 +270,14 @@ class ControllerExtensionModuleSpecial extends Controller
     }
 
     public function deleteProduct() {
-        // Проверка наличия необходимых данных в запросе
         if (isset($this->request->get['user_token'])) {
-            // Получение данных из запроса
             $productId = (int)$this->request->post['product_id'];
             $moduleId = (int)$this->request->post['module_id'];
 
-            // Пример вывода данных
+            $this->load->model('extension/module/special');
+
+            $this->model_extension_module_special->deleteProduct($productId, $moduleId);
+
             $this->response->addHeader('Content-Type: application/json');
             $this->response->setOutput(json_encode(['success' => true]));
         } else {

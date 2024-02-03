@@ -36,8 +36,15 @@ class ControllerInformationActions extends Controller
         foreach ($actions as $action) {
             $action_info = json_decode($action['setting'], true);
 
-            $product_count = count($action_info['product']) - 1;
             $product_label = '';
+            $product_count = 0;
+
+            if (!isset($action_info['product'])) {
+                $product_count = -1;
+                $product_label = 'Товаров в акции нет';
+            } else {
+                $product_count = count($action_info['product']) - 1;
+            }
 
             if ($product_count === 0) {
                 $product_label = '';
@@ -66,7 +73,7 @@ class ControllerInformationActions extends Controller
 
             if ($start_datetime->format('n') !== $end_datetime->format('n')) {
                 $start_formatted .= $monthTranslations[$start_datetime->format('F')];
-            } elseif ($start_datetime->format('Y') !== $end_datetime->format('Y')){
+            } elseif ($start_datetime->format('Y') !== $end_datetime->format('Y')) {
                 $start_formatted .= $monthTranslations[$start_datetime->format('F')];
             }
 
@@ -95,16 +102,18 @@ class ControllerInformationActions extends Controller
 
             $action_info['href'] = $this->url->link('information/action', 'action_id=' . $action_info['id']);
 
-            $this->load->model('catalog/product');
+            if ($product_count >= 0){
+                $this->load->model('catalog/product');
 
-            $product = $this->model_catalog_product->getProduct($action_info['product'][0]);
+                $product = $this->model_catalog_product->getProduct($action_info['product'][0]);
 
-            $this->load->model('tool/image');
+                $this->load->model('tool/image');
 
-            $product['thumb'] = $this->model_tool_image->resize($product['image'], 80, 60);
+                $product['thumb'] = $this->model_tool_image->resize($product['image'], 80, 60);
 
-            $action_info['product_thumb'] = $product['thumb'];
-            $action_info['product_name'] = $product['name'];
+                $action_info['product_thumb'] = $product['thumb'];
+                $action_info['product_name'] = $product['name'];
+            }
 
             $newArray[] = $action_info;
         }
