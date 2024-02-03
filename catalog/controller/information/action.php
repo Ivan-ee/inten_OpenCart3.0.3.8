@@ -92,6 +92,7 @@ class ControllerInformationAction extends Controller {
         $module_id = $this->request->get['action_id'];
 
         $this->load->model('catalog/product');
+        $this->load->model('tool/image');
 
         $products = [];
 
@@ -102,23 +103,16 @@ class ControllerInformationAction extends Controller {
                 $products[] = [
                     'product_id' => $product_id,
                     'name' => $product_info['name'],
-                    'image' => $product_info['image'],
+                    'image' => $this->model_tool_image->resize($product_info['image'], 160, 160),
                     'price' => $product_info['price'],
                     'action_price' => $action_price,
                 ];
             }
-
-            tt($products);
         }
 
+        $data['products'] = $products;
 
-
-//        $this->load->model('tool/image');
-//
-//        $product['thumb'] = $this->model_tool_image->resize($product['image'], 80, 60);
-//
-//        $action_info['product_thumb'] = $product['thumb'];
-//        $action_info['product_name'] = $product['name'];
+//        tt($data['products']);
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');

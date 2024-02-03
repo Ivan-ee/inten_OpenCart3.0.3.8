@@ -82,21 +82,46 @@
                     </div>
                 </div>
 
-                <div class="col-3">
-                    fhjsdfjnSKDfjSfjSDfjk
-                    fhjsdfjnSKDfjSfjSDfjk
-                    fhjsdfjnSKDfjSfjSDfjk
-                    fhjsdfjnSKDfjSfjSDfjk
-                    fhjsdfjnSKDfjSfjSDfjk
-                    fhjsdfjnSKDfjSfjSDfjk
-                    fhjsdfjnSKDfjSfjSDfjk
-                    fhjsdfjnSKDfjSfjSDfjk
-                    fhjsdfjnSKDfjSfjSDfjk
+                <div class="col-3 product" style="background: white">
+                    {% for product in products %}
+                        <div class="product-item mb-3">
+                            <a href="#"><img src="{{ product.image }}" class="product-img-top" alt="{{ product.name }}"></a>
+                            <div class="product-body">
+                                <h5 class="product-title"><a href="#">{{ product.name }}</a></h5>
+                                <h6 class="product-action"><span class="badge" style="">Акция</span></h6>
+                                <div class="d-flex">
+                                    <div class="product-details">
+                                        <div class="product-price">{{ product.action_price|number_format(0, '.', ' ') }}
+                                            ₽
+                                            <span class="product-price-prev">{{ product.price|number_format(0, '.', ' ') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="btn product-btn"><i class="fi fi-rr-heart"></i></div>
+                                    <div class="btn product-btn product-btn-cart" onclick="cart.add('{{ product.product_id }}');"><i class="fi fi-rs-shopping-cart"></i></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
+
             </div>
         </div>
     </div>
 </main>
+
+<script>
+    $(document).ready(function(){
+        $('.product-item').hover(
+            function() {
+                $(this).find('.product-btn-cart').addClass('hover');
+            },
+            function() {
+                $(this).find('.product-btn-cart').removeClass('hover');
+            }
+        );
+    });
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -116,9 +141,9 @@
             document.getElementById('minutes').innerText = minutes;
 
             document.getElementById('day').innerText = getDeclension(days, ['день', 'дня', 'дней']);
-            document.getElementById('hour').innerText =getDeclension(hours, ['час', 'часа', 'часов']);
+            document.getElementById('hour').innerText = getDeclension(hours, ['час', 'часа', 'часов']);
 
-            document.getElementById('minute').innerText =getDeclension(minutes, ['минута', 'минуты', 'минут']);
+            document.getElementById('minute').innerText = getDeclension(minutes, ['минута', 'минуты', 'минут']);
 
             if (distance < 0) {
                 clearInterval(countdownTimer);
