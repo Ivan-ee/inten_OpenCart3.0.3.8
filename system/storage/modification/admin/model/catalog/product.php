@@ -598,12 +598,16 @@ class ModelCatalogProduct extends Model {
 
     public function updateProductSpecial($productId, $specialId, $startDate, $endDate, $specialPrice)
     {
-        $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "' , date_start = '" . $startDate . "' , date_end = '" . $endDate . "' WHERE product_id = '" . (int)$productId . "' AND special_id = '" . $specialId . "'");
+        $this->db->query("UPDATE oc_product_special SET price = '" . (float)$specialPrice . "', date_start = '" . $startDate . "', date_end = '" . $endDate . "' WHERE product_id = '" . (int)$productId . "' AND special_id = '" . $specialId . "' AND customer_group_id = 1");
     }
 
     public function setProductSpecial($productId, $specialId, $startDate, $endDate, $specialPrice)
     {
-        $this->db->query("INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_id) VALUES ('" . (int)$productId . "', '" . (float)$specialPrice . "', '" . $startDate . "', '" . $endDate . "', '" . $specialId . "')");
+        $productId = (int)$productId;
+        $specialPrice = (float)$specialPrice;
+        $specialId = (int)$specialId;
+
+        $this->db->query("INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_id, customer_group_id) VALUES ('$productId', '$specialPrice', '$startDate', '$endDate', '$specialId', 1)");
     }
 
     public function getProductRewards($product_id) {

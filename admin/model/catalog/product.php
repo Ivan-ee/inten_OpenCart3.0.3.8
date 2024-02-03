@@ -582,8 +582,11 @@ class ModelCatalogProduct extends Model {
 
     public function setProductSpecial($productId, $specialId, $startDate, $endDate, $specialPrice)
     {
-        $sql = "INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_id, customer_group_id) VALUES (?, ?, ?, ?, ?, ?)";
-        $this->db->query($sql, array((int)$productId, (float)$specialPrice, $startDate, $endDate, (int)$specialId, 1));
+        $productId = (int)$productId;
+        $specialPrice = (float)$specialPrice;
+        $specialId = (int)$specialId;
+
+        $this->db->query("INSERT INTO oc_product_special (product_id, price, date_start, date_end, special_id, customer_group_id) VALUES ('$productId', '$specialPrice', '$startDate', '$endDate', '$specialId', 1)");
     }
 
     public function getProductRewards($product_id) {
