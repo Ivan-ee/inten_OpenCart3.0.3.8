@@ -262,14 +262,50 @@
             });
         }
 
-        $('#special-product').on('click', '.fa-minus-circle', function () {
+        // $('#special-product').on('click', '.fa-minus-circle', function () {
+        //
+        //     var productId = $(this).parent().attr('id').replace('special-product', '');
+        //
+        //     console.log(productId)
+        //
+        //     $('#product-table tbody tr#special-product' + productId).remove();
+        //
+        //     $(this).parent().remove();
+        // });
 
+        $('#special-product').on('click', '.fa-minus-circle', function () {
             var productId = $(this).parent().attr('id').replace('special-product', '');
 
-            $('#product-table tbody tr#special-product' + productId).remove();
+            // Сохраняем ссылку на элемент
+            var $elementToRemove = $(this).parent();
 
-            $(this).parent().remove();
+            $.ajax({
+                url: 'index.php?route=extension/module/special/deleteProduct&user_token={{ user_token }}',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    product_id: productId,
+                    module_id: '{{module_id}}',
+                },
+                success: function (json) {
+                    if (json['success']) {
+                        $('#product-table tbody tr#special-product' + productId).remove();
+                        console.log("delete");
+
+                        // Используем сохраненную ссылку
+                        $elementToRemove.remove();
+                    } else {
+                        // Обработка ошибки
+                        alert('Ошибка при удалении продукта.');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Ошибка при отправке AJAX-запроса: ' + thrownError);
+                }
+            });
         });
+
+
         //--></script>
 
     <script type="text/javascript">

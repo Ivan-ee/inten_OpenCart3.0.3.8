@@ -34,3 +34,18 @@ define('DB_PREFIX', 'oc_');
 
 // OpenCart API
 define('OPENCART_SERVER', 'https://www.opencart.com/');
+
+function tte($str)
+{
+    echo "<pre>";
+    print_r($str);
+    echo "</pre>";
+    exit();
+}
+
+function tt($str)
+{
+    echo "<pre>";
+    print_r($str);
+    echo "</pre>";
+}

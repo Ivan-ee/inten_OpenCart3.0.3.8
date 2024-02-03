@@ -268,11 +268,22 @@ class ControllerExtensionModuleSpecial extends Controller
         $this->response->setOutput(json_encode($json));
     }
 
-    private function tt($data)
-    {
-        echo '<pre>';
-        var_dump($data);
-        echo '</pre>';
+    public function deleteProduct() {
+        // Проверка наличия необходимых данных в запросе
+        if (isset($this->request->get['user_token'])) {
+            // Получение данных из запроса
+            $productId = (int)$this->request->post['product_id'];
+            $moduleId = (int)$this->request->post['module_id'];
+
+            // Пример вывода данных
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->setOutput(json_encode(['success' => true]));
+        } else {
+            // Если данные отсутствуют, возвращаем ошибку
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->setOutput(json_encode(['error' => 'Missing required data']));
+        }
     }
+
 
 }
