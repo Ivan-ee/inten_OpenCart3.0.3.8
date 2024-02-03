@@ -87,6 +87,37 @@ class ControllerInformationAction extends Controller {
 
         $data['date'] = $date_range;
 
+        $this->load->model('catalog/product');
+
+        $products = [];
+
+        foreach ($action_info['product'] as $product_id) {
+            // Здесь предполагается, что $this->model_catalog_product->getProduct возвращает информацию о продукте по его ID
+            $product_info = $this->model_catalog_product->getProduct($product_id);
+
+            tt($product_info);
+
+            if ($product_info) {
+                // Добавляем информацию о продукте в массив $products
+                $products[] = [
+                    'product_id' => $product_id,
+                    'name' => $product_info['name'],
+                    'image' => $product_info['image'],
+                    'price' => $action_info['product_special'], // Здесь может понадобиться коррекция в зависимости от вашей логики
+                    // Другие поля продукта, которые вам нужны
+                ];
+            }
+        }
+
+
+
+//        $this->load->model('tool/image');
+//
+//        $product['thumb'] = $this->model_tool_image->resize($product['image'], 80, 60);
+//
+//        $action_info['product_thumb'] = $product['thumb'];
+//        $action_info['product_name'] = $product['name'];
+
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
         $data['content_top'] = $this->load->controller('common/content_top');
