@@ -14,84 +14,32 @@
             </ul>
         </nav>
 
-        <div class="action-block mb-4">
+        <div class="block mb-4">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="action-title">{{ name }}</h1>
+                    <h1 class="title">{{ name }}</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-9 action-info">
-                    <div>
-                        <img src="{{ page_image }}" alt="{{ name }}">
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-8 mt-4" style="max-width: 590px">
-                            <p class="p-text">Привлекательные цены на товары из списка!</p>
-                            <div class="description p-text">{{ description }}</div>
-                        </div>
-                        <div class="col-4" style="width: auto; ">
-                            <div class="timer ms-5">
-                                <p>До завершения акции:</p>
-                                <div class="d-flex justify-content-center" id="countdown">
-                                    <div class="timer-block text-center me-2">
-                                        <span id="days">00</span>
-                                        <div class="unit" id="day">дней</div>
-                                    </div>
-                                    <div class="timer-block text-center">
-                                        <span id="hours">00</span>
-                                        <div class="unit" id="hour">часов</div>
-                                    </div>
-
-                                    <div class="timer-block d-flex">
-                                        <div class="colon me-1">:</div>
-                                        <div class="text-center">
-                                            <span id="minutes">00</span>
-                                            <div class="unit" id="minute">минут</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row action-accordion">
-                        <div class="col-12 mt-1">
-                            <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
-                                            Читать условия акции
-                                        </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse"
-                                         data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            {{ special_desk }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-4 mb-4">
-                        <div class="col-10 p-date">
-                            Срок проведения акции: {{ date }}
-                        </div>
-                    </div>
+                <div class="col-3" style="background: red;">
+                    {{ column_left }}
+                    fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
+                    fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
+                    fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
                 </div>
 
-                <div class="col-3 product" style="background: white">
-                    <div class="d-flex justify-content-between">
-                        <div class="product-count">Товары<span>{{ product_count }}</span></div>
-                        <div class="product-link"><a href="{{ href }}" class="lll-link">Смотеть все</a><i class="fi fi-rr-arrow-right ms-1 mt-1"></i></div>
-                    </div>
-                    {% for product in products %}
-                        <div class="product-item mb-3">
-                            <a href="#"><img src="{{ product.image }}" class="product-img-top" alt="{{ product.name }}"></a>
-                            <div class="product-body">
-                                <h5 class="product-title"><a href="#">{{ product.name }}</a></h5>
+                <div class="col-9">
+                    <div class="product-list">
+                        <div class="catalog-products view-title">
+                            {% for product in products %}
+                            <div class="catalog-product">
+                                <div class="catalog-product_image">
+                                    <a class="catalog-product-image-link">
+                                        <img src="{{ product.image }}" alt="{{ poduct.name }}" width="200" height="200">
+                                    </a>
+                                    <span class="catalog-product-discount">-19%</span>
+                                </div>
+                                <a class="catalog-product-name" href="{{ product.href }}"><span>{{ product.name }}</span></a>
                                 <h6 class="product-action"><span class="badge" style="">Акция</span></h6>
                                 <div class="d-flex">
                                     <div class="product-details">
@@ -100,81 +48,71 @@
                                             <span class="product-price-prev">{{ product.price|number_format(0, '.', ' ') }}</span>
                                         </div>
                                     </div>
-                                    <div class="btn product-btn"><i class="fi fi-rr-heart"></i></div>
-                                    <div class="btn product-btn product-btn-cart" onclick="cart.add('{{ product.product_id }}');"><i class="fi fi-rs-shopping-cart"></i></div>
+                                    <div class="btn product-btn"
+                                         onclick="wishlist.add('{{ product.product_id }}');"><i class="fi fi-rr-heart"></i></div>
+                                    <div class="btn product-btn product-btn-cart"
+                                         onclick="cart.add('{{ product.product_id }}');"><i
+                                                class="fi fi-rs-shopping-cart"></i></div>
                                 </div>
-
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                            {% endfor %}
 
+                        </div>
+
+                            <div class="col-4">
+                                <div class="product-cart">
+                                    <a href="#"><img src="{{ product.image }}" class="product-img-top"
+                                                     alt="{{ product.name }}"></a>
+                                    <div class="product-body">
+                                        <h5 class="product-title"><a href="#">{{ product.name }}</a></h5>
+                                        <h6 class="product-action"><span class="badge" style="">Акция</span></h6>
+                                        <div class="d-flex">
+                                            <div class="product-details">
+                                                <div class="product-price">{{ product.action_price|number_format(0, '.', ' ') }}
+                                                    ₽
+                                                    <span class="product-price-prev">{{ product.price|number_format(0, '.', ' ') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="btn product-btn"
+                                                 onclick="wishlist.add('{{ product.product_id }}');"><i class="fi fi-rr-heart"></i></div>
+                                            <div class="btn product-btn product-btn-cart"
+                                                 onclick="cart.add('{{ product.product_id }}');"><i
+                                                        class="fi fi-rs-shopping-cart"></i></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </main>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.product-item').hover(
-            function() {
+            function () {
                 $(this).find('.product-btn-cart').addClass('hover');
             },
-            function() {
+            function () {
                 $(this).find('.product-btn-cart').removeClass('hover');
             }
         );
     });
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.product-link').hover(
-            function() {
+            function () {
                 $(this).find('.fi-rr-arrow-right').addClass('lll');
             },
-            function() {
+            function () {
                 $(this).find('.fi-rr-arrow-right').removeClass('lll');
             }
         );
     });
 </script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-        const countdownDate = new Date('{{ date_countdown }}');
-
-        const countdownTimer = setInterval(function () {
-            const now = new Date();
-            const distance = countdownDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-            minutes = (minutes < 10) ? '0' + minutes : minutes;
-            hours = (hours < 10) ? '0' + hours : hours;
-
-            document.getElementById('days').innerText = days;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('minutes').innerText = minutes;
-
-            document.getElementById('day').innerText = getDeclension(days, ['день', 'дня', 'дней']);
-            document.getElementById('hour').innerText = getDeclension(hours, ['час', 'часа', 'часов']);
-
-            document.getElementById('minute').innerText = getDeclension(minutes, ['минута', 'минуты', 'минут']);
-
-            if (distance < 0) {
-                clearInterval(countdownTimer);
-                document.getElementById('countdown').innerHTML = '<div class="expired">Время вышло!</div>';
-            }
-        }, 1000);
-
-        function getDeclension(number, titles) {
-            const cases = [2, 0, 1, 1, 1, 2];
-            return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
-        }
-    });
-</script>
-
 
 {{ footer }}
