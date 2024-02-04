@@ -69,7 +69,6 @@
                                         <i class="fi fi-rs-shopping-cart"></i>
                                     </div>
                                 </div>
-
                             </div>
                         {% endfor %}
                     </div>
@@ -79,14 +78,14 @@
     </div>
 </main>
 
-<script>
+<<script>
     $(document).ready(function () {
         $('.catalog-products').on('click', '#grid-view-btn', function () {
-            $('.catalog-product').removeClass('list-view');
+            $('.catalog-product').removeClass('list-view').addClass('grid-view');
         });
 
         $('.catalog-products').on('click', '#list-view-btn', function () {
-            $('.catalog-product').addClass('list-view');
+            $('.catalog-product').removeClass('grid-view').addClass('list-view');
         });
 
         $('.catalog-products .catalog-product').hover(
@@ -108,5 +107,6 @@
         );
     });
 </script>
+
 
 {{ footer }}
