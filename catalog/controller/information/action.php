@@ -38,6 +38,9 @@ class ControllerInformationAction extends Controller {
             'text' => $this->language->get($action_info['name']),
         );
 
+        $data['href'] = $this->url->link('catalog/actions', ['action_id' => $this->request->get['action_id']]);
+
+
         $dateTime = new DateTime($action_info['end_date']);
 
         $formattedDate = $dateTime->format('Y-m-d H:i:s');
@@ -116,13 +119,9 @@ class ControllerInformationAction extends Controller {
             $products[]= [];
         }
 
-
-
         $data['product_count'] = count($products);
 
         $data['products'] = $products;
-
-//        tt($data['products']);
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
