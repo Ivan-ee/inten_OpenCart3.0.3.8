@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --text-color: #4E4E4E;
   --text-hover-color: #FF1F00;
@@ -692,6 +693,86 @@ main .home-block .last {
 }
 .catalog-product .catalog-product-image-link img {
   text-align: center;
+}
+
+/* Общий стиль для товаров */
+.catalog-products .catalog-product {
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* Стили для отображения товаров в виде сетки */
+.catalog-products .catalog-product.grid-view {
+  width: 100%;
+}
+
+.catalog-products .catalog-product.grid-view .catalog-product_image {
+  position: relative;
+  overflow: hidden;
+}
+
+.catalog-products .catalog-product.grid-view .catalog-product_image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.catalog-products .catalog-product.grid-view:hover .catalog-product_image img {
+  transform: scale(1.1);
+}
+
+.catalog-products .catalog-product.grid-view .catalog-product_name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.catalog-products .catalog-product.grid-view .product-action {
+  margin-top: 5px;
+}
+
+.catalog-products .catalog-product.grid-view .product-details {
+  margin-right: 5px;
+}
+
+.catalog-products .catalog-product.grid-view .product-price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Стили для отображения товаров в виде списка */
+.catalog-products .catalog-product.list-view {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.catalog-products .catalog-product.list-view .catalog-product_image {
+  margin-right: 20px;
+}
+
+.catalog-products .catalog-product.list-view .catalog-product_image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.catalog-products .catalog-product.list-view .catalog-product_name {
+  font-weight: bold;
+}
+
+.catalog-products .catalog-product.list-view .product-action {
+  margin-top: 5px;
+}
+
+.catalog-products .catalog-product.list-view .product-details {
+  flex-grow: 1;
+}
+
+.catalog-products .catalog-product.list-view .product-price {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 @keyframes blink {

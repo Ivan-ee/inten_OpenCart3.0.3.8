@@ -23,74 +23,56 @@
             <div class="row">
                 <div class="col-3">
                     <div class="bg-white">
-                    {{ column_left }}
-                    fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
-                    fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
-                    fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
+                        {{ column_left }}
+                        fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
+                        fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
+                        fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
                     </div>
                 </div>
 
-                <div class="col-9">
+                <div class="col-9 catalog-products">
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" id="list-view-btn" class="btn btn-default" data-toggle="tooltip"
+                                title="Список">
+                            <i class="fa fa-th-list"></i>
+                        </button>
+                        <button type="button" id="grid-view-btn" class="btn btn-default" data-toggle="tooltip"
+                                title="Сетка">
+                            <i class="fa fa-th"></i>
+                        </button>
+                    </div>
                     <div class="row">
-{#                        <div class="product-list">#}
-                            {% for product in products %}
-                                <div class="catalog-product col-4 mb-3">
-                                    <div class="catalog-product_image">
-                                        <a class="catalog-product-image-link" href="{{ product.href }}">
-                                            <img src="{{ product.image }}" alt="{{ poduct.name }}" width="200"
-                                                 height="200">
-                                        </a>
-{#                                        <span class="catalog-product-discount">-19%</span>#}
-                                    </div>
-                                    <a class="catalog-product-name"
-                                       href="{{ product.href }}"><span>{{ product.name }}</span></a>
-                                    <h6 class="product-action"><span class="badge" style="">Акция</span></h6>
-                                    <div class="d-flex">
-                                        <div class="product-details">
-                                            <div class="product-price">{{ product.action_price|number_format(0, '.', ' ') }}
-                                                ₽
-                                                <span class="product-price-prev">{{ product.price|number_format(0, '.', ' ') }}</span>
-                                            </div>
+                        {% for product in products %}
+                            <div class="catalog-product col-4 mb-3 grid-view">
+                                <div class="catalog-product_image">
+                                    <a class="catalog-product-image-link" href="{{ product.href }}">
+                                        <img src="{{ product.image }}" alt="{{ product.name }}" width="200"
+                                             height="200">
+                                    </a>
+                                    {# <span class="catalog-product-discount">-19%</span> #}
+                                </div>
+                                <a class="catalog-product-name"
+                                   href="{{ product.href }}"><span>{{ product.name }}</span></a>
+                                <h6 class="product-action"><span class="badge" style="">Акция</span></h6>
+                                <div class="d-flex">
+                                    <div class="product-details">
+                                        <div class="product-price">{{ product.action_price|number_format(0, '.', ' ') }}
+                                            ₽
+                                            <span class="product-price-prev">{{ product.price|number_format(0, '.', ' ') }}</span>
                                         </div>
-                                        <div class="btn product-btn"
-                                             onclick="wishlist.add('{{ product.product_id }}');"><i
-                                                    class="fi fi-rr-heart"></i></div>
-                                        <div class="btn product-btn product-btn-cart"
-                                             onclick="cart.add('{{ product.product_id }}');"><i
-                                                    class="fi fi-rs-shopping-cart"></i></div>
+                                    </div>
+                                    <div class="btn product-btn" onclick="wishlist.add('{{ product.product_id }}');">
+                                        <i class="fi fi-rr-heart"></i>
+                                    </div>
+                                    <div class="btn product-btn product-btn-cart"
+                                         onclick="cart.add('{{ product.product_id }}');">
+                                        <i class="fi fi-rs-shopping-cart"></i>
                                     </div>
                                 </div>
-                            {% endfor %}
-{#                        </div>#}
+
+                            </div>
+                        {% endfor %}
                     </div>
-
-                    {#                        </div> #}
-
-                    {#                            <div class="col-4"> #}
-                    {#                                <div class="product-cart"> #}
-                    {#                                    <a href="#"><img src="{{ product.image }}" class="product-img-top" #}
-                    {#                                                     alt="{{ product.name }}"></a> #}
-                    {#                                    <div class="product-body"> #}
-                    {#                                        <h5 class="product-title"><a href="#">{{ product.name }}</a></h5> #}
-                    {#                                        <h6 class="product-action"><span class="badge" style="">Акция</span></h6> #}
-                    {#                                        <div class="d-flex"> #}
-                    {#                                            <div class="product-details"> #}
-                    {#                                                <div class="product-price">{{ product.action_price|number_format(0, '.', ' ') }} #}
-                    {#                                                    ₽ #}
-                    {#                                                    <span class="product-price-prev">{{ product.price|number_format(0, '.', ' ') }}</span> #}
-                    {#                                                </div> #}
-                    {#                                            </div> #}
-                    {#                                            <div class="btn product-btn" #}
-                    {#                                                 onclick="wishlist.add('{{ product.product_id }}');"><i class="fi fi-rr-heart"></i></div> #}
-                    {#                                            <div class="btn product-btn product-btn-cart" #}
-                    {#                                                 onclick="cart.add('{{ product.product_id }}');"><i #}
-                    {#                                                        class="fi fi-rs-shopping-cart"></i></div> #}
-                    {#                                        </div> #}
-
-                    {#                                    </div> #}
-                    {#                                </div> #}
-                    {#                            </div> #}
-
                 </div>
             </div>
         </div>
@@ -99,7 +81,15 @@
 
 <script>
     $(document).ready(function () {
-        $('.product-item').hover(
+        $('.catalog-products').on('click', '#grid-view-btn', function () {
+            $('.catalog-product').removeClass('list-view');
+        });
+
+        $('.catalog-products').on('click', '#list-view-btn', function () {
+            $('.catalog-product').addClass('list-view');
+        });
+
+        $('.catalog-products .catalog-product').hover(
             function () {
                 $(this).find('.product-btn-cart').addClass('hover');
             },
@@ -107,10 +97,8 @@
                 $(this).find('.product-btn-cart').removeClass('hover');
             }
         );
-    });
 
-    $(document).ready(function () {
-        $('.product-link').hover(
+        $('.catalog-products .catalog-product .product-link').hover(
             function () {
                 $(this).find('.fi-rr-arrow-right').addClass('lll');
             },
