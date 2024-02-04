@@ -474,6 +474,36 @@ main .home-block .last {
   border-radius: 8px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
 }
+.action-block .product-link {
+  display: flex;
+  justify-content: center;
+}
+.action-block .product-link a {
+  color: #0d61af;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.action-block .product-link i {
+  color: #0d61af;
+}
+.action-block .product-link a:hover {
+  color: var(--text-hover-color);
+}
+.action-block .product-link .lll {
+  transition: all 0.3s;
+  color: var(--text-hover-color);
+}
+.action-block .product-count {
+  font-size: 18px;
+  font-weight: bold;
+}
+.action-block .product-count span {
+  color: #8c8c8c;
+  flex-grow: 1;
+  font-size: 14px;
+  font-weight: lighter;
+  margin-left: 4px;
+}
 .action-block .product-item {
   text-align: center;
 }

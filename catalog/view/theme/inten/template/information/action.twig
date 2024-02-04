@@ -83,6 +83,10 @@
                 </div>
 
                 <div class="col-3 product" style="background: white">
+                    <div class="d-flex justify-content-between">
+                        <div class="product-count">Товары<span>{{ product_count }}</span></div>
+                        <div class="product-link"><a href="#" class="lll-link">Смотеть все</a><i class="fi fi-rr-arrow-right ms-1 mt-1"></i></div>
+                    </div>
                     {% for product in products %}
                         <div class="product-item mb-3">
                             <a href="#"><img src="{{ product.image }}" class="product-img-top" alt="{{ product.name }}"></a>
@@ -121,6 +125,17 @@
             }
         );
     });
+
+    $(document).ready(function(){
+        $('.product-link').hover(
+            function() {
+                $(this).find('.fi-rr-arrow-right').addClass('lll');
+            },
+            function() {
+                $(this).find('.fi-rr-arrow-right').removeClass('lll');
+            }
+        );
+    });
 </script>
 
 <script>
@@ -152,7 +167,7 @@
                 document.getElementById('countdown').innerHTML = '<div class="expired">Время вышло!</div>';
             }
         }, 1000);
-        
+
         function getDeclension(number, titles) {
             const cases = [2, 0, 1, 1, 1, 2];
             return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];

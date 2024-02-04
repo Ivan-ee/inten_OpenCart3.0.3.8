@@ -110,6 +110,8 @@ class ControllerInformationAction extends Controller {
             }
         }
 
+        $data['product_count'] = count($products);
+
         $data['products'] = $products;
 
 //        tt($data['products']);
