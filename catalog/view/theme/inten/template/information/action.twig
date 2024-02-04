@@ -134,7 +134,9 @@
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            minutes = (minutes < 10) ? '0' + minutes : minutes;
 
             document.getElementById('days').innerText = days;
             document.getElementById('hours').innerText = hours;
@@ -150,8 +152,7 @@
                 document.getElementById('countdown').innerHTML = '<div class="expired">Время вышло!</div>';
             }
         }, 1000);
-
-        // Функция для склонения слов
+        
         function getDeclension(number, titles) {
             const cases = [2, 0, 1, 1, 1, 2];
             return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
