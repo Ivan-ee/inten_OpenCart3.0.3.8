@@ -18,6 +18,8 @@ class ControllerInformationAction extends Controller {
 
         $data['description'] = $action_info['description'];
 
+        $data['special_desk'] = $action_info['special_desk'];
+
         $this->document->setTitle($action_info['name']);
 
         $data['breadcrumbs'] = array();
@@ -96,19 +98,25 @@ class ControllerInformationAction extends Controller {
 
         $products = [];
 
-        foreach ($action_info['product'] as $product_id) {
-            $product_info = $this->model_catalog_product->getProduct($product_id);
-            $action_price = $this->model_catalog_product->getProductSpecialPrice($product_id, $module_id);
-            if ($product_info) {
-                $products[] = [
-                    'product_id' => $product_id,
-                    'name' => $product_info['name'],
-                    'image' => $this->model_tool_image->resize($product_info['image'], 160, 160),
-                    'price' => $product_info['price'],
-                    'action_price' => $action_price,
-                ];
+        if (isset($action_info['product'])){
+            foreach ($action_info['product'] as $product_id) {
+                $product_info = $this->model_catalog_product->getProduct($product_id);
+                $action_price = $this->model_catalog_product->getProductSpecialPrice($product_id, $module_id);
+                if ($product_info) {
+                    $products[] = [
+                        'product_id' => $product_id,
+                        'name' => $product_info['name'],
+                        'image' => $this->model_tool_image->resize($product_info['image'], 160, 160),
+                        'price' => $product_info['price'],
+                        'action_price' => $action_price,
+                    ];
+                }
             }
+        }else{
+            $products[]= [];
         }
+
+
 
         $data['product_count'] = count($products);
 

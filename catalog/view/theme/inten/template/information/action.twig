@@ -68,7 +68,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse"
                                          data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            {{ action_info.special_desk }}
+                                            {{ special_desk }}
                                         </div>
                                     </div>
                                 </div>
@@ -148,10 +148,11 @@
             const distance = countdownDate - now;
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
             minutes = (minutes < 10) ? '0' + minutes : minutes;
+            hours = (hours < 10) ? '0' + hours : hours;
 
             document.getElementById('days').innerText = days;
             document.getElementById('hours').innerText = hours;
