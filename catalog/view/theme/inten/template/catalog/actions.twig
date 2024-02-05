@@ -43,13 +43,12 @@
                     </div>
                     <div class="product-list grid-view">
                         {% for product in products %}
-                            <div class="catalog-product mb-3">
+                            <div class="catalog-product">
                                 <div class="catalog-product-image">
                                     <a class="catalog-product-image-link" href="{{ product.href }}">
-                                        <img src="{{ product.image }}" alt="{{ product.name }}" width="200"
-                                             height="200">
+                                        <img src="{{ product.image }}" alt="{{ product.name }}" width="200">
                                     </a>
-                                    {# <span class="catalog-product-discount">-19%</span> #}
+                                     <span class="catalog-product-discount">-19%</span>
                                 </div>
                                 <a class="catalog-product-name"
                                    href="{{ product.href }}"><span>{{ product.name }}</span></a>
@@ -78,7 +77,7 @@
     </div>
 </main>
 
-<<script>
+<script>
     $(document).ready(function () {
         $('.catalog-products').on('click', '#grid-view-btn', function () {
             $('.product-list').removeClass('list-view').addClass('grid-view');
