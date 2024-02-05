@@ -40,6 +40,7 @@ class ControllerCatalogActions extends Controller {
         if (isset($action_info['product'])){
             foreach ($action_info['product'] as $product_id) {
                 $product_info = $this->model_catalog_product->getProduct($product_id);
+//                tt($product_info);
                 $action_price = $this->model_catalog_product->getProductSpecialPrice($product_id, $module_id);
                 if ($product_info) {
                     $products[] = [
@@ -48,6 +49,7 @@ class ControllerCatalogActions extends Controller {
                         'image' => $this->model_tool_image->resize($product_info['image'], 160, 160),
                         'price' => $product_info['price'],
                         'action_price' => $action_price,
+                        'rating' => 3,
                     ];
                 }
             }
@@ -58,6 +60,8 @@ class ControllerCatalogActions extends Controller {
         $data['product_count'] = count($products);
 
         $data['products'] = $products;
+
+//        tt($products);
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');

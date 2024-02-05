@@ -44,13 +44,26 @@
                             <div class="catalog-product">
                                 <div class="catalog-product-image">
                                     <a class="catalog-product-image-link" href="{{ product.href }}">
-                                        <img src="{{ product.image }}" alt="{{ product.name }}" width="200">
+                                        <img src="{{ product.image }}" alt="{{ product.name }}">
                                     </a>
-                                     <span class="catalog-product-discount">-19%</span>
+                                    <span class="catalog-product-discount">-19%</span>
                                 </div>
                                 <a class="catalog-product-name"
                                    href="{{ product.href }}"><span>{{ product.name }}</span></a>
-                                <h6 class="product-action"><span class="badge" style="">Акция</span></h6>
+                                <div class="d-flex justify-content-between">
+                                    <div class="rating">
+                                        <div class="rating-block">
+                                            {% for i in 1..5 %}
+                                                {% if product.rating < i %}
+                                                    <i class="fi fi-rr-star"></i>
+                                                {% else %}
+                                                    <i class="fi fi-sr-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="product-action"><span class="badge" style="">Акция</span></div>
+                                </div>
                                 <div class="d-flex">
                                     <div class="product-details">
                                         <div class="product-price">{{ product.action_price|number_format(0, '.', ' ') }}

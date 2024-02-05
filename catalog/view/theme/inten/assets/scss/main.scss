@@ -884,6 +884,10 @@ main {
       color: #afafaf;
     }
 
+    button:hover{
+      color: #8a8989;
+    }
+
     .btn{
       border: none;
     }
@@ -905,6 +909,46 @@ main {
     grid-gap: 10px;
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .rating{
+    .rating-block{
+      padding: 7px 6px 3px 6px;
+      width: min-content;
+      border-radius: 8px;
+      border: 1px solid #afafaf;
+      display: inline-flex;
+    }
+    i{
+      font-size: 12px;
+      margin-right: 5px ;
+      color: var(--text-hover-color);
+    }
+
+    i:last-child{
+      margin-right: 0 ;
+    }
+  }
+
+  .catalog-product-image {
+    position: relative;
+    text-align: center;
+    .catalog-product-image-link {
+      img {
+        height: auto;
+      }
+    }
+    .catalog-product-discount {
+      position: absolute;
+      border-radius: 14px;
+      bottom: 0;
+      background-color: var(--text-hover-color);
+      color: #fff;
+      font-size: 12px;
+      height: 24px;
+      left: 0;
+      padding: 4px;
+    }
   }
 
   .catalog-product-name {
@@ -947,26 +991,12 @@ main {
       grid-template-columns: 1fr;
       grid-template-rows: 200px minmax(20px,auto) 30px 50px;
     }
-
     .catalog-product-image {
-      position: relative;
-      text-align: center;
       .catalog-product-image-link {
         img {
           max-width: 200px;
-          height: auto;
+          width: 200px;
         }
-      }
-      .catalog-product-discount {
-        position: absolute;
-        border-radius: 14px;
-        bottom: 0;
-        background-color: var(--text-hover-color);
-        color: #fff;
-        font-size: 12px;
-        height: 24px;
-        left: 0;
-        padding: 4px;
       }
     }
 
@@ -1034,25 +1064,26 @@ main {
   }
 
 
-  /* Стили для отображения товаров в виде списка */
   .list-view {
-    width: 100%;
-    display: flex;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 15px;
 
-    .catalog-product_image {
-      margin-right: 20px;
-
-      img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-      }
+    .catalog-product{
+      grid-gap: 12px 0;
+      display: grid;
+      grid-template-columns: auto minmax(0,1fr) 170px;
+      grid-template-rows: 1fr 32px 20px;
+      padding: 24px 16px;
     }
 
-    .catalog-product_name {
-      font-weight: bold;
+    .catalog-product-image {
+      grid-column: 1;
+      grid-row: 1/4;
+      height: 176px;
+      margin-right: 12px;
+      width: 160px;
+    }
+
+    .catalog-product-name {
+      max-height: 100px;
     }
 
     .product-action {
