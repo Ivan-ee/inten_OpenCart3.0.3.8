@@ -31,20 +31,20 @@
                 </div>
 
                 <div class="col-9 catalog-products">
-                    <div class="btn-group btn-group-sm">
+                    <div class="view-options mb-4">
                         <button type="button" id="list-view-btn" class="btn btn-default" data-toggle="tooltip"
                                 title="Список">
-                            <i class="fa fa-th-list"></i>
+                            <i class="fi fi-rr-list"></i>
                         </button>
                         <button type="button" id="grid-view-btn" class="btn btn-default" data-toggle="tooltip"
                                 title="Сетка">
-                            <i class="fa fa-th"></i>
+                            <i class="fi fi-rr-apps"></i>
                         </button>
                     </div>
-                    <div class="row">
+                    <div class="product-list grid-view">
                         {% for product in products %}
-                            <div class="catalog-product col-4 mb-3 grid-view">
-                                <div class="catalog-product_image">
+                            <div class="catalog-product mb-3">
+                                <div class="catalog-product-image">
                                     <a class="catalog-product-image-link" href="{{ product.href }}">
                                         <img src="{{ product.image }}" alt="{{ product.name }}" width="200"
                                              height="200">
@@ -81,11 +81,11 @@
 <<script>
     $(document).ready(function () {
         $('.catalog-products').on('click', '#grid-view-btn', function () {
-            $('.catalog-product').removeClass('list-view').addClass('grid-view');
+            $('.product-list').removeClass('list-view').addClass('grid-view');
         });
 
         $('.catalog-products').on('click', '#list-view-btn', function () {
-            $('.catalog-product').removeClass('grid-view').addClass('list-view');
+            $('.product-list').removeClass('grid-view').addClass('list-view');
         });
 
         $('.catalog-products .catalog-product').hover(

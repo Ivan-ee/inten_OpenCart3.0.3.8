@@ -680,32 +680,43 @@ main .home-block .last {
   margin-left: 20px;
 }
 
-/* Общий стиль для товаров */
 .catalog-products {
-  /* Стили для отображения товаров в виде сетки */
   /* Стили для отображения товаров в виде списка */
+}
+.catalog-products .view-options {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2px 16px;
 }
 .catalog-products .catalog-product {
   box-sizing: border-box;
-  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 8px;
+  border: 2px saddlebrown solid;
 }
-.catalog-products .grid-view {
-  width: 33%;
+.catalog-products .product-list.grid-view {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
 }
-.catalog-products .grid-view .catalog-product_image {
-  position: relative;
+.catalog-products .product-list.list-view {
+  grid-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.catalog-products .grid-view .catalog-product-image {
   overflow: hidden;
 }
-.catalog-products .grid-view .catalog-product_image img {
-  max-width: 100%;
+.catalog-products .grid-view .catalog-product-image img {
+  max-width: 200px;
   height: auto;
   display: block;
   transition: transform 0.3s ease-in-out;
 }
-.catalog-products .grid-view .catalog-product_image:hover img {
+.catalog-products .grid-view .catalog-product-image:hover img {
   transform: scale(1.1);
 }
-.catalog-products .grid-view .catalog-product_name {
+.catalog-products .grid-view .catalog-product-name {
   margin-top: 10px;
   font-weight: bold;
 }
