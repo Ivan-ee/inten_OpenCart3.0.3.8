@@ -876,6 +876,17 @@ main {
   margin-left: 20px;
 }
 
+.title{
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+  margin-right: 12px;
+  margin-top: 0;
+  vertical-align: middle;
+  color: black;
+  margin-bottom: 16px;
+}
+
 .catalog-products {
   .view-options{
     background-color: white;
@@ -921,7 +932,7 @@ main {
 
   .rating{
     .rating-block{
-      padding: 7px 6px 3px 6px;
+      padding: 7px 6px 6px 6px;
       width: min-content;
       border-radius: 8px;
       border: 1px solid #afafaf;

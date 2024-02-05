@@ -46,7 +46,7 @@
                                     <a class="catalog-product-image-link" href="{{ product.href }}">
                                         <img src="{{ product.image }}" alt="{{ product.name }}">
                                     </a>
-                                    <span class="catalog-product-discount">-19%</span>
+                                    <span class="catalog-product-discount">{{ product.action_price_percent|number_format(0, '.', ' ') }} %</span>
                                 </div>
                                 <a class="catalog-product-name"
                                    href="{{ product.href }}"><span>{{ product.name }}</span></a>

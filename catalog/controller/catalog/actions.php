@@ -40,16 +40,17 @@ class ControllerCatalogActions extends Controller {
         if (isset($action_info['product'])){
             foreach ($action_info['product'] as $product_id) {
                 $product_info = $this->model_catalog_product->getProduct($product_id);
-//                tt($product_info);
                 $action_price = $this->model_catalog_product->getProductSpecialPrice($product_id, $module_id);
                 if ($product_info) {
                     $products[] = [
                         'product_id' => $product_id,
                         'name' => $product_info['name'],
+                        'href' => $this->url->link('product/product', ['product_id' => $product_id]),
                         'image' => $this->model_tool_image->resize($product_info['image'], 160, 160),
                         'price' => $product_info['price'],
                         'action_price' => $action_price,
-                        'rating' => 3,
+                        'action_price_percent' => $this->getPersent($action_price, $product_info['price']),
+                        'rating' => $product_info['rating'],
                     ];
                 }
             }
@@ -61,7 +62,7 @@ class ControllerCatalogActions extends Controller {
 
         $data['products'] = $products;
 
-//        tt($products);
+        tt($data['products']);
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
@@ -73,4 +74,8 @@ class ControllerCatalogActions extends Controller {
         $this->response->setOutput($this->load->view('catalog/actions', $data));
     }
 
+    function getPersent($action_price, $price)
+    {
+        return (1 - $action_price / $price) * 100;
+    }
 }
