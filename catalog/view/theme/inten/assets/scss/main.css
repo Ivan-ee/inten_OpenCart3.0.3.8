@@ -696,6 +696,9 @@ main .home-block .last {
 .catalog-products .view-options button {
   color: #afafaf;
 }
+.catalog-products .view-options .btn {
+  border: none;
+}
 .catalog-products .catalog-product {
   box-sizing: border-box;
   background-color: white;
