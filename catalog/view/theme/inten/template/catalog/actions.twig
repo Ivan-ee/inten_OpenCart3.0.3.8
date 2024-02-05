@@ -32,12 +32,10 @@
 
                 <div class="col-9 catalog-products">
                     <div class="view-options mb-4">
-                        <button type="button" id="list-view-btn" class="btn btn-default" data-toggle="tooltip"
-                                title="Список">
+                        <button type="button" id="list-view-btn" class="btn btn-default" data-toggle="tooltip">
                             <i class="fi fi-rr-list"></i>
                         </button>
-                        <button type="button" id="grid-view-btn" class="btn btn-default" data-toggle="tooltip"
-                                title="Сетка">
+                        <button type="button" id="grid-view-btn" class="btn btn-default selected" data-toggle="tooltip">
                             <i class="fi fi-rr-apps"></i>
                         </button>
                     </div>
@@ -105,6 +103,14 @@
             }
         );
     });
+
+    $(document).ready(function () {
+        $('.view-options button').click(function () {
+            $('.view-options button').removeClass('selected');
+            $(this).addClass('selected');
+        });
+    });
+
 </script>
 
 
