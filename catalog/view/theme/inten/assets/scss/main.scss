@@ -580,6 +580,27 @@ main {
     margin-bottom: 10px;
   }
 
+  .catalog-product-image {
+    position: relative;
+    text-align: center;
+    .catalog-product-image-link {
+      img {
+        height: auto;
+      }
+    }
+    .catalog-product-discount {
+      position: absolute;
+      border-radius: 14px;
+      bottom: 0;
+      background-color: var(--text-hover-color);
+      color: #fff;
+      font-size: 12px;
+      height: 24px;
+      left: 0;
+      padding: 4px;
+    }
+  }
+
   .rating{
     .rating-block{
       padding: 7px 6px 5px 6px;

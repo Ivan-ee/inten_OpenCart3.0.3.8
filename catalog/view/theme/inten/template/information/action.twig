@@ -85,11 +85,17 @@
                 <div class="col-3 product" style="background: white">
                     <div class="d-flex justify-content-between">
                         <div class="product-count">Товары<span>{{ product_count }}</span></div>
-                        <div class="product-link"><a href="{{ href }}" class="lll-link">Смотеть все</a><i class="fi fi-rr-arrow-right ms-1 mt-1"></i></div>
+                        <div class="product-link"><a href="{{ href }}" class="lll-link">Смотеть все</a><i
+                                    class="fi fi-rr-arrow-right ms-1 mt-1"></i></div>
                     </div>
                     {% for product in products %}
                         <div class="product-item mb-3">
-                            <a href="#"><img src="{{ product.image }}" class="product-img-top" alt="{{ product.name }}"></a>
+                            <div class="catalog-product-image">
+                                <a class="catalog-product-image-link" href="{{ product.href }}">
+                                    <img src="{{ product.image }}" alt="{{ product.name }}">
+                                </a>
+                                <span class="catalog-product-discount">{{ product.action_price_percent|number_format(0, '.', ' ') }} %</span>
+                            </div>
                             <div class="product-body">
                                 <h5 class="product-title"><a href="#">{{ product.name }}</a></h5>
                                 <div class="catalog-product-rating">
@@ -114,7 +120,9 @@
                                         </div>
                                     </div>
                                     <div class="btn product-btn"><i class="fi fi-rr-heart"></i></div>
-                                    <div class="btn product-btn product-btn-cart" onclick="cart.add('{{ product.product_id }}');"><i class="fi fi-rs-shopping-cart"></i></div>
+                                    <div class="btn product-btn product-btn-cart"
+                                         onclick="cart.add('{{ product.product_id }}');"><i
+                                                class="fi fi-rs-shopping-cart"></i></div>
                                 </div>
 
                             </div>
@@ -128,23 +136,23 @@
 </main>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.product-item').hover(
-            function() {
+            function () {
                 $(this).find('.product-btn-cart').addClass('hover');
             },
-            function() {
+            function () {
                 $(this).find('.product-btn-cart').removeClass('hover');
             }
         );
     });
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.product-link').hover(
-            function() {
+            function () {
                 $(this).find('.fi-rr-arrow-right').addClass('lll');
             },
-            function() {
+            function () {
                 $(this).find('.fi-rr-arrow-right').removeClass('lll');
             }
         );

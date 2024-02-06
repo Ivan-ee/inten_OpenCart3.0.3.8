@@ -453,6 +453,24 @@ main .home-block .last {
   justify-content: space-between;
   margin-bottom: 10px;
 }
+.action-block .catalog-product-image {
+  position: relative;
+  text-align: center;
+}
+.action-block .catalog-product-image .catalog-product-image-link img {
+  height: auto;
+}
+.action-block .catalog-product-image .catalog-product-discount {
+  position: absolute;
+  border-radius: 14px;
+  bottom: 0;
+  background-color: var(--text-hover-color);
+  color: #fff;
+  font-size: 12px;
+  height: 24px;
+  left: 0;
+  padding: 4px;
+}
 .action-block .rating .rating-block {
   padding: 7px 6px 5px 6px;
   width: min-content;
