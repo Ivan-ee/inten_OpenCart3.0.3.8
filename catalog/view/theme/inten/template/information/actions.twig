@@ -4,12 +4,14 @@
     <div class="actions custom-width mt-3 mb-3">
         <h1 class="title mb-3">{{ name }}</h1>
         <div class="row">
-            <div class="col-3 actions-menu">
-                {% for menu_item in top_menu_items %}
-                    <div class="menu-item">
-                        <a href="{{ menu_item.link }}">{{ menu_item.title }}</a>
-                    </div>
-                {% endfor %}
+            <div class="col-3">
+                <div class="actions-menu">
+                    {% for menu_item in top_menu_items %}
+                        <div class="menu-item">
+                            <a href="{{ menu_item.link }}">{{ menu_item.title }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
             <div class="col-9">
                 {% for action in actions %}

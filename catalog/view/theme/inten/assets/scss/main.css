@@ -346,7 +346,7 @@ main .home-block .last {
   padding: 20px 10px;
   font-size: 18px;
   font-weight: bold;
-  height: 100%;
+  height: min-content;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
 }
 .actions .actions-menu .menu-item {
