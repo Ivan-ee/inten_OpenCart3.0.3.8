@@ -100,7 +100,7 @@ class ControllerInformationActions extends Controller
 
             $action_info['id'] = $action['module_id'];
 
-            $action_info['href'] = $this->url->link('information/action', 'action_id=' . $action_info['id']);
+            $action_info['href'] = $this->url->link('catalog/actions', 'action_id=' . $action_info['id']);
 
             if ($product_count >= 0){
                 $this->load->model('catalog/product');

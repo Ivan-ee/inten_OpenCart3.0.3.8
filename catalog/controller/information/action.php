@@ -40,7 +40,6 @@ class ControllerInformationAction extends Controller {
 
         $data['href'] = $this->url->link('catalog/actions', ['action_id' => $this->request->get['action_id']]);
 
-
         $dateTime = new DateTime($action_info['end_date']);
 
         $formattedDate = $dateTime->format('Y-m-d H:i:s');
@@ -123,7 +122,7 @@ class ControllerInformationAction extends Controller {
 
         $data['product_count'] = count($products);
 
-        $data['products'] = $products;
+        $data['products'] = array_slice($products, 0, 4);
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
