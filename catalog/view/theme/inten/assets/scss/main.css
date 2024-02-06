@@ -242,7 +242,6 @@ main .menu .menu-item:hover {
 }
 main .home-block {
   padding-right: 1.5rem;
-  padding-left: 1.5rem;
 }
 main .home-block .home-block-item {
   margin: 0 auto;
@@ -290,6 +289,7 @@ main .home-block .home-block-item .btn-sales:hover {
 main .home-block .first {
   min-width: 283px;
   padding: 24px 14px 24px 20px;
+  margin-left: 0 !important;
 }
 main .home-block .last {
   margin-right: 0;
@@ -297,6 +297,7 @@ main .home-block .last {
 
 .showcase {
   margin: 0 auto;
+  padding-left: 0;
 }
 
 .showcase-block {

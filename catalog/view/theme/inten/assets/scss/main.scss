@@ -307,7 +307,6 @@ main {
   .home-block {
 
     padding-right: 1.5rem;
-    padding-left: 1.5rem;
 
 
     .home-block-item {
@@ -368,6 +367,7 @@ main {
     .first {
       min-width: 283px;
       padding: 24px 14px 24px 20px;
+      margin-left: 0!important;
     }
 
     .last {
@@ -378,6 +378,7 @@ main {
 
 .showcase {
   margin: 0 auto;
+  padding-left: 0;
 }
 
 .showcase-block {
