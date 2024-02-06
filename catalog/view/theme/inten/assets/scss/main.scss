@@ -94,12 +94,15 @@ main.main {
   background-color: white;
 
   .custom-col {
-    width: 54%;
+    padding-left: 0.3rem!important;
+    padding-right: 3px;
   }
 
   .header-title {
     font-size: 30px;
     font-weight: bold;
+
+    //padding-right: 3rem;
 
     a {
       text-decoration: none;
@@ -115,6 +118,7 @@ main.main {
     background: linear-gradient(to bottom, rgb(51, 51, 51), rgb(78, 78, 78));
     border-radius: 12px;
     height: 64px;
+    width: 270px;
 
     .header-mini-block {
       font-size: 16px;
@@ -203,6 +207,10 @@ main.main {
   }
 
   .header-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 0;
 
     .button-item {
       a, button {
@@ -555,7 +563,7 @@ main {
     height: min-content;
 
     padding: 0 0 10px 0;
-    margin-left: 1rem;
+    margin-left: 0.8rem;
 
     img {
       border-top-left-radius: 8px;
@@ -891,7 +899,7 @@ main {
   .view-options{
     background-color: white;
     border-radius: 8px;
-    padding: 2px 16px;
+    padding: 5px 16px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .16);
 
     button{
@@ -932,7 +940,7 @@ main {
 
   .rating{
     .rating-block{
-      padding: 7px 6px 6px 6px;
+      padding: 7px 6px 5px 6px;
       width: min-content;
       border-radius: 8px;
       border: 1px solid #afafaf;
