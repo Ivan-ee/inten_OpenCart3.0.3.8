@@ -468,10 +468,6 @@ main {
     padding: 24px;
   }
 
-  .block:hover {
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.18);
-  }
-
   .block-image {
     margin-right: 20px;
 
@@ -576,6 +572,31 @@ main {
 
   .description {
     white-space: pre-line;
+  }
+
+  .catalog-product-rating{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .rating{
+    .rating-block{
+      padding: 7px 6px 5px 6px;
+      width: min-content;
+      border-radius: 8px;
+      border: 1px solid #afafaf;
+      display: inline-flex;
+    }
+    i{
+      font-size: 12px;
+      margin-right: 5px ;
+      color: var(--text-hover-color);
+    }
+
+    i:last-child{
+      margin-right: 0 ;
+    }
   }
 
   .p-text {

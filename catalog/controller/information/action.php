@@ -112,6 +112,8 @@ class ControllerInformationAction extends Controller {
                         'image' => $this->model_tool_image->resize($product_info['image'], 160, 160),
                         'price' => $product_info['price'],
                         'action_price' => $action_price,
+                        'action_price_percent' => $this->getPersent($action_price, $product_info['price']),
+                        'rating' => $product_info['rating'],
                     ];
                 }
             }
@@ -131,5 +133,10 @@ class ControllerInformationAction extends Controller {
         $data['header'] = $this->load->controller('common/header');
 
         $this->response->setOutput($this->load->view('information/action', $data));
+    }
+
+    function getPersent($action_price, $price)
+    {
+        return (1 - $action_price / $price) * 100;
     }
 }
