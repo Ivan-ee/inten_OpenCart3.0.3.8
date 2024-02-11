@@ -20,14 +20,14 @@
                             <img src="{{ action.block_image }}" alt="{{ action.name }}">
                         </div>
                         <div class="block-content">
-                            <h2><a href="{{ action.href }}">{{ action.name }}</a></h2>
+                            <h2><a href="{{ action.href_to_action }}">{{ action.name }}</a></h2>
                             <p>{{ action.date }}</p>
                         </div>
                         <div class="block-product">
                             <div>
                                 <img src="{{ action.product_thumb }}" alt="{{ action.product_name }}">
                                 <h4>{{ action.product_name }}</h4>
-                                <a href="{{ action.href }}">{{ action.product_label }}</a>
+                                <a href="{{ action.href_to_product }}">{{ action.product_label }}</a>
                             </div>
                         </div>
                     </div>
