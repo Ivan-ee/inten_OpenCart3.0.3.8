@@ -6,26 +6,22 @@ class ControllerCatalogActions extends Controller {
     {
         $this->load->model('catalog/actions');
 
-        $sort = isset($this->request->get['sort']) ? $this->request->get['sort'] : 'default';
-        $order = isset($this->request->get['order']) ? $this->request->get['order'] : 'asc';
+        $sort = isset($this->request->get['sort']) ? $this->request->get['sort'] : 'action_price_percent';
+        $order = isset($this->request->get['order']) ? $this->request->get['order'] : 'desc';
 
         $data['sort'] = $sort;
         $data['order'] = $order;
-
-        tt($this->request->get);
-
-        //route=catalog/actions&action_id=63
 
         $data['sorts'] = array(
             array(
                 'href' => $this->url->link('catalog/actions', 'action_id=' . $this->request->get['action_id'] .  '&sort=price&order=asc'),
                 'value' => 'price-asc',
-                'text' => 'Снача недорогие'
+                'text' => 'Сначала недорогие'
             ),
             array(
                 'href' => $this->url->link('catalog/actions', 'action_id=' . $this->request->get['action_id'] . '&sort=price&order=desc'),
                 'value' => 'price-desc',
-                'text' => 'Снача дорогие'
+                'text' => 'Сначала дорогие'
             ),
             array(
                 'href' => $this->url->link('catalog/actions', 'action_id=' . $this->request->get['action_id'] . '&sort=rating&order=desc'),
@@ -120,8 +116,6 @@ class ControllerCatalogActions extends Controller {
                     });
             }
         }
-
-        tt($sorted_products);
 
         $data['products'] = $sorted_products;
 

@@ -743,8 +743,30 @@ main .home-block .last {
 .catalog-products .view-options {
   background-color: white;
   border-radius: 8px;
-  padding: 5px 16px;
+  padding: 0 16px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+}
+.catalog-products .view-options .top-filters {
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.catalog-products .view-options .top-filter-label {
+  display: inline-block;
+  font-size: 14px;
+  vertical-align: middle;
+  color: black;
+}
+.catalog-products .view-options .top-filter-select {
+  border: none;
+  text-transform: lowercase;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #0d61af;
+}
+.catalog-products .view-options .top-filter-selected {
+  width: min-content;
 }
 .catalog-products .view-options button {
   color: #afafaf;

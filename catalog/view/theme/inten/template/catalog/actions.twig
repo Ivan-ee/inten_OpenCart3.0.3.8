@@ -32,24 +32,31 @@
 
                 <div class="col-9 catalog-products">
                     <div class="view-options mb-2">
-                        <div class="form-group input-group input-group-sm">
-                            <label class="input-group-addon" for="input-sort">{{ text_sort }}</label>
-                            <select id="input-sort" class="form-control" onchange="location = this.value;">
-                                {% for sorts in sorts %}
-                                    {% if sorts.value == '%s-%s'|format(sort, order) %}
-                                        <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
-                                    {% else %}
-                                        <option value="{{ sorts.href }}">{{ sorts.text }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
+                        <div class="top-filters">
+                            <div class="top-filter">
+                                <label class="top-filter-label" for="input-sort">Сортировка:</label>
+                                <select id="input-sort" class="top-filter-select" onchange="location = this.value;">
+                                    {% for sorts in sorts %}
+                                        {% if sorts.value == '%s-%s'|format(sort, order) %}
+                                            <option value="{{ sorts.href }}"
+                                                    selected="selected" class="top-filter-selected">{{ sorts.text }}</option>
+                                        {% else %}
+                                            <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="buttons">
+                                <button type="button" id="list-view-btn" class="btn btn-default" data-toggle="tooltip">
+                                    <i class="fi fi-rr-list"></i>
+                                </button>
+                                <button type="button" id="grid-view-btn" class="btn btn-default selected"
+                                        data-toggle="tooltip">
+                                    <i class="fi fi-rr-apps"></i>
+                                </button>
+                            </div>
                         </div>
-                        <button type="button" id="list-view-btn" class="btn btn-default" data-toggle="tooltip">
-                            <i class="fi fi-rr-list"></i>
-                        </button>
-                        <button type="button" id="grid-view-btn" class="btn btn-default selected" data-toggle="tooltip">
-                            <i class="fi fi-rr-apps"></i>
-                        </button>
                     </div>
                     <div class="product-list grid-view">
                         {% for product in products %}
