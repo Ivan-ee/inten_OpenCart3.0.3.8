@@ -446,6 +446,11 @@ main {
       margin: 5px 15px;
     }
 
+    .active-menu{
+      margin-left: 5px;
+      color: var(--text-hover-color);
+    }
+
     a {
       text-decoration: none;
       color: var(--text-color);
@@ -453,9 +458,9 @@ main {
     }
 
     a:hover {
+      margin-left: 5px;
       color: var(--text-hover-color);
     }
-
   }
 
   .block {

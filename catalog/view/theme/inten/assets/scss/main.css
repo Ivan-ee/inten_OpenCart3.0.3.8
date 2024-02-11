@@ -352,12 +352,17 @@ main .home-block .last {
 .actions .actions-menu .menu-item {
   margin: 5px 15px;
 }
+.actions .actions-menu .active-menu {
+  margin-left: 5px;
+  color: var(--text-hover-color);
+}
 .actions .actions-menu a {
   text-decoration: none;
   color: var(--text-color);
   transition: all 0.3s;
 }
 .actions .actions-menu a:hover {
+  margin-left: 5px;
   color: var(--text-hover-color);
 }
 .actions .block {

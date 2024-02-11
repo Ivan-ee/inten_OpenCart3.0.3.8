@@ -7,9 +7,15 @@
             <div class="col-3">
                 <div class="actions-menu">
                     {% for menu_item in top_menu_items %}
-                        <div class="menu-item">
-                            <a href="{{ menu_item.link }}">{{ menu_item.title }}</a>
-                        </div>
+                        {% if menu_item.link == active_page %}
+                            <div class="menu-item">
+                                <a class="active-menu" href="{{ menu_item.link }}">{{ menu_item.title }}</a>
+                            </div>
+                        {% else %}
+                            <div class="menu-item">
+                                <a href="{{ menu_item.link }}">{{ menu_item.title }}</a>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

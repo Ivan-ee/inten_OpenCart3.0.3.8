@@ -16,6 +16,8 @@ class ControllerInformationActions extends Controller
 
         $actions = $this->model_catalog_actions->getActions();
 
+        $data['active_page'] = 'actions';
+
         $newArray = [];
 
         $monthTranslations = [
