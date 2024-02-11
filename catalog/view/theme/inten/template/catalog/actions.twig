@@ -32,6 +32,18 @@
 
                 <div class="col-9 catalog-products">
                     <div class="view-options mb-2">
+                        <div class="form-group input-group input-group-sm">
+                            <label class="input-group-addon" for="input-sort">{{ text_sort }}</label>
+                            <select id="input-sort" class="form-control" onchange="location = this.value;">
+                                {% for sorts in sorts %}
+                                    {% if sorts.value == '%s-%s'|format(sort, order) %}
+                                        <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+                                    {% else %}
+                                        <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
                         <button type="button" id="list-view-btn" class="btn btn-default" data-toggle="tooltip">
                             <i class="fi fi-rr-list"></i>
                         </button>

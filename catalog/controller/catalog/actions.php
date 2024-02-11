@@ -6,6 +6,44 @@ class ControllerCatalogActions extends Controller {
     {
         $this->load->model('catalog/actions');
 
+        $sort = isset($this->request->get['sort']) ? $this->request->get['sort'] : 'default';
+        $order = isset($this->request->get['order']) ? $this->request->get['order'] : 'asc';
+
+        $data['sort'] = $sort;
+        $data['order'] = $order;
+
+        tt($this->request->get);
+
+        //route=catalog/actions&action_id=63
+
+        $data['sorts'] = array(
+            array(
+                'href' => $this->url->link('catalog/actions', 'action_id=' . $this->request->get['action_id'] .  '&sort=price&order=asc'),
+                'value' => 'price-asc',
+                'text' => 'Снача недорогие'
+            ),
+            array(
+                'href' => $this->url->link('catalog/actions', 'action_id=' . $this->request->get['action_id'] . '&sort=price&order=desc'),
+                'value' => 'price-desc',
+                'text' => 'Снача дорогие'
+            ),
+            array(
+                'href' => $this->url->link('catalog/actions', 'action_id=' . $this->request->get['action_id'] . '&sort=rating&order=desc'),
+                'value' => 'rating-desc',
+                'text' => 'Сначала с лучшей оценкой'
+            ),
+            array(
+                'href' => $this->url->link('catalog/actions', 'action_id=' . $this->request->get['action_id'] . '&sort=viewed&order=desc'),
+                'value' => 'viewed-desc',
+                'text' => 'Сначала популярные'
+            ),
+            array(
+                'href' => $this->url->link('catalog/actions', 'action_id=' . $this->request->get['action_id'] . '&sort=action_price_percent&order=desc'),
+                'value' => 'action_price_percent-desc',
+                'text' => 'По скидке (%)'
+            ),
+        );
+
         $row_data = $this->model_catalog_actions->getActionById($this->request->get['action_id']);
 
         $action_info = json_decode($row_data['setting'], true);
@@ -41,6 +79,7 @@ class ControllerCatalogActions extends Controller {
             foreach ($action_info['product'] as $product_id) {
                 $product_info = $this->model_catalog_product->getProduct($product_id);
                 $action_price = $this->model_catalog_product->getProductSpecialPrice($product_id, $module_id);
+
                 if ($product_info) {
                     $products[] = [
                         'product_id' => $product_id,
@@ -48,9 +87,10 @@ class ControllerCatalogActions extends Controller {
                         'href' => $this->url->link('product/product', ['product_id' => $product_id]),
                         'image' => $this->model_tool_image->resize($product_info['image'], 160, 160),
                         'price' => $product_info['price'],
-                        'action_price' => $action_price,
-                        'action_price_percent' => $this->getPersent($action_price, $product_info['price']),
+                        'action_price' => ceil($action_price),
+                        'action_price_percent' => ceil($this->getPersent($action_price, $product_info['price'])),
                         'rating' => $product_info['rating'],
+                        'viewed' => $product_info['viewed'],
                     ];
                 }
             }
@@ -60,7 +100,30 @@ class ControllerCatalogActions extends Controller {
 
         $data['product_count'] = count($products);
 
-        $data['products'] = $products;
+        $sorted_products = $products;
+
+        if ($sort !== 'default') {
+            switch ($order) {
+                case 'asc':
+                    usort($sorted_products, function($a, $b) use ($sort) {
+                        return $a[$sort] - $b[$sort];
+                    });
+                    break;
+                case 'desc':
+                    usort($sorted_products, function($a, $b) use ($sort) {
+                        return $b[$sort] - $a[$sort];
+                    });
+                    break;
+                default:
+                    usort($sorted_products, function($a, $b) {
+                        return $a['rating'] - $b['rating'];
+                    });
+            }
+        }
+
+        tt($sorted_products);
+
+        $data['products'] = $sorted_products;
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
@@ -76,4 +139,5 @@ class ControllerCatalogActions extends Controller {
     {
         return (1 - $action_price / $price) * 100;
     }
+
 }
