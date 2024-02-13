@@ -51,7 +51,7 @@
                                 <button type="button" id="list-view-btn" class="btn btn-default" data-toggle="tooltip">
                                     <i class="fi fi-rr-list"></i>
                                 </button>
-                                <button type="button" id="grid-view-btn" class="btn btn-default selected"
+                                <button type="button" id="grid-view-btn" class="btn btn-default"
                                         data-toggle="tooltip">
                                     <i class="fi fi-rr-apps"></i>
                                 </button>
@@ -109,17 +109,35 @@
 
 <script>
     $(document).ready(function () {
+        // Проверяем, сохранен ли ранее выбранный вид просмотра
+        var defaultView = localStorage.getItem('productView');
+        var selectedView = localStorage.getItem('selectedView');
+
+        if (defaultView) {
+            $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
+        }
+
+        if (selectedView === 'list') {
+            $('#list-view-btn').addClass('selected');
+        } else {
+            $('#grid-view-btn').addClass('selected');
+        }
+
+        // Переключение на сетку
         $('.catalog-products').on('click', '#grid-view-btn', function () {
             $('.product-list').removeClass('list-view').addClass('grid-view');
             $('.product-btn-cart').html('<i class="fi fi-rs-shopping-cart"></i>');
+            localStorage.setItem('productView', 'grid-view'); // Сохраняем выбранный вид просмотра
         });
 
+        // Переключение на список
         $('.catalog-products').on('click', '#list-view-btn', function () {
             $('.product-list').removeClass('grid-view').addClass('list-view');
-
             $('.product-btn-cart').text('Купить');
+            localStorage.setItem('productView', 'list-view'); // Сохраняем выбранный вид просмотра
         });
 
+        // Добавление класса при наведении на товар
         $('.catalog-products .catalog-product').hover(
             function () {
                 $(this).find('.product-btn-cart').addClass('hover');
@@ -129,6 +147,7 @@
             }
         );
 
+        // Добавление класса при наведении на ссылку в товаре
         $('.catalog-products .catalog-product .product-link').hover(
             function () {
                 $(this).find('.fi-rr-arrow-right').addClass('lll');
@@ -137,15 +156,24 @@
                 $(this).find('.fi-rr-arrow-right').removeClass('lll');
             }
         );
-    });
 
-    $(document).ready(function () {
-        $('.view-options button').click(function () {
-            $('.view-options button').removeClass('selected');
+        $('#list-view-btn').click(function () {
             $(this).addClass('selected');
+            $('#grid-view-btn').removeClass('selected');
+
+            // Сохраняем выбор пользователя в localStorage
+            localStorage.setItem('selectedView', 'list');
+        });
+
+        // При нажатии на кнопку сетки
+        $('#grid-view-btn').click(function () {
+            $(this).addClass('selected');
+            $('#list-view-btn').removeClass('selected');
+
+            // Сохраняем выбор пользователя в localStorage
+            localStorage.setItem('selectedView', 'grid');
         });
     });
-
 </script>
 
 
