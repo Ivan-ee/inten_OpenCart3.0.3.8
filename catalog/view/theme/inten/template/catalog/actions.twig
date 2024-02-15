@@ -58,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-list grid-view">
+                    <div class="product-list">
                         {% for product in products %}
                             <div class="catalog-product">
                                 <div class="catalog-product-image">
@@ -109,32 +109,59 @@
 
 <script>
     $(document).ready(function () {
-        // Проверяем, сохранен ли ранее выбранный вид просмотра
-        var defaultView = localStorage.getItem('productView');
-        var selectedView = localStorage.getItem('selectedView');
 
-        if (defaultView) {
-            $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
+        switchView();
+
+        function switchView(){
+            var defaultView = localStorage.getItem('productView') ? localStorage.getItem('productView') : 'list-view';
+
+            switch (defaultView) {
+                case 'list-view':
+                    $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
+                    $('#grid-view-btn').removeClass('selected');
+                    $('#list-view-btn').addClass('selected');
+                    $('.product-btn-cart').text('Купить');
+                    break;
+                case 'grid-view':
+                    $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
+                    $('#list-view-btn').removeClass('selected');
+                    $('#grid-view-btn').addClass('selected');
+                    $('.product-btn-cart').html('<i class="fi fi-rs-shopping-cart"></i>');
+                    break;
+                default:
+                    localStorage.setItem('productView', 'list-view');
+                    $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
+                    $('#list-view-btn').addClass('selected');
+                    $('.product-btn-cart').text('Купить');
+            }
         }
 
-        if (selectedView === 'list') {
-            $('#list-view-btn').addClass('selected');
-        } else {
-            $('#grid-view-btn').addClass('selected');
-        }
 
-        // Переключение на сетку
+        // if (defaultView === 'list-view') {
+        //     $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
+        // } else if (defaultView === 'grid-view'){
+        //     $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
+        // } else {
+        //     $('.product-list').removeClass('grid-view list-view').addClass('list-view');
+        // }
+        //
+        // if (selectedView === 'list') {
+        //     $('#list-view-btn').addClass('selected');
+        // } else if (selectedView === 'grid'){
+        //     $('#grid-view-btn').addClass('selected');
+        // } else {
+        //     $('#list-view-btn').addClass('selected');
+        // }
+
         $('.catalog-products').on('click', '#grid-view-btn', function () {
-            $('.product-list').removeClass('list-view').addClass('grid-view');
-            $('.product-btn-cart').html('<i class="fi fi-rs-shopping-cart"></i>');
-            localStorage.setItem('productView', 'grid-view'); // Сохраняем выбранный вид просмотра
+            localStorage.setItem('productView', 'grid-view');
+            switchView();// Сохраняем выбранный вид просмотра
         });
 
         // Переключение на список
         $('.catalog-products').on('click', '#list-view-btn', function () {
-            $('.product-list').removeClass('grid-view').addClass('list-view');
-            $('.product-btn-cart').text('Купить');
-            localStorage.setItem('productView', 'list-view'); // Сохраняем выбранный вид просмотра
+            localStorage.setItem('productView', 'list-view');
+            switchView();// Сохраняем выбранный вид просмотра
         });
 
         // Добавление класса при наведении на товар
@@ -157,22 +184,22 @@
             }
         );
 
-        $('#list-view-btn').click(function () {
-            $(this).addClass('selected');
-            $('#grid-view-btn').removeClass('selected');
-
-            // Сохраняем выбор пользователя в localStorage
-            localStorage.setItem('selectedView', 'list');
-        });
-
-        // При нажатии на кнопку сетки
-        $('#grid-view-btn').click(function () {
-            $(this).addClass('selected');
-            $('#list-view-btn').removeClass('selected');
-
-            // Сохраняем выбор пользователя в localStorage
-            localStorage.setItem('selectedView', 'grid');
-        });
+        // $('#list-view-btn').click(function () {
+        //     $(this).addClass('selected');
+        //     $('#grid-view-btn').removeClass('selected');
+        //
+        //     // Сохраняем выбор пользователя в localStorage
+        //     localStorage.setItem('selectedView', 'list');
+        // });
+        //
+        // // При нажатии на кнопку сетки
+        // $('#grid-view-btn').click(function () {
+        //     $(this).addClass('selected');
+        //     $('#list-view-btn').removeClass('selected');
+        //
+        //     // Сохраняем выбор пользователя в localStorage
+        //     localStorage.setItem('selectedView', 'grid');
+        // });
     });
 </script>
 
