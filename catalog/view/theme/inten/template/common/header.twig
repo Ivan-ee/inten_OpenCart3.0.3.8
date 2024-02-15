@@ -50,10 +50,10 @@
     <div class="header-top important-width">
         <nav class="row custom-width d-flex align-items-center mt-3">
             <div class="col-3 position-relative ps-0"><a href="#"><i class="fi fi-rr-marker me-3"></i>Краснодар</a></div>
-            <div class="col-6 d-flex">
+            <div class="col-6 d-flex ps-2">
                 {% for menu_item in top_menu_items %}
                     {% if loop.first %}
-                        <div class=" me-4"><a href="{{ menu_item.link }}">{{ menu_item.title }}<span
+                        <div class="me-4"><a href="{{ menu_item.link }}">{{ menu_item.title }}<span
                                         class="red-circle"></span></a></div>
                     {% else %}
                         <div class="ms-4 me-4"><a href="{{ menu_item.link }}">{{ menu_item.title }}</a></div>
