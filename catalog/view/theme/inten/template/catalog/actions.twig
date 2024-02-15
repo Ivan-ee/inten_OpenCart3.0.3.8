@@ -136,35 +136,17 @@
             }
         }
 
-
-        // if (defaultView === 'list-view') {
-        //     $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
-        // } else if (defaultView === 'grid-view'){
-        //     $('.product-list').removeClass('grid-view list-view').addClass(defaultView);
-        // } else {
-        //     $('.product-list').removeClass('grid-view list-view').addClass('list-view');
-        // }
-        //
-        // if (selectedView === 'list') {
-        //     $('#list-view-btn').addClass('selected');
-        // } else if (selectedView === 'grid'){
-        //     $('#grid-view-btn').addClass('selected');
-        // } else {
-        //     $('#list-view-btn').addClass('selected');
-        // }
-
         $('.catalog-products').on('click', '#grid-view-btn', function () {
             localStorage.setItem('productView', 'grid-view');
-            switchView();// Сохраняем выбранный вид просмотра
+            switchView();
         });
 
         // Переключение на список
         $('.catalog-products').on('click', '#list-view-btn', function () {
             localStorage.setItem('productView', 'list-view');
-            switchView();// Сохраняем выбранный вид просмотра
+            switchView();
         });
 
-        // Добавление класса при наведении на товар
         $('.catalog-products .catalog-product').hover(
             function () {
                 $(this).find('.product-btn-cart').addClass('hover');
@@ -174,7 +156,6 @@
             }
         );
 
-        // Добавление класса при наведении на ссылку в товаре
         $('.catalog-products .catalog-product .product-link').hover(
             function () {
                 $(this).find('.fi-rr-arrow-right').addClass('lll');
@@ -183,23 +164,7 @@
                 $(this).find('.fi-rr-arrow-right').removeClass('lll');
             }
         );
-
-        // $('#list-view-btn').click(function () {
-        //     $(this).addClass('selected');
-        //     $('#grid-view-btn').removeClass('selected');
-        //
-        //     // Сохраняем выбор пользователя в localStorage
-        //     localStorage.setItem('selectedView', 'list');
-        // });
-        //
-        // // При нажатии на кнопку сетки
-        // $('#grid-view-btn').click(function () {
-        //     $(this).addClass('selected');
-        //     $('#list-view-btn').removeClass('selected');
-        //
-        //     // Сохраняем выбор пользователя в localStorage
-        //     localStorage.setItem('selectedView', 'grid');
-        // });
+      
     });
 </script>
 
