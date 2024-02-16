@@ -22,12 +22,9 @@
             </div>
             <div class="row">
                 <div class="col-3">
-                    <div class="bg-white">
+
                         {{ column_left }}
-                        fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
-                        fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
-                        fsdfdssdnjkfblsdbfsafbjlsafbklsadfbsd
-                    </div>
+
                 </div>
 
                 <div class="col-9 catalog-products">
@@ -141,7 +138,6 @@
             switchView();
         });
 
-        // Переключение на список
         $('.catalog-products').on('click', '#list-view-btn', function () {
             localStorage.setItem('productView', 'list-view');
             switchView();
